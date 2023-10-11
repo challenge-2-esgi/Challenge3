@@ -20,6 +20,8 @@ back-dev: back-install
 	docker compose exec -ti node npm run dev
 back-shell:
 	docker compose exec -ti node /bin/sh
+d-s-u:
+	docker compose exec -ti node npm run d:s:u
 
 # front
 front-install:
