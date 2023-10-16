@@ -20,8 +20,27 @@ back-dev: back-install
 	docker compose exec -ti node npm run dev
 back-shell:
 	docker compose exec -ti node /bin/sh
-d-s-u:
-	docker compose exec -ti node npm run d:s:u
+
+# database
+migration:
+#	migration: should specify migration name
+	docker compose exec -ti node npx sequelize-cli migration:create --name $(filter-out $@,$(MAKECMDGOALS))
+migrate: 
+	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:migrate
+reset-db:
+	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:migrate:undo:all
+	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:migrate
+seed-file:
+#	should specify file name
+	docker compose exec -ti node npx sequelize-cli seed:generate --name $(filter-out $@,$(MAKECMDGOALS))
+seed-undo:
+	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:seed:undo:all
+seed: seed-undo
+	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:seed:all
+# dsu => database schema update
+dsu:
+	docker compose exec -ti node npm run dev:sync:db
+
 
 # front
 front-install:
