@@ -1,8 +1,18 @@
 const joi = require('joi')
 
+const SUPPORTED_ENVS = {
+    dev: 'dev',
+    test: 'test',
+    prod: 'prod',
+}
+
+if (process.env.NODE_ENV === SUPPORTED_ENVS.dev) {
+    require('dotenv').config()
+}
+
 const envVarsSchema = joi
     .object({
-        NODE_ENV: joi.string().valid('prod', 'dev', 'test').required(),
+        NODE_ENV: joi.string().valid(...Object.values(SUPPORTED_ENVS)).required(),
         PORT: joi.number().required(),
         POSTGRES_URL: joi.string().required(),
         MONGO_URL: joi.string().required(),
@@ -22,4 +32,5 @@ module.exports = {
     port: envVars.PORT,
     postgresUrl: envVars.POSTGRES_URL,
     mongoUrl: envVars.MONGO_URL,
+    supportedEnvs: SUPPORTED_ENVS,
 }

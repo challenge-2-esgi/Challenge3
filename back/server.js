@@ -1,4 +1,4 @@
-const config = require('./config')
+const config = require('./config/app-config')
 const db = require('./db')
 const app = require('./app')
 

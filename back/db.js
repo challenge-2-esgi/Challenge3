@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize')
 const mongoose = require('mongoose')
-const config = require('./config')
+const config = require('./config/app-config')
 
 const MONGO_TIME_OUT = 3000
 
