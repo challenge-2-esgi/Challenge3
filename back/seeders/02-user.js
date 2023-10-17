@@ -3,6 +3,7 @@
 const { faker } = require('@faker-js/faker')
 const { uuidv7 } = require('uuidv7')
 const { ROLE } = require('../constants')
+const hasher = require('../services/hasher')
 
 const users = [
     { email: 'admin@dev.fr', role: ROLE.admin },
@@ -20,6 +21,7 @@ const PASSWORD = 'password'
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
+        const hashedPassword = await hasher.hash(PASSWORD)
         await queryInterface.bulkInsert(
             'user',
             users.map((u) => ({
@@ -28,7 +30,7 @@ module.exports = {
                 lastname: faker.person.lastName(),
                 role: u.role,
                 email: u.email,
-                password: PASSWORD,
+                password: hashedPassword,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             })),
