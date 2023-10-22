@@ -22,4 +22,8 @@ ValidationError.fromSequelize = function (SequelizeValidationError) {
 
 ValidationError.fromMongoose = function (MongooseValidationError) {}
 
+ValidationError.fromJoi = function (JoiValidationError) {
+    return new ValidationError({path: JoiValidationError.message})
+}
+
 module.exports = ValidationError
