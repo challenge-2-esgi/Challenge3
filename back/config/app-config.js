@@ -12,10 +12,15 @@ if (process.env.NODE_ENV === SUPPORTED_ENVS.dev) {
 
 const envVarsSchema = joi
     .object({
-        NODE_ENV: joi.string().valid(...Object.values(SUPPORTED_ENVS)).required(),
+        NODE_ENV: joi
+            .string()
+            .valid(...Object.values(SUPPORTED_ENVS))
+            .required(),
         PORT: joi.number().required(),
         POSTGRES_URL: joi.string().required(),
         MONGO_URL: joi.string().required(),
+        TOKEN_SECRET: joi.string().required(),
+        TOKEN_EXPIRE_TIME: joi.number().required(),
     })
     .unknown()
 
@@ -32,5 +37,7 @@ module.exports = {
     port: envVars.PORT,
     postgresUrl: envVars.POSTGRES_URL,
     mongoUrl: envVars.MONGO_URL,
+    tokenSecret: envVars.TOKEN_SECRET,
+    tokenExpireTime: envVars.TOKEN_EXPIRE_TIME,
     supportedEnvs: SUPPORTED_ENVS,
 }
