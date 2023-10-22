@@ -49,3 +49,6 @@ front-dev: front-install
 	docker compose exec -ti react npm run dev
 front-shell:
 	docker compose exec -ti react /bin/sh
+# disable telemetry
+front-dt:
+	docker compose exec -ti next npx next telemetry disable

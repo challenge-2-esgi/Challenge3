@@ -42,6 +42,8 @@ services:
     working_dir: /home/node/app
     tty: true
     stdin_open: true
+    environment:
+      PORT: $FRONT_PORT
     ports:
       - $FRONT_PORT:$FRONT_PORT
     volumes:
