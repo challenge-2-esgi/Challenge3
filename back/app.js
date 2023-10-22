@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const CRUDRouter = require('./routes/item-router')
+const AuthRouter = require('./routes/auth-router')
 const ValidationError = require('./errors/ValidationError')
 
 // TODO: define cors options
@@ -12,6 +13,7 @@ app.use(express.json())
 
 // TODO: add crud routes
 // ex: app.use('/users', CRUDRouter({ model: User }))
+app.use(AuthRouter())
 
 // errors middleware
 app.use(function (err, req, res, next) {
@@ -20,7 +22,7 @@ app.use(function (err, req, res, next) {
     } else if (err instanceof SyntaxError) {
         res.sendStatus(400)
     } else {
-        console.log('[Error] : '+ err)
+        console.log('[Error] : ' + err)
         res.status(500).send(err.message)
     }
 })
