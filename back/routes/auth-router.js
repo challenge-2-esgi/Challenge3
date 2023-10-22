@@ -2,7 +2,7 @@ const { Router } = require('express')
 const User = require('../models/User')
 const hasher = require('../services/hasher')
 const jwt = require('../services/jwt')
-const Validator = require('../middlewares/Validator')
+const Validator = require('../middlewares/validator')
 const validators = require('../validators')
 
 function AuthRouter() {
@@ -19,7 +19,7 @@ function AuthRouter() {
                         email,
                     },
                 })
-                
+
                 if (user && (await hasher.compare(password, user.password))) {
                     res.status(200).json({ token: jwt.sign({ sub: user.id }) })
                 } else {

@@ -7,6 +7,11 @@ function sign(payload) {
     })
 }
 
+function verify(token, callback) {
+    return jwt.verify(token, appConfig.tokenSecret, callback)
+}
+
 module.exports = {
     sign,
+    verify,
 }
