@@ -51,4 +51,7 @@ front-shell:
 	docker compose exec -ti react /bin/sh
 # disable telemetry
 front-dt:
-	docker compose exec -ti next npx next telemetry disable
+	docker compose exec -ti react npx next telemetry disable
+# sb = storybook
+sb-start: front-install
+	docker compose exec -ti react npm run storybook

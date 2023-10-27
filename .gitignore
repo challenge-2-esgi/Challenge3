@@ -39,3 +39,6 @@ coverage
 
 # front
 /front/cache
+.out
+.storybook-out
+storybook-static
