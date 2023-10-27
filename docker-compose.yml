@@ -44,8 +44,11 @@ services:
     stdin_open: true
     environment:
       PORT: $FRONT_PORT
+      STORYBOOK_PORT: $FRONT_STORYBOOK_PORT
+      STORYBOOK_DISABLE_TELEMETRY: 1 # https://storybook.js.org/docs/react/configure/telemetry
     ports:
       - $FRONT_PORT:$FRONT_PORT
+      - $FRONT_STORYBOOK_PORT:$FRONT_STORYBOOK_PORT
     volumes:
       - ./front:/home/node/app
   
