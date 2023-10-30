@@ -32,7 +32,7 @@ export default () => {
         <>
             <div className="rounded-sm bg-white shadow-default">
                 <div className="flex h-screen flex-wrap items-center justify-center">
-                    <div className="w-full border-stroke xl:w-1/2 xl:border-2">
+                    <div className="w-full border-stroke xl:w-1/2 shadow-lg">
                         <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
                             <span className="mb-1.5 block font-medium">
                                 Authentication
@@ -120,7 +120,7 @@ export default () => {
                                     <input
                                         type="submit"
                                         value="Sign In"
-                                        className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 transition hover:bg-opacity-90 hover:bg-blue-500"
+                                        className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 transition hover:bg-opacity-90 hover:bg-blue-700"
                                     />
                                 </div>
                             </form>
