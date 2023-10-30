@@ -1,10 +1,14 @@
+'use client'
+
 import { useState } from 'react'
 
 export default function useToken() {
     const getToken = () => {
-        const tokenString = localStorage.getItem('token')
-        const userToken = JSON.parse(tokenString)
-        return userToken?.token
+        if (typeof window !== 'undefined') {
+            const tokenString = localStorage.getItem('token')
+            const userToken = JSON.parse(tokenString)
+            return userToken?.token
+        }
     }
 
     const [token, setToken] = useState(getToken())
