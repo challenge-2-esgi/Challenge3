@@ -1,6 +1,6 @@
 'use client'
 
-import Link from 'next/link'
+import Button from '@/components/Button'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import useToken from './useToken'
@@ -30,14 +30,14 @@ export default () => {
 
     return (
         <>
-            <div className="rounded-sm bg-white shadow-default">
+            <div className="shadow-default rounded-sm bg-white">
                 <div className="flex h-screen flex-wrap items-center justify-center">
-                    <div className="w-full border-stroke xl:w-1/2 shadow-lg">
-                        <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
+                    <div className="border-stroke w-full shadow-lg xl:w-1/2">
+                        <div className="sm:p-12.5 xl:p-17.5 w-full p-4">
                             <span className="mb-1.5 block font-medium">
                                 Authentication
                             </span>
-                            <h2 className="mb-9 text-2xl font-bold  sm:text-title-xl2">
+                            <h2 className="sm:text-title-xl2 mb-9 text-2xl  font-bold">
                                 Se connecter
                             </h2>
 
@@ -54,7 +54,7 @@ export default () => {
                                             required
                                             type="email"
                                             placeholder="Enter your email"
-                                            className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="border-stroke w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                                         />
 
                                         <span className="absolute right-4 top-4">
@@ -89,7 +89,7 @@ export default () => {
                                             required
                                             type="password"
                                             placeholder="6+ Characters, 1 Capital letter"
-                                            className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
+                                            className="border-stroke w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
                                         />
 
                                         <span className="absolute right-4 top-4">
@@ -115,14 +115,13 @@ export default () => {
                                         </span>
                                     </div>
                                 </div>
-
-                                <div className="mb-5">
-                                    <input
-                                        type="submit"
-                                        value="Sign In"
-                                        className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 transition hover:bg-opacity-90 hover:bg-blue-700"
-                                    />
-                                </div>
+                                <Button
+                                    className="mb-5 w-full"
+                                    type="submit"
+                                    size="large"
+                                >
+                                    Sign In
+                                </Button>
                             </form>
                         </div>
                     </div>
