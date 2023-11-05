@@ -1,9 +1,10 @@
 'use client'
 
-import Button from '@/components/Button'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import useToken from './useToken'
+import Button from '@/components/Button'
+import Input from '@/components/Input'
 
 export default () => {
     const [email, setEmail] = useState('')
@@ -46,18 +47,14 @@ export default () => {
                                     <label className="mb-2.5 block font-medium">
                                         Email
                                     </label>
-                                    <div className="relative">
-                                        <input
-                                            onChange={(e) => {
-                                                setEmail(e.target.value)
-                                            }}
-                                            required
-                                            type="email"
-                                            placeholder="Enter your email"
-                                            className="border-stroke w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
-                                        />
-
-                                        <span className="absolute right-4 top-4">
+                                    <Input
+                                        onChange={(e) => {
+                                            setEmail(e.target.value)
+                                        }}
+                                        required
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        icon={
                                             <svg
                                                 className="fill-current"
                                                 width="22"
@@ -73,26 +70,23 @@ export default () => {
                                                     />
                                                 </g>
                                             </svg>
-                                        </span>
-                                    </div>
+                                        }
+                                        iconPosition="right"
+                                    />
                                 </div>
 
                                 <div className="mb-6">
                                     <label className="mb-2.5 block font-medium">
                                         Password
                                     </label>
-                                    <div className="relative">
-                                        <input
-                                            onChange={(e) => {
-                                                setPassword(e.target.value)
-                                            }}
-                                            required
-                                            type="password"
-                                            placeholder="6+ Characters, 1 Capital letter"
-                                            className="border-stroke w-full rounded-lg border bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none"
-                                        />
-
-                                        <span className="absolute right-4 top-4">
+                                    <Input
+                                        onChange={(e) => {
+                                            setPassword(e.target.value)
+                                        }}
+                                        required
+                                        type="password"
+                                        placeholder="6+ Characters, 1 Capital letter"
+                                        icon={
                                             <svg
                                                 className="fill-current"
                                                 width="22"
@@ -112,8 +106,9 @@ export default () => {
                                                     />
                                                 </g>
                                             </svg>
-                                        </span>
-                                    </div>
+                                        }
+                                        iconPosition="right"
+                                    />
                                 </div>
                                 <Button
                                     className="mb-5 w-full"
