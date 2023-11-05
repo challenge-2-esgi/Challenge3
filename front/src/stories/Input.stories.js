@@ -35,8 +35,17 @@ export default {
     },
 }
 
-export const WithHelperText = {
+export const Label = {
     args: {
+        label: 'Email',
+        placeholder: 'adresse mail',
+        type: 'email',
+    },
+}
+
+export const HelperText = {
+    args: {
+        label: 'Email',
         type: 'email',
         helperText: 'saisir votre adresse mail',
         placeholder: 'adresse mail',
@@ -61,6 +70,7 @@ export const IconRight = {
 
 export const Error = {
     args: {
+        label: 'Adresse mail',
         type: 'email',
         placeholder: 'Input avec erreur',
         helperText: 'adresse mail incorrect',
