@@ -37,11 +37,11 @@ const Button = ({
 }
 
 Button.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     type: PropTypes.oneOf(['button', 'submit']),
     disabled: PropTypes.bool,
     outlined: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'larg']),
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
 }
 
 export default Button
