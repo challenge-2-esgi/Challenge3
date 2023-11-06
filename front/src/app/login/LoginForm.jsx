@@ -1,11 +1,11 @@
+import { Auth } from '@/api'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import useStore from '@/store'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { zodResolver } from '@hookform/resolvers/zod'
-import useToken from './useToken'
-import { useRouter } from 'next/navigation'
-import { Auth } from '@/api'
 
 const fields = { email: 'email', password: 'password' }
 const validationSchema = z.object({
@@ -20,21 +20,23 @@ const validationSchema = z.object({
 })
 
 const LoginForm = () => {
+    const loginAction = useStore((state) => state.login)
     const router = useRouter()
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({ resolver: zodResolver(validationSchema) })
-    const { token, setToken } = useToken()
+    } = useForm({
+        defaultValues: { email: 'admin@dev.fr', password: 'password' },
+        resolver: zodResolver(validationSchema),
+    })
     const { mutate: login } = Auth.useLogin({
         onSuccess: (token) => {
-            setToken(token)
-            router.push('/')
+            loginAction(token)
+            router.replace('/')
         },
     })
 
-    // TODO: use store
     // TODO: handle api errors
     const onsubmit = (data) => {
         login(data)
