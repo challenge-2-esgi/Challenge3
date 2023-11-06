@@ -11,6 +11,9 @@ class Storage {
     getToken() {
         return localStorage.getItem(this.keys.token) ?? null
     }
+    removeToken() {
+        localStorage.removeItem(this.keys.token)
+    }
 }
 
 const storage = new Storage()
