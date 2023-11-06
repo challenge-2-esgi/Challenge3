@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useToken from './useToken'
 import { useRouter } from 'next/navigation'
+import { Auth } from '@/api'
 
 const fields = { email: 'email', password: 'password' }
 const validationSchema = z.object({
@@ -19,34 +20,24 @@ const validationSchema = z.object({
 })
 
 const LoginForm = () => {
+    const router = useRouter()
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm({
-        resolver: zodResolver(validationSchema),
+    } = useForm({ resolver: zodResolver(validationSchema) })
+    const { token, setToken } = useToken()
+    const { mutate: login } = Auth.useLogin({
+        onSuccess: (token) => {
+            setToken(token)
+            router.push('/')
+        },
     })
 
     // TODO: use store
     // TODO: handle api errors
-    const { token, setToken } = useToken()
-    const router = useRouter()
-    const backUrl = process.env.NEXT_PUBLIC_BACK_URL
-
-    const onsubmit = async (data) => {
-        const res = await fetch(backUrl + '/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        })
-
-        if (res.ok) {
-            const json = await res.json()
-            setToken(json.token)
-            router.push('/')
-        } else {
-            console.error(await res.text())
-        }
+    const onsubmit = (data) => {
+        login(data)
     }
 
     return (
