@@ -27,7 +27,6 @@ const LoginForm = () => {
         handleSubmit,
         formState: { errors },
     } = useForm({
-        defaultValues: { email: 'admin@dev.fr', password: 'password' },
         resolver: zodResolver(validationSchema),
     })
     const { mutate: login } = Auth.useLogin({
