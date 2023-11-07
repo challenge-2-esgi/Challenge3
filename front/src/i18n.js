@@ -3,6 +3,12 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 
+import en from '@/translations/en/global.json'
+import enValidation from '@/translations/en/validation.json'
+
+import fr from '@/translations/fr/global.json'
+import frValidation from '@/translations/fr/validation.json'
+
 const LANGUAGES = {
     FR: 'fr',
     EN: 'en',
@@ -14,26 +20,16 @@ const NAMESPACES = {
 }
 
 function buildResources(language) {
-    const prefix = './translations/' + language
-    const resources = [
-        {
-            ns: NAMESPACES.DEFAULT,
-            resource: import(prefix + '/global.json').then(
-                ({ default: json }) => json
-            ),
+    return {
+        [LANGUAGES.FR]: {
+            [NAMESPACES.DEFAULT]: fr,
+            [NAMESPACES.VALIDATION]: frValidation,
         },
-        {
-            ns: NAMESPACES.VALIDATION,
-            resource: import(prefix + '/validation.json').then(
-                ({ default: json }) => json
-            ),
+        [LANGUAGES.EN]: {
+            [NAMESPACES.DEFAULT]: en,
+            [NAMESPACES.VALIDATION]: enValidation,
         },
-    ]
-
-    return resources.reduce(
-        (prev, current) => ({ ...prev, [current.ns]: current.resource }),
-        {}
-    )
+    }[language]
 }
 
 i18n.use(initReactI18next).init({
