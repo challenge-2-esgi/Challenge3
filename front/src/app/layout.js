@@ -1,4 +1,6 @@
 import { Inter } from 'next/font/google'
+
+import '@/i18n'
 import './globals.css'
 import Providers from './providers'
 
