@@ -10,8 +10,12 @@ import fr from '@/translations/fr/global.json'
 import frValidation from '@/translations/fr/validation.json'
 
 const LANGUAGES = {
-    FR: 'fr',
     EN: 'en',
+    FR: 'fr',
+}
+const NAMES = {
+    [LANGUAGES.EN]: 'English',
+    [LANGUAGES.FR]: 'Français',
 }
 
 const NAMESPACES = {
@@ -44,6 +48,10 @@ i18n.use(initReactI18next).init({
     },
 })
 
-export { LANGUAGES as t_LANGUAGES, NAMESPACES as t_NAMESPACES }
+export {
+    LANGUAGES as t_LANGUAGES,
+    NAMES as t_LANGUAGES_NAMES,
+    NAMESPACES as t_NAMESPACES,
+}
 
 export default i18n
