@@ -2,9 +2,14 @@ import PropTypes from 'prop-types'
 import Dropdown from './Dropdown'
 import Language from './Language'
 
-const LanguagePicker = ({ defaultLanguage, languages, onChange }) => {
+const LanguagePicker = ({
+    defaultLanguage,
+    languages,
+    onChange,
+    className = '',
+}) => {
     return (
-        <div className="absolute right-8">
+        <div className={className}>
             <Dropdown
                 buttonClasses="!bg-white !text-black !hover:bg-whiter"
                 iconClasses="!hidden"
