@@ -25,9 +25,9 @@ const Input = ({
     }[iconPosition]
 
     const errorClasses = {
-        label: 'text-red-600',
-        input: 'border-red-500 text-red-900 placeholder-red-700 focus:border-red-500',
-        helperText: 'text-red-600',
+        label: 'text-danger',
+        input: 'border-danger text-danger placeholder-danger focus:border-danger',
+        helperText: 'text-danger',
     }
 
     return (
@@ -46,7 +46,7 @@ const Input = ({
                 <div className="relative">
                     <input
                         className={classNames(
-                            'border-stroke w-full rounded-lg border bg-transparent py-4 pr-10 outline-none focus:border-primary focus-visible:shadow-none',
+                            'w-full rounded-lg border border-stroke bg-transparent py-4 pr-10 outline-none focus:border-primary focus-visible:shadow-none',
                             error && errorClasses.input,
                             paddingClasses,
                             className
@@ -69,7 +69,7 @@ const Input = ({
                 {helperText ? (
                     <p
                         className={classNames(
-                            'mt-2 text-sm text-gray-500',
+                            'text-gray-500 mt-2 text-sm',
                             error && errorClasses.helperText
                         )}
                     >

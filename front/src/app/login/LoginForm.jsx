@@ -1,27 +1,43 @@
 import { Auth } from '@/api'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import { t_NAMESPACES } from '@/i18n'
 import useStore from '@/store'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { z } from 'zod'
 
 const fields = { email: 'email', password: 'password' }
-const validationSchema = z.object({
-    [fields.email]: z
-        .string()
-        .trim()
-        .min(1, 'email is required')
-        .email('must be a valid email'),
-    [fields.password]: z
-        .string()
-        .min(6, 'password must be at least 6 characters'),
-})
 
 const LoginForm = () => {
+    const { t } = useTranslation()
     const loginAction = useStore((state) => state.login)
     const router = useRouter()
+
+    const validationSchema = z.object({
+        [fields.email]: z
+            .string()
+            .trim()
+            .min(
+                1,
+                t('login_form.input.email.required', {
+                    ns: t_NAMESPACES.VALIDATION,
+                })
+            )
+            .email(
+                t('login_form.input.email.not_valid', {
+                    ns: t_NAMESPACES.VALIDATION,
+                })
+            ),
+        [fields.password]: z.string().min(
+            1,
+            t('login_form.input.password.required', {
+                ns: t_NAMESPACES.VALIDATION,
+            })
+        ),
+    })
     const {
         register,
         handleSubmit,
@@ -45,10 +61,10 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit(onsubmit)}>
             <Input
                 containerClasses="mb-4"
-                label="Email"
+                label={t('login_form.label.email')}
                 register={register(fields.email)}
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('login_form.input.email')}
                 error={errors[fields.email] ? true : false}
                 helperText={errors[fields.email]?.message ?? ''}
                 icon={
@@ -72,12 +88,12 @@ const LoginForm = () => {
             />
             <Input
                 containerClasses="mb-6"
-                label="Password"
+                label={t('login_form.label.password')}
                 register={register(fields.password)}
                 error={errors[fields.password] ? true : false}
                 helperText={errors[fields.password]?.message ?? ''}
                 type="password"
-                placeholder="6+ Characters, 1 Capital letter"
+                placeholder={t('login_form.input.password')}
                 icon={
                     <svg
                         className="fill-current"
@@ -102,7 +118,7 @@ const LoginForm = () => {
                 iconPosition="right"
             />
             <Button className="mb-5 w-full" type="submit" size="large">
-                Sign In
+                {t('login_form.button.login_in')}
             </Button>
         </form>
     )

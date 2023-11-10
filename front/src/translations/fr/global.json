@@ -1,3 +1,16 @@
 {
-    "example": "Exemple"
+    "login_form": {
+        "title": "Se connecter",
+        "label": {
+            "email": "Addresse mail",
+            "password": "Mot de passe"
+        },
+        "input": {
+            "email": "Saisir votre adresse mail",
+            "password": "Saisir votre mot de passe"
+        },
+        "button": {
+            "login_in": "Se connecter"
+        }
+    }
 }
