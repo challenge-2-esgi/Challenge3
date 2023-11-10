@@ -33,6 +33,7 @@
     "@storybook/nextjs": "^7.5.1",
     "@storybook/react": "^7.5.1",
     "@storybook/testing-library": "^0.2.2",
+    "@svgr/webpack": "^8.1.0",
     "autoprefixer": "^10",
     "css-loader": "^6.8.1",
     "eslint": "^8",
