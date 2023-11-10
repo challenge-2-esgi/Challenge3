@@ -1,3 +1,13 @@
 {
-    "example": "Example"
+    "login_form": {
+        "input": {
+            "email": {
+                "required": "L'addresse mail est requise",
+                "not_valid": "Doit être une addresse mail valide"
+            },
+            "password": {
+                "required": "Le mot de passe est requis"
+            }
+        }
+    }
 }

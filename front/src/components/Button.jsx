@@ -20,9 +20,9 @@ const Button = ({
     return (
         <button
             className={classNames(
-                'flex flex-row items-center justify-center rounded-lg px-7 py-3 text-base font-medium hover:bg-opacity-90 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+                'flex flex-row items-center justify-center rounded-lg px-7 py-3 text-base font-medium text-white hover:bg-opacity-90 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
                 outlined
-                    ? 'border-2 border-primary hover:bg-neutral-500 hover:bg-opacity-10'
+                    ? 'hover:bg-neutral-500 border border-primary text-primary hover:bg-opacity-10'
                     : 'bg-primary',
                 SIZE_CLASSES[size],
                 className

@@ -1,3 +1,16 @@
 {
-    "example": "Example"
+    "login_form": {
+        "title": "Sign In",
+        "label": {
+            "email": "Email",
+            "password": "Password"
+        },
+        "input": {
+            "email": "Enter your email",
+            "password": "Enter your password"
+        },
+        "button": {
+            "login_in": "Sign In"
+        }
+    }
 }
