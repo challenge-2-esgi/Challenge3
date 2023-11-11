@@ -44,6 +44,9 @@ const preview = {
     },
     parameters: {
         i18n,
+        nextjs: {
+            appDirectory: true,
+        },
     },
     decorators: [WithiI18next],
 }
