@@ -12,5 +12,10 @@
         "button": {
             "login_in": "Se connecter"
         }
+    },
+    "sidebar": {
+        "item": {
+            "dashboard": "Dashboard"
+        }
     }
 }

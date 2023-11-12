@@ -12,5 +12,10 @@
         "button": {
             "login_in": "Sign In"
         }
+    },
+    "sidebar": {
+        "item": {
+            "dashboard": "Dashboard"
+        }
     }
 }
