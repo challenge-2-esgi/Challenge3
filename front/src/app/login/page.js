@@ -4,7 +4,6 @@ import LanguagePicker from '@/components/LanguagePicker'
 import { t_LANGUAGES } from '@/i18n'
 import { useTranslation } from 'react-i18next'
 import LoginForm from './LoginForm'
-import { t } from 'i18next'
 
 export default () => {
     const { i18n, t } = useTranslation()

@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    async redirects() {
+        return [
+            {
+                source: '/',
+                destination: '/login',
+                permanent: true,
+            },
+        ]
+    },
     webpack(config) {
         // https://react-svgr.com/docs/next/
 
