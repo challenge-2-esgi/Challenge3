@@ -15,7 +15,7 @@ function buildClient() {
     client.interceptors.request.use(
         (config) => {
             if (config.authorization) {
-                const token = storage.getToken
+                const token = storage.getToken()
                 if (token) {
                     config.headers.Authorization = 'Bearer ' + token
                 }
