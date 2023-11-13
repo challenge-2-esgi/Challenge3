@@ -1,6 +1,7 @@
 import { Auth } from '@/api'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
 import useStore from '@/store'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -44,11 +45,11 @@ const LoginForm = () => {
         formState: { errors },
     } = useForm({
         resolver: zodResolver(validationSchema),
-    })
+            })
     const { mutate: login } = Auth.useLogin({
         onSuccess: (token) => {
             loginAction(token)
-            router.replace('/')
+            router.replace(route.DASHBOARD)
         },
     })
 
