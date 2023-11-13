@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
-const CRUDRouter = require('./routes/item-router')
 const AuthRouter = require('./routes/auth-router')
 const ValidationError = require('./errors/ValidationError')
+const UserRouter = require('./routes/user-router')
 
 // TODO: define cors options
 // const corsOptions = {}
@@ -11,9 +11,8 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// TODO: add crud routes
-// ex: app.use('/users', CRUDRouter({ model: User }))
 app.use(AuthRouter())
+app.use(UserRouter())
 
 // errors middleware
 app.use(function (err, req, res, next) {
