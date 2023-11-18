@@ -17,5 +17,11 @@
         "item": {
             "dashboard": "Dashboard"
         }
+    },
+    "header": {
+        "menu": {
+            "account": "Paramètres du compte",
+            "logout": "Se déconnecter"
+        }
     }
 }
