@@ -2,10 +2,18 @@
 
 import { User } from '@/api'
 import Loader from '@/components/Loader'
-import { Fragment } from 'react'
+import useStore from '@/store'
+import { Fragment, useEffect } from 'react'
 
 const UserLoader = ({ children }) => {
-    const { isLoading, error } = User.useLoggedInUser()
+    const setUser = useStore((state) => state.setUser)
+    const { isLoading, error, data } = User.useLoggedInUser()
+
+    useEffect(() => {
+        if (data != null) {
+            setUser(data)
+        }
+    }, [data])
 
     if (isLoading) {
         return <Loader size="large" />
