@@ -9,6 +9,7 @@ const Dropdown = ({
     onChange,
     containerClasses = '',
     buttonClasses = '',
+    menuClasses = '',
     itemContainerClasses = '',
     iconClasses = '',
 }) => {
@@ -78,7 +79,8 @@ const Dropdown = ({
             <ul
                 className={classNames(
                     'shadow-card absolute left-0 top-full z-[1000] mt-2 block w-full rounded-md border border-stroke bg-white py-3',
-                    show ? 'block' : 'hidden'
+                    show ? 'block' : 'hidden',
+                    menuClasses
                 )}
             >
                 {items.map((item, index) => (
@@ -107,6 +109,7 @@ Dropdown.propTypes = {
     onChange: PropTypes.func.isRequired,
     containerClasses: PropTypes.string,
     buttonClasses: PropTypes.string,
+    menuClasses: PropTypes.string,
     itemContainerClasses: PropTypes.string,
     iconClasses: PropTypes.string,
 }
