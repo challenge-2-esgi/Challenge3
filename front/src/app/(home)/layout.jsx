@@ -1,15 +1,7 @@
-import SidebarItems from './SidebarItems'
-import UserLoader from './UserLoader'
+import ClientLayout from './ClientLayout'
 
 const HomeLayout = ({ children }) => {
-    return (
-        <UserLoader>
-            <div className="flex h-screen overflow-hidden">
-                <SidebarItems />
-                <main>{children}</main>
-            </div>
-        </UserLoader>
-    )
+    return <ClientLayout>{children}</ClientLayout>
 }
 
 export default HomeLayout
