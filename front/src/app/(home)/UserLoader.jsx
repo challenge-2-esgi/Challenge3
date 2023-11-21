@@ -16,7 +16,7 @@ const UserLoader = ({ children }) => {
     }, [data])
 
     if (isLoading) {
-        return <Loader size="large" />
+        return <Loader className="h-screen" size="large" />
     }
 
     if (error) {

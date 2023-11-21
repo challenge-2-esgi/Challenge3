@@ -1,6 +1,14 @@
 const role = {
     admin: 'ADMIN',
     support: 'SUPPORT',
+    deliverer: 'DELIVERER',
+    client: 'CLIENT',
 }
 
-export { role }
+const itemOperation = {
+    add: 'add',
+    edit: 'edit',
+    view: 'view',
+}
+
+export { role, itemOperation }
