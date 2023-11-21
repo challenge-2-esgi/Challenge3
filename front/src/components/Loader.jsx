@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { twMerge } from 'tailwind-merge'
 
 const SIZE_CLASSES = {
     small: 'h-4 w-4 border-2',
@@ -7,9 +8,14 @@ const SIZE_CLASSES = {
     large: 'h-16 w-16 border-4',
 }
 
-const Loader = ({ size = 'medium', color = 'primary' }) => {
+const Loader = ({ className = '', size = 'medium', color = 'primary' }) => {
     return (
-        <div className="flex h-screen items-center justify-center bg-white">
+        <div
+            className={twMerge(
+                'flex items-center justify-center bg-white',
+                className
+            )}
+        >
             <div
                 className={classNames(
                     'animate-spin rounded-full border-solid  border-t-transparent',
@@ -24,6 +30,7 @@ const Loader = ({ size = 'medium', color = 'primary' }) => {
 Loader.propTypes = {
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     color: PropTypes.string,
+    className: PropTypes.string,
 }
 
 export default Loader
