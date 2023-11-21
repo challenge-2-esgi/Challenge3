@@ -1,0 +1,18 @@
+{
+    "user_form": {
+        "input": {
+            "firstname": "Enter first name",
+            "lastname": "Enter last name",
+            "email": "Enter email"
+        },
+        "button": {
+            "add": "Add",
+            "edit": "Edit"
+        },
+        "submit": {
+            "error_message": "something went wrong Sorry!",
+            "adding_success_message": "User successfuly added",
+            "editing_success_message": "User successfuly updated"
+        }
+    }
+}

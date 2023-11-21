@@ -9,5 +9,19 @@
                 "required": "Le mot de passe est requis"
             }
         }
+    },
+    "user_form": {
+        "input": {
+            "firstname": {
+                "required": "Le prénom est requis"
+            },
+            "lastname": {
+                "required": "le nom est requis"
+            },
+            "email": {
+                "required": "L'addresse mail est requise",
+                "not_valid": "Doit être une addresse mail valide"
+            }
+        }
     }
 }

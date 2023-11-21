@@ -1,0 +1,11 @@
+{
+    "user": {
+        "firstname": "First name",
+        "lastname": "Last name",
+        "email": "Email",
+        "role": "Role",
+        "role_title": {
+            "deliverer": "Deliverer"
+        }
+    }
+}
