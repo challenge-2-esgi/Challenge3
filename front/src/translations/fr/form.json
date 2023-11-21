@@ -1,0 +1,18 @@
+{
+    "user_form": {
+        "input": {
+            "firstname": "Saisir le prénom",
+            "lastname": "Saisir le nom",
+            "email": "Saisir l'addresse mail"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        },
+        "submit": {
+            "error_message": "quelque chose s'est mal passé Désolé!",
+            "adding_success_message": "Utilisateur ajouté avec succès",
+            "editing_success_message": "L'utilisateur est mis à jour avec succès"
+        }
+    }
+}

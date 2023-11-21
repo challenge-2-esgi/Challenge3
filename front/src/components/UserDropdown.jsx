@@ -1,5 +1,6 @@
 'use client'
 
+import { role } from '@/constants'
 import Avatar from './Avatar'
 import Dropdown from './Dropdown'
 
@@ -7,6 +8,7 @@ import LogoutIcon from '@/app/assets/logout.svg'
 import SettingsIcon from '@/app/assets/settings.svg'
 import route from '@/constants/route'
 import useStore from '@/store'
+import { capitalize } from '@/utils'
 import classNames from 'classnames'
 import { useRouter } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +22,7 @@ const UserDropdown = () => {
     const router = useRouter()
     const { t } = useTranslation()
     const logoutAction = useStore((state) => state.logout)
-    // TODO: get user from store
+    const user = useStore((state) => state.loggedinUser)
 
     const menu = [
         {
@@ -43,18 +45,30 @@ const UserDropdown = () => {
     const itemClasses =
         'flex items-center gap-3.5 text-sm font-medium text-body duration-300 ease-in-out hover:text-primary [&>svg]:fill-current'
 
+    if (user == null) {
+        return null
+    }
+
     return (
         <div>
             <Dropdown
                 buttonClasses="!bg-transparent !text-black !hover:bg-whiter px-2"
                 menuClasses="left-auto right-0 min-w-[14rem]"
-                itemContainerClasses="hover:bg-white"
+                itemContainerClasses="!hover:bg-white"
                 className="relative left-auto right-0 min-w-[14rem]"
                 label={
                     <Avatar
                         className="mr-3"
-                        fullname="John Doe"
-                        role="Web Developper"
+                        fullname={
+                            capitalize(user.firstname) +
+                            ' ' +
+                            capitalize(user.lastname)
+                        }
+                        role={
+                            Object.values(role).includes(user.role)
+                                ? capitalize(user.role)
+                                : ''
+                        }
                     />
                 }
                 renderItem={(item) => {

@@ -1,5 +1,5 @@
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { twMerge } from 'tailwind-merge'
 
 const SIZE_CLASSES = {
     small: 'text-xs px-4 py-2',
@@ -19,7 +19,7 @@ const Button = ({
 
     return (
         <button
-            className={classNames(
+            className={twMerge(
                 'flex flex-row items-center justify-center rounded-lg px-7 py-3 text-base font-medium text-white hover:bg-opacity-90 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
                 outlined
                     ? 'hover:bg-neutral-500 border border-primary text-primary hover:bg-opacity-10'

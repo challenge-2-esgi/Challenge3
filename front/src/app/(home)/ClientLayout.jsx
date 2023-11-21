@@ -34,7 +34,9 @@ const ClientLayout = ({ children }) => {
                             }}
                         />
                     </header>
-                    <main>{children}</main>
+                    <main className="h-full w-full overflow-auto bg-whiten p-10">
+                        {children}
+                    </main>
                 </div>
             </div>
         </UserLoader>

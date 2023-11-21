@@ -12,7 +12,7 @@ const Input = ({
     ...props
 }) => {
     // register : useForm props
-    const { className, register, ...p } = props
+    const { className, register, disabled, ...p } = props
 
     const iconPositionClasses = {
         left: icon ? 'left-0' : '',
@@ -29,6 +29,10 @@ const Input = ({
         input: 'border-danger text-danger placeholder-danger focus:border-danger',
         helperText: 'text-danger',
     }
+
+    const disabledClasses = disabled
+        ? '!bg-gray placeholder-body text-body'
+        : ''
 
     return (
         <div className={classNames(containerClasses)}>
@@ -49,9 +53,11 @@ const Input = ({
                             'w-full rounded-lg border border-stroke bg-transparent py-4 pr-10 outline-none focus:border-primary focus-visible:shadow-none',
                             error && errorClasses.input,
                             paddingClasses,
+                            disabledClasses,
                             className
                         )}
                         type={type}
+                        disabled={disabled}
                         {...register}
                         {...p}
                     />

@@ -1,6 +1,7 @@
+import useOnClickOutside from '@/hooks/useOnClickOutside'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 const Dropdown = ({
     label,
@@ -15,20 +16,9 @@ const Dropdown = ({
 }) => {
     const [show, setshow] = useState(false)
     const dropdownRef = useRef()
-
-    useEffect(() => {
-        const handleOutsideClick = (event) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target)
-            ) {
-                setshow(false)
-            }
-        }
-        document.addEventListener('click', handleOutsideClick, false)
-        return () =>
-            document.removeEventListener('click', handleOutsideClick, false)
-    }, [])
+    useOnClickOutside(dropdownRef, () => {
+        setshow(false)
+    })
 
     function toggle() {
         setshow((prev) => !prev)

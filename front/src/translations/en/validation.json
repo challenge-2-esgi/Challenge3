@@ -9,5 +9,19 @@
                 "required": "password is required"
             }
         }
+    },
+    "user_form": {
+        "input": {
+            "firstname": {
+                "required": "first name is required"
+            },
+            "lastname": {
+                "required": "last name is required"
+            },
+            "email": {
+                "required": "email is required",
+                "not_valid": "must be a valid email"
+            }
+        }
     }
 }

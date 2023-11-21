@@ -15,13 +15,28 @@
     },
     "sidebar": {
         "item": {
-            "dashboard": "Dashboard"
+            "dashboard": "Dashboard",
+            "users": "Utilisateurs"
         }
     },
     "header": {
         "menu": {
             "account": "Paramètres du compte",
             "logout": "Se déconnecter"
+        }
+    },
+    "page": {
+        "users": {
+            "title": "Utilisateurs",
+            "button": {
+                "add": "Ajouter"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!"
         }
     }
 }
