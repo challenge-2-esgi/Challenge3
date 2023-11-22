@@ -2,11 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:mobile/core/services/api/api_service.dart';
 
 class LoginForm extends StatefulWidget {
-  Future<void> Function(String email, String password) onSubmit;
+  final ApiService apiService;
+  void Function() onLoggedIn;
 
-  LoginForm({super.key, required this.onSubmit});
+  LoginForm({super.key, required this.apiService, required this.onLoggedIn});
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -58,9 +60,12 @@ class _LoginFormState extends State<LoginForm> {
         _loading = true;
       });
       try {
-        await widget.onSubmit(_formKey.currentState?.value["email"],
-            _formKey.currentState?.value["password"]);
-      } on Exception catch (e) {
+        await widget.apiService.user.login(
+          _formKey.currentState?.value["email"],
+          _formKey.currentState?.value["password"],
+        );
+        widget.onLoggedIn();
+      } on Exception {
         _showError("Addresse mail ou mot de passe incorrect !");
       } finally {
         setState(() {
