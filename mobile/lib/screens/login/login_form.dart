@@ -81,7 +81,6 @@ class _LoginFormState extends State<LoginForm> {
           children: [
             FormBuilderTextField(
               name: "email",
-              initialValue: "client1@dev.fr",
               decoration: const InputDecoration(
                 labelText: "Addresse mail",
                 border: OutlineInputBorder(),
@@ -101,7 +100,6 @@ class _LoginFormState extends State<LoginForm> {
             ),
             FormBuilderTextField(
               name: "password",
-              initialValue: "password",
               decoration: InputDecoration(
                 labelText: "Mot de passe",
                 border: const OutlineInputBorder(),

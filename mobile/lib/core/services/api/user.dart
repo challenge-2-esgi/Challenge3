@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mobile/services/storage_service.dart';
+import 'package:mobile/core/services/storage_service.dart';
 
 class User {
   final Dio client;
