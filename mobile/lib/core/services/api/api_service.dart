@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:mobile/services/api/user.dart';
-import 'package:mobile/services/storage_service.dart';
+import 'package:mobile/core/services/api/user.dart';
+import 'package:mobile/core/services/storage_service.dart';
 
 class ApiService {
   static const _baseUrl = "http://10.0.2.2:3001";

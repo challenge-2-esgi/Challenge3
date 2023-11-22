@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/services/api/api_service.dart';
 import 'package:mobile/screens/login/login_form.dart';
-import 'package:mobile/services/api/api_service.dart';
 
 class LoginScreen extends StatelessWidget {
   final api = ApiService();
