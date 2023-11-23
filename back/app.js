@@ -3,6 +3,7 @@ const cors = require('cors')
 const AuthRouter = require('./routes/auth-router')
 const ValidationError = require('./errors/ValidationError')
 const UserRouter = require('./routes/user-router')
+const OrderRouter = require('./routes/order-router')
 
 // TODO: define cors options
 // const corsOptions = {}
@@ -13,6 +14,7 @@ app.use(express.json())
 
 app.use(AuthRouter())
 app.use(UserRouter())
+app.use(OrderRouter())
 
 // errors middleware
 app.use(function (err, req, res, next) {
