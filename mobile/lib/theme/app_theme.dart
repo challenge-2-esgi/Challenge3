@@ -46,6 +46,63 @@ class AppTheme {
 
     return base.copyWith(
       extensions: [_colors],
+      elevatedButtonTheme: const ElevatedButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(AppColors.primary),
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+          ),
+          padding: MaterialStatePropertyAll(
+            EdgeInsets.symmetric(horizontal: 28, vertical: 15),
+          ),
+        ),
+      ),
+      inputDecorationTheme: const InputDecorationTheme(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelStyle: TextStyle(
+          color: AppColors.primary,
+        ),
+        labelStyle: TextStyle(
+          color: AppColors.body,
+        ),
+        hintStyle: TextStyle(
+          color: AppColors.bodyDark,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.body,
+            style: BorderStyle.solid,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.danger,
+            style: BorderStyle.solid,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
+        errorStyle: TextStyle(
+          color: AppColors.danger,
+        ),
+        suffixIconColor: AppColors.body,
+      ),
     );
   }
 }
