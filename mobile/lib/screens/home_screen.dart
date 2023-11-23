@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/providers/auth_provider.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 
 // TODO: change content
 class HomeScreen extends StatelessWidget {
+  static const routeName = "home";
+
   const HomeScreen({super.key});
 
   static navigateTo(BuildContext context) {
-    Navigator.of(context).pushNamed("/");
+    Navigator.of(context).pushNamed(routeName);
   }
 
   @override
@@ -18,9 +21,10 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
+            context.authProviderNoListen.logout();
             LoginScreen.navigateTo(context);
           },
-          child: const Text('Retour !'),
+          child: const Text('Logout'),
         ),
       ),
     );

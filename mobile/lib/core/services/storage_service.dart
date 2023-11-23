@@ -6,9 +6,10 @@ class StorageService {
 
   StorageService() : _storage = const FlutterSecureStorage();
 
-  storeToken(String token) => _storage.write(key: _tokenKey, value: token);
+  Future<void> storeToken(String token) =>
+      _storage.write(key: _tokenKey, value: token);
 
-  removeToken() => _storage.delete(key: _tokenKey);
+  Future<void> removeToken() => _storage.delete(key: _tokenKey);
 
-  getToken() => _storage.read(key: _tokenKey);
+  Future<String?> getToken() => _storage.read(key: _tokenKey);
 }

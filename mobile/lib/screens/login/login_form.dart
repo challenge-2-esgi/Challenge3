@@ -6,7 +6,7 @@ import 'package:mobile/core/services/api/api_service.dart';
 
 class LoginForm extends StatefulWidget {
   final ApiService apiService;
-  void Function() onLoggedIn;
+  void Function(String token) onLoggedIn;
 
   LoginForm({super.key, required this.apiService, required this.onLoggedIn});
 
@@ -60,11 +60,11 @@ class _LoginFormState extends State<LoginForm> {
         _loading = true;
       });
       try {
-        await widget.apiService.user.login(
+        final String token = await widget.apiService.user.login(
           _formKey.currentState?.value["email"],
           _formKey.currentState?.value["password"],
         );
-        widget.onLoggedIn();
+        widget.onLoggedIn(token);
       } on Exception {
         _showError("Addresse mail ou mot de passe incorrect !");
       } finally {

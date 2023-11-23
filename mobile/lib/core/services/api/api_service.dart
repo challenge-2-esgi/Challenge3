@@ -3,17 +3,19 @@ import 'package:mobile/core/services/api/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
 
 class ApiService {
+  final User _user;
+
+  ApiService({required StorageService storageService})
+      : _user = User(client: Client._buildClient(storageService));
+
+  User get user => _user;
+}
+
+class Client {
   static const _baseUrl = "http://10.0.2.2:3001";
   static const _nonAuthorizationPaths = ['/login'];
 
-  static final Dio _dio = _buildDio();
-  static final StorageService _storage = StorageService();
-
-  final User user;
-
-  ApiService() : user = User(client: _dio, storage: _storage);
-
-  static _buildDio() {
+  static _buildClient(StorageService storageService) {
     final dio = Dio(
       BaseOptions(
         baseUrl: _baseUrl,
@@ -28,13 +30,12 @@ class ApiService {
         onRequest: (options, handler) async {
           if (!_nonAuthorizationPaths.any(options.path.startsWith)) {
             options.headers['Authorization'] =
-                'Bearer ${await _storage.getToken()}';
+                'Bearer ${await storageService.getToken()}';
           }
           return handler.next(options);
         },
       ),
     );
-
     return dio;
   }
 }
