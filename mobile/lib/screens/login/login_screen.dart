@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/services/api/api_service.dart';
+import 'package:mobile/core/providers/api_provider.dart';
+import 'package:mobile/core/providers/auth_provider.dart';
 import 'package:mobile/screens/home_screen.dart';
 import 'package:mobile/screens/login/login_form.dart';
 
@@ -10,19 +11,18 @@ class LoginScreen extends StatelessWidget {
     Navigator.of(context).pushNamed(routeName);
   }
 
-  final apiService = ApiService();
-
-  LoginScreen({super.key});
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: LoginForm(
-          onLoggedIn: () {
+          onLoggedIn: (String token) {
+            context.authProviderNoListen.login(token);
             HomeScreen.navigateTo(context);
           },
-          apiService: apiService,
+          apiService: context.apiService,
         ),
       ),
     );
