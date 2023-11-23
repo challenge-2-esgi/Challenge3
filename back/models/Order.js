@@ -20,15 +20,21 @@ Order.init(
             allowNull: false,
             defaultValue: false,
         },
-        pickupTime: DataTypes.DATE,
-        deliverTime: DataTypes.DATE,
+        pickupTime: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
+        deliverTime: {
+            type: DataTypes.DATE,
+            allowNull: true,
+        },
         validationCode: {
             type: DataTypes.STRING(50),
             allowNull: false,
         },
         distance: {
             type: DataTypes.FLOAT,
-            allowNull: null,
+            allowNull: true,
         },
         status: {
             type: DataTypes.ENUM(Object.values(ORDER_STATUS)),
