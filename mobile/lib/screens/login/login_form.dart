@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobile/core/services/api/api_service.dart';
+import 'package:mobile/theme/app_theme.dart';
 
 class LoginForm extends StatefulWidget {
   final ApiService apiService;
@@ -80,15 +81,36 @@ class _LoginFormState extends State<LoginForm> {
     return FormBuilder(
       key: _formKey,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+        color: context.theme.colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              "Se connecter",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w500,
+                color: context.theme.colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 60,
+            ),
+            Text(
+              "Addresse mail",
+              style: TextStyle(
+                fontSize: 16,
+                color: context.theme.colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
             FormBuilderTextField(
               name: "email",
               decoration: const InputDecoration(
-                labelText: "Addresse mail",
-                border: OutlineInputBorder(),
+                hintText: "saisir votre addresse mail",
               ),
               keyboardType: TextInputType.emailAddress,
               validator: FormBuilderValidators.compose(
@@ -101,18 +123,29 @@ class _LoginFormState extends State<LoginForm> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
+            ),
+            Text(
+              "Mot de passe",
+              style: TextStyle(
+                fontSize: 16,
+                color: context.theme.colors.black,
+              ),
+            ),
+            const SizedBox(
+              height: 8,
             ),
             FormBuilderTextField(
               name: "password",
               decoration: InputDecoration(
-                labelText: "Mot de passe",
-                border: const OutlineInputBorder(),
+                hintText: 'saisir votre mot de passe',
                 suffixIcon: IconButton(
                   onPressed: _toggleEye,
-                  icon: Icon(_obscurePassword
-                      ? CupertinoIcons.eye_slash
-                      : CupertinoIcons.eye),
+                  icon: Icon(
+                    _obscurePassword
+                        ? CupertinoIcons.eye
+                        : CupertinoIcons.eye_slash,
+                  ),
                 ),
               ),
               keyboardType: TextInputType.visiblePassword,
@@ -124,18 +157,24 @@ class _LoginFormState extends State<LoginForm> {
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: _loading ? null : _onSubmit,
-              child: _loading
-                  ? const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        color: Colors.white,
-                      ),
-                    )
-                  : const Text("S'identifier"),
+            const SizedBox(
+              height: 40,
             ),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _loading ? null : _onSubmit,
+                child: _loading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text("S'identifier"),
+              ),
+            )
           ],
         ),
       ),

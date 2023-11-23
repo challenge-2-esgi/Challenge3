@@ -4,6 +4,7 @@ import 'package:mobile/core/providers/auth_provider.dart';
 import 'package:mobile/core/services/storage_service.dart';
 import 'package:mobile/screens/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
+import 'package:mobile/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -36,6 +37,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Challenge',
+      theme: AppTheme.themeData,
       routes: {
         '/': (context) => context.authProvider.isAuthenticated
             ? const HomeScreen()
