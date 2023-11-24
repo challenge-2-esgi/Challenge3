@@ -20,3 +20,7 @@ function buildItemRoute(base, itemId, operation) {
 export function buildEditUserRoute(userId) {
     return buildItemRoute(route.USERS + '/', userId, itemOperation.edit)
 }
+
+export function buildEditOrderRoute(orderId) {
+    return buildItemRoute(route.ORDERS + '/', orderId, itemOperation.edit)
+}

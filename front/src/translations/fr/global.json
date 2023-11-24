@@ -16,7 +16,8 @@
     "sidebar": {
         "item": {
             "dashboard": "Dashboard",
-            "users": "Utilisateurs"
+            "users": "Utilisateurs",
+            "orders": "Commandes"
         }
     },
     "header": {

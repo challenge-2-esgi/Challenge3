@@ -2,6 +2,7 @@ export default Object.freeze({
     LOGIN: '/login',
     DASHBOARD: '/dashboard',
     USERS: '/users',
+    ORDERS: '/orders',
 
     // for crud operations
     ITEM_ADD: '/add',
