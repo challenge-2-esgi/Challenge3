@@ -23,7 +23,7 @@ function AuthRouter() {
                 if (user && (await hasher.compare(password, user.password))) {
                     res.status(200).json({ token: jwt.sign({ sub: user.id }) })
                 } else {
-                    res.sendStatus(401)
+                    res.sendStatus(422)
                 }
             } catch (error) {
                 next(error)
