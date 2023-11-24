@@ -1,5 +1,6 @@
 export default Object.freeze({
     LOGIN: '/login',
+    HOME: '/home',
     DASHBOARD: '/dashboard',
     USERS: '/users',
 
