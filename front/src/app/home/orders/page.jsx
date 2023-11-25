@@ -75,7 +75,7 @@ const OrdersPage = () => {
                     <Fragment>
                         <TableCrudActions
                             canView={false}
-                            canEdit={false}
+                            canEdit={true}
                             canDelete={false}
                             onEdit={() => {
                                 router.push(
