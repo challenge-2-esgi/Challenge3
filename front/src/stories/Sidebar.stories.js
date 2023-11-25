@@ -42,6 +42,7 @@ const menuItems = [
             </svg>
         ),
         path: route.users.path,
+        segment: route.users.segment,
     },
     {
         title: 'orders',
@@ -65,6 +66,7 @@ const menuItems = [
             </svg>
         ),
         path: route.orders.path,
+        segment: route.orders.segment,
     },
 ]
 const Template = {

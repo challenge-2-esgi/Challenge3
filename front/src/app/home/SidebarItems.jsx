@@ -28,11 +28,13 @@ function buildMenuItem(userRole, t) {
             {
                 title: t('sidebar.item.dashboard'),
                 path: route.DASHBOARD,
+                segment: route.segment.home.dashboard,
                 icon: null,
             },
             {
                 title: t('sidebar.item.users'),
                 path: route.USERS,
+                segment: route.segment.home.users,
                 icon: null,
             },
             {
