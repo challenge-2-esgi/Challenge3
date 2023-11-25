@@ -37,7 +37,8 @@
                 "cancel": "Annuler",
                 "confirm": "Supprimer"
             },
-            "delete_error_message": "quelque chose s'est mal passé Désolé!"
+            "delete_error_message": "quelque chose s'est mal passé Désolé!",
+            "delete_success_message": "Commande supprimée avec succès"
         },
         "users": {
             "title": "Utilisateurs",

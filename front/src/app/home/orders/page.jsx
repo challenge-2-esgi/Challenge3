@@ -67,18 +67,10 @@ const OrdersPage = () => {
                 const { mutate: deleteOrder, isPending } = Order.useDelete(
                     row.getValue('id'),
                     () => {
-                        toast.success(
-                            t('page.orders.delete.success_message', {
-                                ns: t_NAMESPACES.MODEL,
-                            })
-                        )
+                        toast.success(t('page.orders.delete_success_message'))
                     },
                     () => {
-                        toast.error(
-                            t('page.orders.delete.error_message', {
-                                ns: t_NAMESPACES.MODEL,
-                            })
-                        )
+                        toast.error(t('page.orders.delete_error_message'))
                     }
                 )
 

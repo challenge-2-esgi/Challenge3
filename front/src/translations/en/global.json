@@ -37,7 +37,8 @@
                 "cancel": "Cancel",
                 "confirm": "Delete"
             },
-            "delete_error_message": "something went wrong Sorry!"
+            "delete_error_message": "something went wrong Sorry!",
+            "delete_success_message": "Order deleted successfully"
         },
         "users": {
             "title": "Users",
