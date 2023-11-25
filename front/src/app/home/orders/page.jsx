@@ -59,6 +59,21 @@ const OrdersPage = () => {
             id: 'pickupTime',
             header: t('order.pickup_time', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'pickupTime',
+            cell: ({ row }) => {
+                const pickupTime = row.getValue('pickupTime')
+                return pickupTime ? new Date(pickupTime).toLocaleString() : ''
+            },
+        },
+        {
+            id: 'deliverTime',
+            header: t('order.deliver_time', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'deliverTime',
+            cell: ({ row }) => {
+                const deliveryTime = row.getValue('deliverTime')
+                return deliveryTime
+                    ? new Date(deliveryTime).toLocaleString()
+                    : ''
+            },
         },
         {
             id: 'actions',
