@@ -52,9 +52,9 @@ const UserDropdown = () => {
     return (
         <div>
             <Dropdown
-                buttonClasses="!bg-transparent !text-black !hover:bg-whiter px-2"
+                buttonClasses="bg-transparent text-black hover:bg-transparent px-2"
                 menuClasses="left-auto right-0 min-w-[14rem]"
-                itemContainerClasses="!hover:bg-white"
+                itemContainerClasses="hover:bg-white"
                 className="relative left-auto right-0 min-w-[14rem]"
                 label={
                     <Avatar
