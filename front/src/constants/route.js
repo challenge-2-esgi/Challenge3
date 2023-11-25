@@ -10,4 +10,14 @@ export default Object.freeze({
     ITEM_ADD: '/add',
     ITEM_EDIT: '/edit',
     ITEM_VIEW: '/view',
+
+    // segments
+    segment: {
+        home: {
+            dashboard: 'dashboard',
+            users: 'users',
+            orders: 'orders',
+            complaints: 'complaints',
+        },
+    },
 })

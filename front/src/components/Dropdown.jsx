@@ -2,6 +2,7 @@ import useOnClickOutside from '@/hooks/useOnClickOutside'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { useRef, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 const Dropdown = ({
     label,
@@ -31,13 +32,15 @@ const Dropdown = ({
 
     return (
         <div
-            className={classNames('relative', containerClasses)}
+            className={twMerge(classNames('relative', containerClasses))}
             ref={dropdownRef}
         >
             <button
-                className={classNames(
-                    'inline-flex items-center gap-2.5 rounded-md bg-primary px-5 py-3 font-medium text-white hover:bg-opacity-95',
-                    buttonClasses
+                className={twMerge(
+                    classNames(
+                        'inline-flex items-center gap-2.5 rounded-md bg-primary px-5 py-3 font-medium text-white hover:bg-opacity-95',
+                        buttonClasses
+                    )
                 )}
                 onClick={toggle}
             >
@@ -67,18 +70,22 @@ const Dropdown = ({
                 </svg>
             </button>
             <ul
-                className={classNames(
-                    'shadow-card absolute left-0 top-full z-[1000] mt-2 block w-full rounded-md border border-stroke bg-white py-3',
-                    show ? 'block' : 'hidden',
-                    menuClasses
+                className={twMerge(
+                    classNames(
+                        'shadow-card absolute left-0 top-full z-[1000] mt-2 block w-full rounded-md border border-stroke bg-white py-3',
+                        show ? 'block' : 'hidden',
+                        menuClasses
+                    )
                 )}
             >
                 {items.map((item, index) => (
                     <li
                         key={index}
-                        className={classNames(
-                            'flex cursor-pointer px-5 py-2 font-medium hover:bg-whiter hover:text-primary',
-                            itemContainerClasses
+                        className={twMerge(
+                            classNames(
+                                'flex cursor-pointer px-5 py-2 font-medium hover:bg-whiter hover:text-primary',
+                                itemContainerClasses
+                            )
                         )}
                         onClick={() => {
                             trigger(item)

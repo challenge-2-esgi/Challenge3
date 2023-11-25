@@ -10,7 +10,7 @@ const Sidebar = ({ items }) => {
 
     const itemsWithActive = items.map((item) => ({
         ...item,
-        active: `/${segment}` === item.path,
+        active: segment === item.segment,
     }))
 
     return (
@@ -42,6 +42,7 @@ Sidebar.propTypes = {
         PropTypes.shape({
             title: PropTypes.string,
             path: PropTypes.string,
+            segment: PropTypes.string,
             icon: PropTypes.element,
         })
     ).isRequired,
