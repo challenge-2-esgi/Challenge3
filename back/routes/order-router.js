@@ -4,12 +4,9 @@ const CRUDRouter = require('./item-router')
 const Order = require('../models/Order')
 const { ROLE } = require('../constants')
 const validators = require('../validators')
-
-const LoggedInUser = require('../middlewares/logged-in-user')
 const RolesGuard = require('../middlewares/roles-guard')
-const OwnershipGuard = require('../middlewares/ownership-guard')
 const Validator = require('../middlewares/validator')
-const { isAdmin } = require('../utils/authorization')
+const OwnerOrDeliveryPerson = require('../middlewares/owner-or-delivery-person-guard')
 
 function OrderRouter() {
     const router = new Router()
@@ -28,34 +25,25 @@ function OrderRouter() {
             collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin])],
             itemCreateMiddlewares: [
                 AuthGuard,
+                RolesGuard([ROLE.admin, ROLE.client]),
                 Validator(validators.createOrder),
             ],
             itemReadMiddlewares: [
                 AuthGuard,
-                OwnershipGuard({
+                OwnerOrDeliveryPerson({
                     findResource: findOrder,
-                    ownerKey: 'id',
                     includeAdmin: true,
                 }),
             ],
             itemUpdateMiddlewares: [
                 Validator(validators.updateOrder),
                 AuthGuard,
-                OwnershipGuard({
+                OwnerOrDeliveryPerson({
                     findResource: findOrder,
-                    ownerKey: 'id',
                     includeAdmin: true,
                 }),
             ],
-            itemDeleteGuards: [
-                AuthGuard,
-                RolesGuard([ROLE.admin]),
-                OwnershipGuard({
-                    findResource: findOrder,
-                    ownerKey: 'id',
-                    includeAdmin: true,
-                }),
-            ],
+            itemDeleteGuards: [AuthGuard, RolesGuard([ROLE.admin])],
         })
     )
     return router
