@@ -27,6 +27,18 @@
         }
     },
     "page": {
+        "orders": {
+            "title": "Commandes",
+            "button": {
+                "add": "Ajouter"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer cette commande ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!"
+        },
         "users": {
             "title": "Utilisateurs",
             "button": {

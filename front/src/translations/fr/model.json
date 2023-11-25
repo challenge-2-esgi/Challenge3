@@ -1,4 +1,18 @@
 {
+    "order": {
+        "status": "Status",
+        "statusTypes": {
+            "waiting_for_pick_up": "En attente de récupération",
+            "delivering": "En cours de livraison",
+            "delivered": "Livré",
+            "cancelled": "Annulé"
+        },
+        "sku": "SKU",
+        "reciever_email": "Email du destinataire",
+        "reciever_phone": "Téléphone du destinataire",
+        "is_delivered": "Livré",
+        "pickup_time": "Heure de récupération (livreur)"
+    },
     "user": {
         "firstname": "Prénom",
         "lastname": "Nom",
