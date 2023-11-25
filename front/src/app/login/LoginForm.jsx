@@ -45,11 +45,11 @@ const LoginForm = () => {
         formState: { errors },
     } = useForm({
         resolver: zodResolver(validationSchema),
-            })
+    })
     const { mutate: login } = Auth.useLogin({
         onSuccess: (token) => {
             loginAction(token)
-            router.replace(route.DASHBOARD)
+            router.replace(route.HOME)
         },
     })
 

@@ -2,7 +2,7 @@
 
 import BackIcon from '@/components/BackIcon'
 import Container from '@/components/Container'
-import { itemOperation } from '@/constants'
+import { itemOperation, role } from '@/constants'
 import { useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 import UserForm from '../UserForm'
@@ -10,6 +10,7 @@ import { User } from '@/api'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { t_NAMESPACES } from '@/i18n'
+import withRoleGuard from '@/HOC/withRoleGuard'
 
 const AddUserPage = () => {
     const router = useRouter()
@@ -46,4 +47,4 @@ const AddUserPage = () => {
     )
 }
 
-export default AddUserPage
+export default withRoleGuard([role.admin], AddUserPage)

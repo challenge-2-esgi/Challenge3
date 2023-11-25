@@ -4,9 +4,17 @@ import LanguagePicker from '@/components/LanguagePicker'
 import { t_LANGUAGES } from '@/i18n'
 import { useTranslation } from 'react-i18next'
 import LoginForm from './LoginForm'
+import { useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
 
 export default () => {
+    const queryClient = useQueryClient()
     const { i18n, t } = useTranslation()
+
+    useEffect(() => {
+        queryClient.removeQueries()
+    }, [])
+
     return (
         <div className="shadow-default rounded-sm bg-white">
             <LanguagePicker
