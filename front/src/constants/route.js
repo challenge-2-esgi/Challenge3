@@ -16,6 +16,7 @@ export default Object.freeze({
         home: {
             dashboard: 'dashboard',
             users: 'users',
+            orders: 'orders',
             complaints: 'complaints',
         },
     },

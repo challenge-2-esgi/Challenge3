@@ -40,6 +40,7 @@ function buildMenuItem(userRole, t) {
             {
                 title: t('sidebar.item.orders'),
                 path: route.ORDERS,
+                segment: route.segment.home.orders,
                 icon: null,
             },
         ]
