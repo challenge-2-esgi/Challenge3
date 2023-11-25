@@ -8,7 +8,6 @@ import { Fragment, useEffect } from 'react'
 const UserLoader = ({ children }) => {
     const setUser = useStore((state) => state.setUser)
     const { isLoading, error, data } = User.useLoggedInUser()
-
     useEffect(() => {
         if (data != null) {
             setUser(data)

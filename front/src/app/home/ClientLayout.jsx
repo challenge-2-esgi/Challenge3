@@ -12,6 +12,7 @@ import UserLoader from './UserLoader'
 
 const ClientLayout = ({ children }) => {
     const { i18n } = useTranslation()
+
     const isAuthenticated = useStore((state) => state.isAuthenticated)
 
     if (!isAuthenticated) {

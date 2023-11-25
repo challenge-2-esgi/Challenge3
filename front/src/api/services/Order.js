@@ -1,31 +1,21 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import client from '../client'
 
-const prefix = 'users'
+const prefix = 'orders'
 
 export default {
-    useLoggedInUser: () =>
+    useOrders: () =>
         useQuery({
-            queryKey: ['loggedInUser'],
+            queryKey: ['orders'],
             queryFn: async () => {
-                const res = await client.get(prefix + '/current', {
-                    authorization: true,
-                })
-                return res.data
-            },
-            retry: false,
-        }),
-    useUsers: () =>
-        useQuery({
-            queryKey: ['uses'],
-            queryFn: async () => {
-                const res = await client.get('users', { authorization: true })
+                const res = await client.get('orders', { authorization: true })
                 return res.data
             },
         }),
-    useUser: (id) =>
+
+    useOrder: (id) =>
         useQuery({
-            queryKey: ['user', id],
+            queryKey: ['order', id],
             queryFn: async () => {
                 const res = await client.get(prefix + '/' + id, {
                     authorization: true,
@@ -33,6 +23,7 @@ export default {
                 return res.data
             },
         }),
+
     useAdd: (onSuccess, onError) =>
         useMutation({
             mutationFn: async (data) => {
@@ -48,6 +39,7 @@ export default {
                 onError()
             },
         }),
+
     useUpdate: (id, onSuccess, onError) =>
         useMutation({
             mutationFn: async (data) => {
@@ -63,6 +55,7 @@ export default {
                 onError()
             },
         }),
+
     useDelete: (id, onSuccess, onError) =>
         useMutation({
             mutationFn: async () => {

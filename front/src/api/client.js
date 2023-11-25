@@ -2,7 +2,6 @@ import storage from '@/services/storage'
 import axios from 'axios'
 
 // TODO: token expired interceptor
-
 function buildClient() {
     const client = axios.create({
         baseURL: process.env.NEXT_PUBLIC_BACK_URL,
