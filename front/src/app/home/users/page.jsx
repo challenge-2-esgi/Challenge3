@@ -16,6 +16,7 @@ import { buildEditUserRoute } from '@/utils/route'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import withRoleGuard from '@/HOC/withRoleGuard'
 
 const UsersPage = () => {
     const router = useRouter()
@@ -161,4 +162,4 @@ const UsersPage = () => {
     )
 }
 
-export default UsersPage
+export default withRoleGuard([role.admin], UsersPage)

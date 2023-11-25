@@ -1,5 +1,7 @@
 'use client'
 
+import withRoleGuard from '@/HOC/withRoleGuard'
+import { role } from '@/constants'
 import { Fragment } from 'react'
 
 function DashboardPage() {
@@ -10,4 +12,4 @@ function DashboardPage() {
     )
 }
 
-export default DashboardPage
+export default withRoleGuard([role.admin], DashboardPage)

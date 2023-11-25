@@ -4,13 +4,14 @@ import { User } from '@/api'
 import BackIcon from '@/components/BackIcon'
 import Container from '@/components/Container'
 import Loader from '@/components/Loader'
-import { itemOperation } from '@/constants'
+import { itemOperation, role } from '@/constants'
 import { useRouter } from 'next/navigation'
 import { Fragment } from 'react'
 import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import UserForm from '../../UserForm'
 import { t_NAMESPACES } from '@/i18n'
+import withRoleGuard from '@/HOC/withRoleGuard'
 
 const EditUserPage = ({ params }) => {
     const { t } = useTranslation()
@@ -55,4 +56,4 @@ const EditUserPage = ({ params }) => {
     )
 }
 
-export default EditUserPage
+export default withRoleGuard([role.admin], EditUserPage)
