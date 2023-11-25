@@ -1,5 +1,5 @@
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import { twMerge } from 'tailwind-merge'
 
 const Pill = ({ title, color, outlined = false }) => {
     const bgClasses = `text-white bg-${color}`
@@ -7,7 +7,7 @@ const Pill = ({ title, color, outlined = false }) => {
 
     return (
         <span
-            className={classNames(
+            className={twMerge(
                 'inline-flex cursor-default items-center rounded-full px-3 py-1 text-sm font-semibold',
                 outlined ? outlinedClasses : bgClasses
             )}
