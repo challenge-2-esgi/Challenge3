@@ -1,8 +1,8 @@
 export default Object.freeze({
     LOGIN: '/login',
     HOME: '/home',
-    DASHBOARD: '/dashboard',
-    USERS: '/users',
+    DASHBOARD: '/home/dashboard',
+    USERS: '/home/users',
 
     // for crud operations
     ITEM_ADD: '/add',
