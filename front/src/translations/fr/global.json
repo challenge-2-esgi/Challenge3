@@ -1,4 +1,6 @@
 {
+    "yes": "Oui",
+    "no": "Non",
     "login_form": {
         "title": "Se connecter",
         "label": {

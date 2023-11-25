@@ -1,4 +1,6 @@
 {
+    "yes": "Yes",
+    "no": "No",
     "login_form": {
         "title": "Sign In",
         "label": {
