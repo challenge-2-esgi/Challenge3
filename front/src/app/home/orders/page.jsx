@@ -7,10 +7,8 @@ import { Order } from '@/api'
 import ConfirmDialog from '@/components/ConfirmDialog'
 import Table from '@/components/Table'
 import TableCrudActions from '@/components/TableCrudActions'
-import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
 import { buildEditOrderRoute } from '@/utils/route'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { mapStatusToLabel } from '../../../utils/translateHelper'
@@ -52,6 +50,10 @@ const OrdersPage = () => {
             id: 'isDelivered',
             header: t('order.is_delivered', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'isDelivered',
+            cell: ({ row }) => {
+                const isDelivered = row.getValue('isDelivered')
+                return isDelivered ? t('yes') : t('no')
+            },
         },
         {
             id: 'pickupTime',
