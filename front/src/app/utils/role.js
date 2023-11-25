@@ -9,9 +9,15 @@ export function hasOneOfRoles(user, roles = []) {
 }
 
 export function isAdmin(user) {
-    return hasOneOfRoles(user, [role.admin])
+    if (!user) {
+        return false
+    }
+    return user.role === role.admin
 }
 
 export function isSupport(user) {
-    return hasOneOfRoles(user, [role.support])
+    if (!user) {
+        return false
+    }
+    return user.role === role.support
 }
