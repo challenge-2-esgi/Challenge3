@@ -22,6 +22,10 @@ function UserRouter() {
         })
     }
 
+    router.get('/users/current', AuthGuard, (req, res) => {
+        res.status(200).json(req.user)
+    })
+
     router.use(
         '/users',
         CRUDRouter({

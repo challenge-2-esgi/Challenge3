@@ -3,27 +3,22 @@
 import { Fragment, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { User } from '@/api'
-import Button from '@/components/Button'
+import { Order } from '@/api'
 import ConfirmDialog from '@/components/ConfirmDialog'
-import Pill from '@/components/Pill'
 import Table from '@/components/Table'
 import TableCrudActions from '@/components/TableCrudActions'
-import { role } from '@/constants'
 import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
-import { buildEditUserRoute } from '@/utils/route'
+import { buildEditOrderRoute } from '@/utils/route'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
-import withRoleGuard from '@/HOC/withRoleGuard'
+import { mapStatusToLabel } from '../../../utils/translateHelper'
 
-const UsersPage = () => {
+const OrdersPage = () => {
     const router = useRouter()
-
     const { t } = useTranslation()
-
-    const { isLoading, data, error } = User.useUsers()
+    const { isLoading, data, error } = Order.useOrders()
 
     const columns = [
         {
@@ -32,43 +27,36 @@ const UsersPage = () => {
             accessorKey: 'id',
         },
         {
-            id: 'firstname',
-            header: t('user.firstname', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'firstname',
+            id: 'status',
+            header: t('order.status', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'status',
+            cell: ({ row }) =>
+                mapStatusToLabel(row.getValue('status'), t, t_NAMESPACES.MODEL),
         },
         {
-            id: 'lastname',
-            header: t('user.lastname', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'lastname',
+            id: 'sku',
+            header: t('order.sku', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'sku',
         },
         {
-            id: 'email',
-            header: t('user.email', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'email',
+            id: 'recieverEmail',
+            header: t('order.reciever_email', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'recieverEmail',
         },
         {
-            id: 'role',
-            header: t('user.role', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'role',
-            cell: ({ cell }) => {
-                const title =
-                    cell.getValue() === role.deliverer
-                        ? t('user.role_title.deliverer', {
-                              ns: t_NAMESPACES.MODEL,
-                          }).toLowerCase()
-                        : cell.getValue().toLowerCase()
-                return <Pill title={title} color="info" />
-            },
+            id: 'recieverPhone',
+            header: t('order.reciever_phone', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'recieverPhone',
         },
         {
-            id: 'createdAt',
-            header: 'Créer',
-            accessorKey: 'createdAt',
+            id: 'isDelivered',
+            header: t('order.is_delivered', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'isDelivered',
         },
         {
-            id: 'updateddAt',
-            header: 'Met à jour',
-            accessorKey: 'createdAt',
+            id: 'pickupTime',
+            header: t('order.pickup_time', { ns: t_NAMESPACES.MODEL }),
+            accessorKey: 'pickupTime',
         },
         {
             id: 'actions',
@@ -76,10 +64,13 @@ const UsersPage = () => {
             accessorKey: 'id',
             cell: ({ row }) => {
                 const [showModal, setShowModal] = useState(false)
-                const { mutate: deleteUser, isPending } = User.useDelete(
+                const { mutate: deleteOrder, isPending } = Order.useDelete(
                     row.getValue('id'),
                     () => {
-                        toast.error(t('page.users.delete_error_message'))
+                        toast.success(t('page.orders.delete_success_message'))
+                    },
+                    () => {
+                        toast.error(t('page.orders.delete_error_message'))
                     }
                 )
 
@@ -87,13 +78,11 @@ const UsersPage = () => {
                     <Fragment>
                         <TableCrudActions
                             canView={false}
-                            canEdit={
-                                row.getValue('role') === role.admin ||
-                                row.getValue('role') === role.support
-                            }
+                            canEdit={true}
+                            canDelete={true}
                             onEdit={() => {
                                 router.push(
-                                    buildEditUserRoute(row.getValue('id'))
+                                    buildEditOrderRoute(row.getValue('id'))
                                 )
                             }}
                             onDelete={() => {
@@ -102,19 +91,21 @@ const UsersPage = () => {
                         />
                         {showModal ? (
                             <ConfirmDialog
-                                message={t('page.users.confirm_dialog.message')}
+                                message={t(
+                                    'page.orders.confirm_dialog.message'
+                                )}
                                 cancelLabel={t(
-                                    'page.users.confirm_dialog.cancel'
+                                    'page.orders.confirm_dialog.cancel'
                                 )}
                                 confirmLabel={t(
-                                    'page.users.confirm_dialog.confirm'
+                                    'page.orders.confirm_dialog.confirm'
                                 )}
                                 loading={isPending}
                                 onCancel={() => {
                                     setShowModal(false)
                                 }}
                                 onConfirm={() => {
-                                    deleteUser()
+                                    deleteOrder()
                                     if (!isPending) {
                                         setShowModal(false)
                                     }
@@ -146,13 +137,13 @@ const UsersPage = () => {
     return (
         <Fragment>
             <h2 className="mb-6 cursor-default text-2xl font-semibold text-black">
-                {t('page.users.title')}
+                {t('page.orders.title')}
             </h2>
-            <Link href={route.USERS + route.ITEM_ADD}>
+            {/* <Link href={route.ORDERS + route.ITEM_ADD}>
                 <Button className="mb-4 mt-4" size="medium">
-                    {t('page.users.button.add')}
+                    {t('page.orders.button.add')}
                 </Button>
-            </Link>
+            </Link> */}
             <Table
                 columns={columns}
                 data={data ?? []}
@@ -164,4 +155,4 @@ const UsersPage = () => {
     )
 }
 
-export default withRoleGuard([role.admin], UsersPage)
+export default OrdersPage

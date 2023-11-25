@@ -11,4 +11,11 @@ const itemOperation = {
     view: 'view',
 }
 
-export { role, itemOperation }
+const orderStatus = {
+    waitingForPickup: 'WAITING_FOR_PICK_UP',
+    delivering: 'DELIVERING',
+    delivered: 'DELIVERED',
+    cancelled: 'CANCELLED',
+}
+
+export { orderStatus, role, itemOperation }

@@ -10,6 +10,7 @@ import { role } from '@/constants'
 
 export default () => {
     const { t } = useTranslation()
+
     const user = useStore((state) => state.loggedinUser)
 
     if (user == null) {
@@ -32,6 +33,11 @@ function buildMenuItem(userRole, t) {
             {
                 title: t('sidebar.item.users'),
                 path: route.USERS,
+                icon: null,
+            },
+            {
+                title: t('sidebar.item.orders'),
+                path: route.ORDERS,
                 icon: null,
             },
         ]
