@@ -4,9 +4,7 @@ import { Fragment, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Order } from '@/api'
-import Button from '@/components/Button'
 import ConfirmDialog from '@/components/ConfirmDialog'
-import Pill from '@/components/Pill'
 import Table from '@/components/Table'
 import TableCrudActions from '@/components/TableCrudActions'
 import route from '@/constants/route'
@@ -15,6 +13,7 @@ import { buildEditOrderRoute } from '@/utils/route'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { mapStatusToLabel } from '../../../utils/translateHelper'
 
 const OrdersPage = () => {
     const router = useRouter()
@@ -31,6 +30,8 @@ const OrdersPage = () => {
             id: 'status',
             header: t('order.status', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'status',
+            cell: ({ row }) =>
+                mapStatusToLabel(row.getValue('status'), t, t_NAMESPACES.MODEL),
         },
         {
             id: 'sku',
@@ -39,22 +40,22 @@ const OrdersPage = () => {
         },
         {
             id: 'recieverEmail',
-            header: t('order.recieverEmail', { ns: t_NAMESPACES.MODEL }),
+            header: t('order.reciever_email', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'recieverEmail',
         },
         {
             id: 'recieverPhone',
-            header: t('order.recieverPhone', { ns: t_NAMESPACES.MODEL }),
+            header: t('order.reciever_phone', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'recieverPhone',
         },
         {
             id: 'isDelivered',
-            header: t('order.isDelivered', { ns: t_NAMESPACES.MODEL }),
+            header: t('order.is_delivered', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'isDelivered',
         },
         {
             id: 'pickupTime',
-            header: t('order.pickupTime', { ns: t_NAMESPACES.MODEL }),
+            header: t('order.pickup_time', { ns: t_NAMESPACES.MODEL }),
             accessorKey: 'pickupTime',
         },
         {

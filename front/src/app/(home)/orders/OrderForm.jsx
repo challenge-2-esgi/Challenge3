@@ -14,7 +14,6 @@ const fields = {
 
 const OrderForm = ({ operation, values, onSubmit, loading = true }) => {
     const { t } = useTranslation()
-
     const validationSchema = z.object({
         [fields.sku]: z
             .string()

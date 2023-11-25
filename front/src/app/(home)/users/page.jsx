@@ -19,7 +19,9 @@ import toast from 'react-hot-toast'
 
 const UsersPage = () => {
     const router = useRouter()
+
     const { t } = useTranslation()
+
     const { isLoading, data, error } = User.useUsers()
 
     const columns = [
