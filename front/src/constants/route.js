@@ -3,6 +3,7 @@ export default Object.freeze({
     HOME: '/home',
     DASHBOARD: '/home/dashboard',
     USERS: '/home/users',
+    COMPLAINTS: '/home/complaints',
 
     // for crud operations
     ITEM_ADD: '/add',
