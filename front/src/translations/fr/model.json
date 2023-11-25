@@ -11,7 +11,8 @@
         "reciever_email": "Email du destinataire",
         "reciever_phone": "Téléphone du destinataire",
         "is_delivered": "Livré",
-        "pickup_time": "Heure de récupération (livreur)"
+        "pickup_time": "Heure de récupération (livreur)",
+        "deliver_time": "Heure de livraison"
     },
     "user": {
         "firstname": "Prénom",

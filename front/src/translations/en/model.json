@@ -11,7 +11,8 @@
         "reciever_email": "Reciever email",
         "reciever_phone": "Reciever phone",
         "is_delivered": "Is delivered",
-        "pickup_time": "Pickup time (delivery person)"
+        "pickup_time": "Pickup time (delivery person)",
+        "deliver_time": "Delivery time"
     },
     "user": {
         "firstname": "First name",
