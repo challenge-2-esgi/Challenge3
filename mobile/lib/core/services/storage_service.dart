@@ -1,10 +1,18 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class StorageService {
-  static const _tokenKey = "token";
-  final FlutterSecureStorage _storage;
+  static StorageService? _instance;
 
-  StorageService() : _storage = const FlutterSecureStorage();
+  static get instance {
+    if (_instance != null) _instance!;
+    _instance = StorageService._internal();
+    return _instance!;
+  }
+
+  StorageService._internal();
+
+  static const _tokenKey = "token";
+  final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
   Future<void> storeToken(String token) =>
       _storage.write(key: _tokenKey, value: token);

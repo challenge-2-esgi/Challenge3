@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/providers/api_provider.dart';
 import 'package:mobile/core/providers/auth_provider.dart';
 import 'package:mobile/core/services/storage_service.dart';
 import 'package:mobile/screens/home_screen.dart';
@@ -18,11 +17,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider(
-          create: (context) => ApiProvider(),
-        ),
         ChangeNotifierProvider(
-          create: (context) => AuthProvider(storageService: StorageService()),
+          create: (context) =>
+              AuthProvider(storageService: StorageService.instance),
         )
       ],
       child: const AppWidget(),

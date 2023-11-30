@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/providers/api_provider.dart';
 import 'package:mobile/core/providers/auth_provider.dart';
+import 'package:mobile/core/services/api/api_service.dart';
 import 'package:mobile/screens/home_screen.dart';
 import 'package:mobile/screens/login/login_form.dart';
 
@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
             context.authProviderNoListen.login(token);
             HomeScreen.navigateTo(context);
           },
-          apiService: context.apiService,
+          apiService: ApiService.instance,
         ),
       ),
     );
