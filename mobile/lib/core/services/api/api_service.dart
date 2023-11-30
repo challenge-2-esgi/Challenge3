@@ -3,10 +3,17 @@ import 'package:mobile/core/services/api/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
 
 class ApiService {
-  final User _user;
+  static ApiService? _instance;
 
-  ApiService({required StorageService storageService})
-      : _user = User(client: Client._buildClient(storageService));
+  static get instance {
+    if (_instance != null) _instance!;
+    _instance = ApiService._internal();
+    return _instance!;
+  }
+
+  ApiService._internal();
+
+  final User _user = User(client: Client._buildClient(StorageService.instance));
 
   User get user => _user;
 }
