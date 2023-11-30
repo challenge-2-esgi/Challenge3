@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/providers/auth_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/blocs/auth/auth_bloc.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 
 // TODO: change content
@@ -18,13 +19,15 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Ecran d'accueil"),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            context.authProviderNoListen.logout();
-            LoginScreen.navigateTo(context);
-          },
-          child: const Text('Logout'),
+      body: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) => Center(
+          child: ElevatedButton(
+            onPressed: () {
+              context.read<AuthBloc>().add(AuthLogout());
+              LoginScreen.navigateTo(context);
+            },
+            child: const Text('Logout'),
+          ),
         ),
       ),
     );
