@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/providers/auth_provider.dart';
-import 'package:mobile/core/services/storage_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/blocs/auth/auth_bloc.dart';
 import 'package:mobile/screens/home_screen.dart';
 import 'package:mobile/screens/login/login_screen.dart';
 import 'package:mobile/theme/app_theme.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   runApp(const App());
@@ -15,46 +14,51 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) =>
-              AuthProvider(storageService: StorageService.instance),
+        BlocProvider(
+          create: (context) => AuthBloc()..add(AuthTokenLoaded()),
         )
       ],
-      child: const AppWidget(),
-    );
-  }
-}
+      child: MaterialApp(
+        title: 'Challenge',
+        theme: AppTheme.themeData,
+        routes: {
+          '/': (context) => BlocBuilder<AuthBloc, AuthState>(
+                builder: (context, state) {
+                  if (state.status == AuthStatus.loading) {
+                    return const Scaffold(
+                      body: SafeArea(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                    );
+                  }
 
-class AppWidget extends StatelessWidget {
-  const AppWidget({super.key});
+                  if (!state.isAuthenticated) {
+                    return const LoginScreen();
+                  }
+                  return const HomeScreen();
+                },
+              ),
+        },
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case HomeScreen.routeName:
+              return MaterialPageRoute(
+                builder: (_) => const HomeScreen(),
+              );
+            case LoginScreen.routeName:
+              return MaterialPageRoute(
+                builder: (_) => const LoginScreen(),
+              );
+          }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Challenge',
-      theme: AppTheme.themeData,
-      routes: {
-        '/': (context) => context.authProvider.isAuthenticated
-            ? const HomeScreen()
-            : const LoginScreen(),
-      },
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case HomeScreen.routeName:
-            return MaterialPageRoute(
-              builder: (_) => const HomeScreen(),
-            );
-          case LoginScreen.routeName:
-            return MaterialPageRoute(
-              builder: (_) => const LoginScreen(),
-            );
-        }
-
-        // TODO: add not found screen
-        return null;
-      },
+          // TODO: add not found screen
+          return null;
+        },
+      ),
     );
   }
 }
