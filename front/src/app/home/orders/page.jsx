@@ -12,6 +12,7 @@ import { buildEditOrderRoute } from '@/utils/route'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { mapStatusToLabel } from '../../../utils/translateHelper'
+import ErrorRequest from '@/components/ErrorRequest'
 
 const OrdersPage = () => {
     const router = useRouter()
@@ -136,18 +137,8 @@ const OrdersPage = () => {
     ]
 
     if (error) {
-        /**
-         * TODO
-         * add translation
-         * create component for error message
-         */
         return (
-            <main className="m-auto flex h-60 items-center justify-center text-base">
-                <p>
-                    <strong>Uh oh, something went wrong Sorry!</strong> <br />
-                    There was a problem with your request
-                </p>
-            </main>
+           <ErrorRequest />
         )
     }
 
