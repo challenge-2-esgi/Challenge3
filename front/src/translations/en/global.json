@@ -29,6 +29,23 @@
         }
     },
     "page": {
+        "dashboard": {
+            "main_title": "DASHBOARD"
+        },
+        "statistics": {
+            "averageRatingsDeliverers": "Average ratings of deliverers",
+            "averageDeliveryTime": "Average delivery time",
+            "titleNewClientsPerDay": "Number of new clients per day",
+            "nbOfNewClients": "Number of new clients",
+            "titleDeliveriesPerDay": "Number of deliveries per day",
+            "nbOfDeliveries": "Number of deliveries",
+            "date": "Date",
+            "titleTopClients": "Top clients",
+            "rank": "Rank",
+            "firstname": "Firstname",
+            "lastname": "Lastname",
+            "nbOfOrders": "Number of orders"
+        },
         "orders": {
             "title": "Orders",
             "button": {

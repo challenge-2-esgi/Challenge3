@@ -3,11 +3,12 @@
 import withRoleGuard from '@/HOC/withRoleGuard'
 import { role } from '@/constants'
 import { Fragment } from 'react'
+import Statistics from '../statistics/page'
 
 function DashboardPage() {
     return (
         <Fragment>
-            <h1 className="ml-4">Dashboard Page</h1>
+            <Statistics />
         </Fragment>
     )
 }
