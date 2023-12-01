@@ -1,6 +1,5 @@
 'use client'
 
-import { Order } from '@/api'
 import Loader from '@/components/Loader'
 import { useTranslation } from 'react-i18next'
 

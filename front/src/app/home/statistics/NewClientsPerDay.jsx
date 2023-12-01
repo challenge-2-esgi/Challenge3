@@ -5,31 +5,35 @@ import Loader from '@/components/Loader'
 import { useTranslation } from 'react-i18next'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
-const DeliveriesPerDay = ({ params }) => {
+const NewClientsPerDay = ({ params }) => {
     const { t } = useTranslation()
     const { data, isLoading } = Order.useOrder('')
 
     const statistics = {
-        nbOfDeliveriesPerDay: [
+        nbOfNewClientsPerDay: [
             {
                 date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 100,
+                nbOfNewClients: 100,
             },
             {
                 date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 80,
+                nbOfNewClients: 200,
             },
             {
                 date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 30,
+                nbOfNewClients: 300,
             },
             {
                 date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 190,
+                nbOfNewClients: 400,
             },
             {
                 date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 1,
+                nbOfNewClients: 500,
+            },
+            {
+                date: new Date().toLocaleDateString(),
+                nbOfNewClients: 600,
             },
         ],
     }
@@ -37,7 +41,7 @@ const DeliveriesPerDay = ({ params }) => {
     return (
         <div className="flex flex-col items-center justify-center">
             <h1 className="mb-6 text-2xl font-bold">
-                {t('page.statistics.titleDeliveriesPerDay')}
+                {t('page.statistics.titleNewClientsPerDay')}
             </h1>
             {isLoading ? (
                 <Loader className="mt-9 h-28 !bg-transparent" size="medium" />
@@ -45,7 +49,7 @@ const DeliveriesPerDay = ({ params }) => {
                 <LineChart
                     width={500}
                     height={300}
-                    data={statistics.nbOfDeliveriesPerDay}
+                    data={statistics.nbOfNewClientsPerDay}
                     margin={{
                         top: 5,
                         right: 30,
@@ -55,7 +59,7 @@ const DeliveriesPerDay = ({ params }) => {
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis dataKey="nbOfDeliveries" />
+                    <YAxis dataKey="nbOfNewClients" />
                     <Tooltip />
                     <Line
                         name={t('page.statistics.date')}
@@ -65,9 +69,9 @@ const DeliveriesPerDay = ({ params }) => {
                         activeDot={{ r: 14 }}
                     />
                     <Line
-                        name={t('page.statistics.nbOfDeliveries')}
+                        name={t('page.statistics.nbOfNewClients')}
                         type="monotone"
-                        dataKey="nbOfDeliveries"
+                        dataKey="nbOfNewClients"
                         stroke="#82ca9d"
                     />
                 </LineChart>
@@ -76,4 +80,4 @@ const DeliveriesPerDay = ({ params }) => {
     )
 }
 
-export default DeliveriesPerDay
+export default NewClientsPerDay

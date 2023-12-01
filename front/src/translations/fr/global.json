@@ -35,8 +35,16 @@
         "statistics": {
             "averageRatingsDeliverers": "Note moyenne des livreurs",
             "averageDeliveryTime": "Temps moyen de livraison",
+            "titleNewClientsPerDay": "Nouveaux clients par jour",
+            "nbOfNewClients": "Nombre de nouveaux clients",
+            "titleDeliveriesPerDay": "Nombre livraisons par jour",
             "nbOfDeliveries": "Nombre de livraisons",
-            "date": "Date"
+            "date": "Date",
+            "titleTopClients": "Meilleurs clients",
+            "rank": "Rang",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "nbOfOrders": "Nombre de commandes"
         },
         "orders": {
             "title": "Commandes",
