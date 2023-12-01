@@ -23,5 +23,20 @@
                 "not_valid": "Doit être une addresse mail valide"
             }
         }
+    },
+    "order_form": {
+        "input": {
+            "sku": {
+                "required": "Le SKU est requis"
+            }
+        }
+    },
+    "rating_form": {
+        "input": {
+            "rating": {
+                "required": "La note est requise",
+                "not_valid": "La note doit être un nombre entre 0 et 5"
+            }
+        }
     }
 }

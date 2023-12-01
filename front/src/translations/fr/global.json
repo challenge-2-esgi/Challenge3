@@ -19,7 +19,8 @@
         "item": {
             "dashboard": "Dashboard",
             "users": "Utilisateurs",
-            "orders": "Commandes"
+            "orders": "Commandes",
+            "ratings": "Ratings"
         }
     },
     "header": {
@@ -70,6 +71,19 @@
                 "confirm": "Supprimer"
             },
             "delete_error_message": "quelque chose s'est mal passé Désolé!"
+        },
+        "ratings": {
+            "title": "Notes",
+            "button": {
+                "add": "Ajouter"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer ce rating ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!",
+            "delete_success_message": "Rating supprimé avec succès"
         },
         "not_found": {
             "title": "Désolé, la page est introuvable",

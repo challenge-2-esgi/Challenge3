@@ -22,5 +22,10 @@
         "role_title": {
             "deliverer": "Deliverer"
         }
+    },
+    "rating": {
+        "rating": "Rating",
+        "clientName": "Client name",
+        "delivererName": "Deliverer name"
     }
 }
