@@ -23,5 +23,20 @@
                 "not_valid": "must be a valid email"
             }
         }
+    },
+    "order_form": {
+        "input": {
+            "sku" : {
+                "required" : "sku is required"
+            }
+        }
+    },
+    "rating_form": {
+        "input": {
+            "rating" : {
+                "required" : "rating is required",
+                "not_valid" : "rating must be between 0 and 5"
+            }
+        }
     }
 }

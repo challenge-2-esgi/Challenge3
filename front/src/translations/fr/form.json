@@ -14,5 +14,23 @@
             "adding_success_message": "Utilisateur ajouté avec succès",
             "editing_success_message": "L'utilisateur est mis à jour avec succès"
         }
+    },
+    "order_form": {
+        "input": {
+            "sku" : "Saisir le SKU"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        }
+    },
+    "rating_form": {
+        "input": {
+            "rating": "Saisir la note"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        }
     }
 }

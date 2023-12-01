@@ -43,6 +43,12 @@ function buildMenuItem(userRole, t) {
                 segment: route.segment.home.orders,
                 icon: null,
             },
+            {
+                title: t('sidebar.item.ratings'),
+                path: route.RATINGS,
+                segment: route.segment.home.ratings,
+                icon: null,
+            }
         ]
     }
 

@@ -14,5 +14,23 @@
             "adding_success_message": "User successfuly added",
             "editing_success_message": "User successfuly updated"
         }
+    },
+    "order_form": {
+        "input": {
+            "sku": "Enter sku"
+        },
+        "button": {
+            "add": "Add",
+            "edit": "Edit"
+        }
+    },
+    "rating_form": {
+        "input": {
+            "rating": "Enter rating"
+        },
+        "button": {
+            "add": "Add",
+            "edit": "Edit"
+        }
     }
 }
