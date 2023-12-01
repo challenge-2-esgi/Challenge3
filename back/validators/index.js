@@ -4,6 +4,7 @@ const updateUser = require('./update.user.validator')
 const createOrder = require('./create.order.validator')
 const updateOrder = require('./update.order.validator')
 const updateDeliverer = require('./update.deliverer.validator')
+const createDeliverer = require('./create.deliverer.validator')
 
 module.exports = {
     login,
@@ -12,4 +13,5 @@ module.exports = {
     createOrder,
     updateOrder,
     updateDeliverer,
+    createDeliverer,
 }

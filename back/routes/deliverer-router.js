@@ -27,7 +27,7 @@ function DelivererRouter() {
             itemCreateMiddlewares: [
                 AuthGuard,
                 RolesGuard([ROLE.admin, ROLE.deliverer]),
-                Validator(validators.createOrder),
+                Validator(validators.createDeliverer),
             ],
             itemReadMiddlewares: [
                 AuthGuard,
