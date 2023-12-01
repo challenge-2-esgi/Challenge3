@@ -34,12 +34,12 @@ const RatingsPage = () => {
         {
             id: 'clientId',
             header: t('rating.clientName', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'clientId',
+            accessorKey: 'client.firstname',
         },
         {
             id: 'delivererId',
             header: t('rating.delivererName', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'delivererId',
+            accessorKey: 'deliverer.user.firstname',
         },
         {
             id: 'rating',

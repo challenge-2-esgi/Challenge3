@@ -48,6 +48,10 @@ function RatingRouter() {
                     includeAdmin: true,
                 })
             ],
+            includeCollectionModels: [{
+                    all: true,
+                    nested: true,
+            }]
         })
     )
 
