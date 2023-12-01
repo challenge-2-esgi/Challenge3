@@ -34,7 +34,9 @@
         },
         "statistics": {
             "averageRatingsDeliverers": "Note moyenne des livreurs",
-            "averageDeliveryTime": "Temps moyen de livraison"
+            "averageDeliveryTime": "Temps moyen de livraison",
+            "nbOfDeliveries": "Nombre de livraisons",
+            "date": "Date"
         },
         "orders": {
             "title": "Commandes",

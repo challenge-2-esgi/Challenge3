@@ -34,7 +34,9 @@
         },
         "statistics": {
             "averageRatingsDeliverers": "Average ratings of deliverers",
-            "averageDeliveryTime": "Average delivery time"
+            "averageDeliveryTime": "Average delivery time",
+            "nbOfDeliveries": "Number of deliveries",
+            "date": "Date"
         },
         "orders": {
             "title": "Orders",
