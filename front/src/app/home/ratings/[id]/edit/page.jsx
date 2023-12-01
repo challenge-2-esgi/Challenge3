@@ -17,11 +17,12 @@ const EditRatingPage = ({ params }) => {
 
     const router = useRouter()
 
-    const { data,isLoading: fetchingRating } = Rating.useRating(params.id)
+    const { data,isLoading: fetchingRating, refetch } = Rating.useRating(params.id)
 
     const { mutate: updateRating, isPending: updatingRating } = Rating.useUpdate(
         params.id,
         () => {
+            refetch()
             toast.success(
                 t('rating_form.submit.editing_success_message', {
                     ns: t_NAMESPACES.FORM,
