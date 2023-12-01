@@ -11,6 +11,8 @@ function ItemRouter({
     itemReadMiddlewares = [],
     itemUpdateMiddlewares = [],
     itemDeleteGuards = [],
+    includeReadModels = [],
+    includeCollectionModels = [],
 }) {
     const router = new Router()
 
@@ -18,6 +20,7 @@ function ItemRouter({
         router.get('/', ...collectionMiddlewares, async function (req, res) {
             const items = await Model.findAll({
                 where: req.query,
+                include: includeCollectionModels,
             })
             res.json(items)
         })
@@ -52,6 +55,7 @@ function ItemRouter({
                         where: {
                             id: req.params.id,
                         },
+                        include: includeReadModels,
                     })
                     if (item) {
                         res.json(item)
