@@ -19,7 +19,8 @@
         "item": {
             "dashboard": "Dashboard",
             "users": "Users",
-            "orders": "Orders"
+            "orders": "Orders",
+            "ratings": "Ratings"
         }
     },
     "header": {
@@ -70,6 +71,19 @@
                 "confirm": "Delete"
             },
             "delete_error_message": "something went wrong Sorry!"
+        },
+        "ratings": {
+            "title": "Ratings",
+            "button": {
+                "add": "Add"
+            },
+            "confirm_dialog": {
+                "message": "Are you sure you want to delete this rating?",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "delete_error_message": "something went wrong Sorry!",
+            "delete_success_message": "Rating deleted successfully"
         },
         "not_found": {
             "title": "Sorry, the page can’t be found",

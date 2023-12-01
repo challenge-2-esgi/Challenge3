@@ -1,29 +1,34 @@
-import Button from '@/components/Button'
-import Input from '@/components/Input'
-import Loader from '@/components/Loader'
-import { itemOperation } from '@/constants'
-import { t_NAMESPACES } from '@/i18n'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
-import { z } from 'zod'
+import Button from "@/components/Button";
+import Input from "@/components/Input";
+import Loader from "@/components/Loader";
+import { itemOperation } from "@/constants";
+import { t_NAMESPACES } from "@/i18n";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { z } from "zod";
 
 const fields = {
-    sku: 'sku',
+    rating: 'rating',
 }
 
-const OrderForm = ({ operation, values, onSubmit, loading = true }) => {
-    const { t } = useTranslation()
+const RatingForm = ({ operation, values, onSubmit, loading = true }) => {
+
+    const  { t } = useTranslation()
     const validationSchema = z.object({
-        [fields.sku]: z
+        [fields.rating]: z
             .string()
             .trim()
             .min(
                 1,
-                t('order_form.input.sku.required', {
+                t('rating_form.input.rating.required', {
                     ns: t_NAMESPACES.VALIDATION,
                 })
-            ),
+            )
+            .regex(/^[0-5]$/, t('rating_form.input.rating.not_valid', {
+                ns: t_NAMESPACES.VALIDATION,
+            }))
+            
     })
 
     const {
@@ -50,24 +55,28 @@ const OrderForm = ({ operation, values, onSubmit, loading = true }) => {
     return (
         <form className="text-black" onSubmit={handleSubmit(submit)}>
             <Input
+                type="number"
+                min="0"
+                max="5"
                 containerClasses="mb-6"
-                label={t('order.sku', { ns: t_NAMESPACES.MODEL })}
-                register={register(fields.sku)}
-                placeholder={t('order_form.input.sku', {
+                label={t('rating.rating', { ns: t_NAMESPACES.MODEL })}
+                register={register(fields.rating)}
+                placeholder={t('rating_form.input.rating', {
                     ns: t_NAMESPACES.FORM,
                 })}
-                error={errors[fields.sku] ? true : false}
-                helperText={errors[fields.sku]?.message ?? ''}
+                error={errors[fields.rating] ? true : false}
+                helperText={errors[fields.rating]?.message ?? ''}
             />
+
             <Button type="submit" size="large" disabled={loading}>
                 {loading ? (
                     <Loader className="bg-transparent" color="white" />
                 ) : (
                     {
-                        [itemOperation.add]: t('order_form.button.add', {
+                        [itemOperation.add]: t('rating_form.button.add', {
                             ns: t_NAMESPACES.FORM,
                         }),
-                        [itemOperation.edit]: t('order_form.button.edit', {
+                        [itemOperation.edit]: t('rating_form.button.edit', {
                             ns: t_NAMESPACES.FORM,
                         }),
                     }[operation]
@@ -77,4 +86,4 @@ const OrderForm = ({ operation, values, onSubmit, loading = true }) => {
     )
 }
 
-export default OrderForm
+export default RatingForm;

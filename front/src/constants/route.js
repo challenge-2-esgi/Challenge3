@@ -5,6 +5,7 @@ export default Object.freeze({
     ORDERS: '/home/orders',
     USERS: '/home/users',
     COMPLAINTS: '/home/complaints',
+    RATINGS: '/home/ratings',
 
     // for crud operations
     ITEM_ADD: '/add',
@@ -18,6 +19,7 @@ export default Object.freeze({
             users: 'users',
             orders: 'orders',
             complaints: 'complaints',
+            ratings: 'ratings',
         },
     },
 })

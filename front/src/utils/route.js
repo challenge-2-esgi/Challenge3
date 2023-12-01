@@ -24,3 +24,7 @@ export function buildEditUserRoute(userId) {
 export function buildEditOrderRoute(orderId) {
     return buildItemRoute(route.ORDERS + '/', orderId, itemOperation.edit)
 }
+
+export function buildEditRatingRoute(ratingId) {
+    return buildItemRoute(route.RATINGS + '/', ratingId, itemOperation.edit)
+}
