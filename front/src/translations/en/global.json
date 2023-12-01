@@ -29,6 +29,13 @@
         }
     },
     "page": {
+        "dashboard": {
+            "main_title": "DASHBOARD"
+        },
+        "statistics": {
+            "averageRatingsDeliverers": "Average ratings of deliverers",
+            "averageDeliveryTime": "Average delivery time"
+        },
         "orders": {
             "title": "Orders",
             "button": {

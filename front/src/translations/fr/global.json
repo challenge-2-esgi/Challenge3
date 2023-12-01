@@ -29,6 +29,13 @@
         }
     },
     "page": {
+        "dashboard": {
+            "main_title": "TABLEAU DE BORD"
+        },
+        "statistics": {
+            "averageRatingsDeliverers": "Note moyenne des livreurs",
+            "averageDeliveryTime": "Temps moyen de livraison"
+        },
         "orders": {
             "title": "Commandes",
             "button": {

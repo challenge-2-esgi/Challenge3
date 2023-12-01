@@ -27,7 +27,7 @@ const StatisticCards = () => {
                     <div className="">
                         <StatisticCard
                             key={index}
-                            title={t(`statistics.${statistic.title}`)}
+                            title={t(`page.statistics.${statistic.title}`)}
                             value={statistic.value}
                         />
                     </div>

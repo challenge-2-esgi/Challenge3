@@ -16,7 +16,7 @@ const Statistics = ({ params }) => {
         <>
             <div className="flex w-full flex-col">
                 <p className="mb-5 text-center text-xl font-bold">
-                    {t('dashboard.main_title')}
+                    {t('page.dashboard.main_title')}
                 </p>
                 <StatisticCards />
                 <DeliveriesPerDay />
