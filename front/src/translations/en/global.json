@@ -21,7 +21,8 @@
             "users": "Users",
             "orders": "Orders",
             "ratings": "Ratings",
-            "fleet": "Fleet"
+            "fleet": "Fleet",
+            "deliverers": "Deliverers"
         }
     },
     "header": {

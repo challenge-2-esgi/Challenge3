@@ -21,7 +21,8 @@
             "users": "Utilisateurs",
             "orders": "Commandes",
             "ratings": "Ratings",
-            "fleet": "Flotte"
+            "fleet": "Flotte",
+            "deliverers": "Livreurs"
         }
     },
     "header": {
@@ -82,9 +83,6 @@
         },
         "ratings": {
             "title": "Notes",
-            "button": {
-                "add": "Ajouter"
-            },
             "confirm_dialog": {
                 "message": "Êtes-vous sûr de vouloir supprimer ce rating ?",
                 "cancel": "Annuler",
@@ -92,6 +90,19 @@
             },
             "delete_error_message": "quelque chose s'est mal passé Désolé!",
             "delete_success_message": "Rating supprimé avec succès"
+        },
+        "deliverers": {
+            "title": "Livreurs",
+            "button": {
+                "add": "Ajouter"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer ce livreur ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!",
+            "delete_success_message": "Livreur supprimé avec succès"
         },
         "not_found": {
             "title": "Désolé, la page est introuvable",

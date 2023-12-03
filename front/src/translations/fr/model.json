@@ -27,5 +27,15 @@
         "rating": "Note",
         "clientName": "Nom du client",
         "delivererName": "Nom du livreur"
+    },
+    "deliverer": {
+        "firstname": "Prénom",
+        "lastname": "Nom",
+        "status": {
+            "status": "Status",
+            "online": "En ligne",
+            "offline": "Hors ligne"
+        },
+        "phone": "Téléphone"
     }
 }
