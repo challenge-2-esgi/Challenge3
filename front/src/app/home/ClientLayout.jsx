@@ -24,7 +24,7 @@ const ClientLayout = ({ children }) => {
             <div className="flex h-screen overflow-hidden">
                 <SidebarItems />
                 <div className="flex w-full flex-col">
-                    <header className="realtive flex w-full items-center justify-end bg-white pr-10 drop-shadow-sm">
+                    <header className="realtive z-10 flex w-full items-center justify-end bg-white pr-10 drop-shadow-sm">
                         <UserDropdown />
                         <LanguagePicker
                             className="absolute left-8"
@@ -35,7 +35,7 @@ const ClientLayout = ({ children }) => {
                             }}
                         />
                     </header>
-                    <main className="h-full w-full overflow-auto bg-whiten p-10">
+                    <main className="relative z-0 h-full w-full overflow-auto bg-whiten p-10">
                         {children}
                     </main>
                 </div>
