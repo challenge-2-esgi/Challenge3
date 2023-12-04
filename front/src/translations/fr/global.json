@@ -20,7 +20,8 @@
             "dashboard": "Dashboard",
             "users": "Utilisateurs",
             "orders": "Commandes",
-            "ratings": "Ratings"
+            "ratings": "Ratings",
+            "fleet": "Flotte"
         }
     },
     "header": {
@@ -46,6 +47,13 @@
             "firstname": "Prénom",
             "lastname": "Nom",
             "nbOfOrders": "Nombre de commandes"
+        },
+        "fleet": {
+            "filters": {
+                "all": "Tous",
+                "delivering": "En cours de livraison",
+                "waiting": "En attente"
+            }
         },
         "orders": {
             "title": "Commandes",
