@@ -26,7 +26,7 @@
     "rating": {
         "rating": "Rating",
         "clientName": "Client name",
-        "delivererName": "Deliverer name",
+        "delivererName": "Deliverer name"
     },
     "deliverer": {
         "firstname": "Firstname",
