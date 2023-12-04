@@ -20,7 +20,8 @@
             "dashboard": "Dashboard",
             "users": "Users",
             "orders": "Orders",
-            "ratings": "Ratings"
+            "ratings": "Ratings",
+            "fleet": "Fleet"
         }
     },
     "header": {
@@ -46,6 +47,13 @@
             "firstname": "Firstname",
             "lastname": "Lastname",
             "nbOfOrders": "Number of orders"
+        },
+        "fleet": {
+            "filters": {
+                "all": "All",
+                "delivering": "On delivery",
+                "waiting": "Waiting"
+            }
         },
         "orders": {
             "title": "Orders",

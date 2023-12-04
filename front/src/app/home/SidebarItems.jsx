@@ -32,6 +32,12 @@ function buildMenuItem(userRole, t) {
                 icon: null,
             },
             {
+                title: t('sidebar.item.fleet'),
+                path: route.FLEET,
+                segment: route.segment.home.fleet,
+                icon: null,
+            },
+            {
                 title: t('sidebar.item.users'),
                 path: route.USERS,
                 segment: route.segment.home.users,
@@ -48,7 +54,7 @@ function buildMenuItem(userRole, t) {
                 path: route.RATINGS,
                 segment: route.segment.home.ratings,
                 icon: null,
-            }
+            },
         ]
     }
 

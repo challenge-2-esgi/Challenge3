@@ -55,7 +55,7 @@ const UserDropdown = () => {
                 buttonClasses="bg-transparent text-black hover:bg-transparent px-2"
                 menuClasses="left-auto right-0 min-w-[14rem]"
                 itemContainerClasses="hover:bg-white"
-                className="relative left-auto right-0 min-w-[14rem]"
+                containerClasses="relative left-auto right-0 min-w-[14rem]"
                 label={
                     <Avatar
                         className="mr-3"
