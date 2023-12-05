@@ -34,12 +34,12 @@ const UsersPage = () => {
         {
             id: 'firstname',
             header: t('deliverer.firstname', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'firstname',
+            accessorKey: 'user.firstname',
         },
         {
             id: 'lastname',
             header: t('deliverer.lastname', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'lastname',
+            accessorKey: 'user.lastname',
         },
         {
             id: 'phone',

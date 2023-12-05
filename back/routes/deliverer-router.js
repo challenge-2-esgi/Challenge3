@@ -46,6 +46,12 @@ function DelivererRouter() {
                 }),
             ],
             itemDeleteGuards: [AuthGuard, RolesGuard([ROLE.admin])],
+            includeCollectionModels: [
+                {
+                    all: true,
+                    nested: true,
+                },
+            ],
         })
     )
     return router
