@@ -61,7 +61,7 @@ class _LoginFormState extends State<LoginForm> {
         _loading = true;
       });
       try {
-        final String token = await widget.apiService.user.login(
+        final String token = await widget.apiService.login(
           _formKey.currentState?.value["email"],
           _formKey.currentState?.value["password"],
         );

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mobile/core/services/api/user.dart';
+import 'package:mobile/core/models/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
 
 class ApiService {
@@ -13,9 +13,28 @@ class ApiService {
 
   ApiService._internal();
 
-  final User _user = User(client: Client._buildClient(StorageService.instance));
+  final _client = Client._buildClient(StorageService.instance);
 
-  User get user => _user;
+  Future<String> login(String email, String password) async {
+    try {
+      var response = await _client.post(
+        "/login",
+        data: {'email': email, 'password': password},
+      );
+      return response.data['token'];
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<User> getLoggedInUser() async {
+    try {
+      final response = await _client.get("/users/current");
+      return User.fromJson(response.data);
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
 }
 
 class Client {
