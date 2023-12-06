@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require('sequelize')
 const db = require('../db')
 const User = require('./User')
+const sseChannel = require('../sse/channel')
+const sseEvent = require('../sse/events')
 
 class Deliverer extends Model {}
 
@@ -32,6 +34,28 @@ Deliverer.belongsTo(User, {
     },
     onUpdate: 'CASCADE',
     onDelete: 'CASCADE',
+})
+
+Deliverer.addHook('afterUpdate', (instance, { fields }) => {
+    if (fields.includes('latitude') || fields.includes('longitude')) {
+        sseChannel.publish(
+            {
+                delivererId: instance.id,
+                latitude: instance.latitude,
+                longitude: instance.longitude,
+            },
+            sseEvent.delivererLocation
+        )
+        
+        sseChannel.publish(
+            {
+                delivererId: instance.id,
+                latitude: instance.latitude,
+                longitude: instance.longitude,
+            },
+            sseEvent.orderLocation
+        )
+    }
 })
 
 module.exports = Deliverer
