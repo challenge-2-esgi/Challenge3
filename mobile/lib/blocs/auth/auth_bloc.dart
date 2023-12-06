@@ -26,7 +26,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
 
     on<AuthLogin>(
-      (event, emit) {},
+      (event, emit) async {
+        await StorageService.instance.storeToken(event.token);
+        emit(
+          state.copyWith(status: AuthStatus.initial, isAuthenticated: true),
+        );
+      },
     );
 
     on<AuthLogout>(
