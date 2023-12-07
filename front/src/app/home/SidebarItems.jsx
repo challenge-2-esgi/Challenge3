@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 'use client'
 
 import { useTranslation } from 'react-i18next'
@@ -8,6 +9,7 @@ import route from '../../constants/route'
 import useStore from '@/store'
 import { role } from '@/constants'
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default () => {
     const { t } = useTranslation()
 
@@ -64,7 +66,20 @@ function buildMenuItem(userRole, t) {
     }
 
     if (userRole === role.support) {
-        return []
+        return [
+            {
+                title: t('sidebar.item.complaints'),
+                path: route.COMPLAINTS,
+                segment: route.segment.home.complaints,
+                icon: null,
+            },
+            {
+                title: t('sidebar.item.complaints_chat'),
+                path: route.COMPLAINTS_CHAT,
+                segment: route.segment.home.complaintsChat,
+                icon: null,
+            }
+        ]
     }
 
     return []
