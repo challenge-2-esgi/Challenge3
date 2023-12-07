@@ -7,6 +7,8 @@ export default Object.freeze({
     COMPLAINTS: '/home/complaints',
     RATINGS: '/home/ratings',
     FLEET: '/home/fleet',
+    COMPLAINTS: '/home/complaints',
+    COMPLAINTS_CHAT: '/home/complaints/chat',
 
     // for crud operations
     ITEM_ADD: '/add',
@@ -22,6 +24,8 @@ export default Object.freeze({
             complaints: 'complaints',
             ratings: 'ratings',
             fleet: 'fleet',
+            complaintsChat: 'complaints/chat',
+            complaints: 'complaints',
         },
     },
 })

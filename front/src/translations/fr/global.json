@@ -21,7 +21,9 @@
             "users": "Utilisateurs",
             "orders": "Commandes",
             "ratings": "Ratings",
-            "fleet": "Flotte"
+            "fleet": "Flotte",
+            "complaints": "Réclamations",
+            "complaints_chat": "Réclamations chat"
         }
     },
     "header": {
