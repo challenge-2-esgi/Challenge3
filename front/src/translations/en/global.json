@@ -21,7 +21,9 @@
             "users": "Users",
             "orders": "Orders",
             "ratings": "Ratings",
-            "fleet": "Fleet"
+            "fleet": "Fleet",
+            "complaints": "Complaints",
+            "complaints_chat": "Complaints Chat"
         }
     },
     "header": {
