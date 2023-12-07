@@ -9,7 +9,7 @@ export default Object.freeze({
     FLEET: '/home/fleet',
     DELIVERERS: '/home/deliverers',
     COMPLAINTS: '/home/complaints',
-    COMPLAINTS_CHAT: '/home/complaints/chat',
+    COMPLAINTS_CHAT: '/home/complaints/chat', 
 
     // for crud operations
     ITEM_ADD: '/add',
