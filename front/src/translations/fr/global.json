@@ -23,7 +23,8 @@
             "ratings": "Ratings",
             "fleet": "Flotte",
             "deliverers": "Livreurs",
-            "complaints": "Réclamations"
+            "complaints": "Réclamations",
+            "complaints_chat": "Réclamations chat"
         }
     },
     "header": {
