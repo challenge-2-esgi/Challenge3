@@ -12,13 +12,13 @@ import TableCrudActions from '@/components/TableCrudActions'
 import { role } from '@/constants'
 import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
-import { buildEditUserRoute } from '@/utils/route'
+import { buildEditDelivererRoute } from '@/utils/route'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import withRoleGuard from '@/HOC/withRoleGuard'
 
-const UsersPage = () => {
+const DeliverersPage = () => {
     const router = useRouter()
 
     const { t } = useTranslation()
@@ -52,7 +52,6 @@ const UsersPage = () => {
             accessorKey: 'isActive',
             cell: ({ row }) => {
                 const isActive = row.getValue('status')
-                console.log("isActive", isActive)
                 const title = isActive
                     ? t('deliverer.status.online', {
                           ns: t_NAMESPACES.MODEL,
@@ -69,7 +68,7 @@ const UsersPage = () => {
             accessorKey: 'id',
             cell: ({ row }) => {
                 const [showModal, setShowModal] = useState(false)
-                const { mutate: deleteUser, isPending } = Deliverer.useDelete(
+                const { mutate: deleteDeliverer, isPending } = Deliverer.useDelete(
                     row.getValue('id'),
                     () => {
                         toast.error(t('page.deliverers.delete_error_message'))
@@ -80,13 +79,10 @@ const UsersPage = () => {
                     <Fragment>
                         <TableCrudActions
                             canView={false}
-                            canEdit={
-                                row.getValue('role') === role.admin ||
-                                row.getValue('role') === role.support
-                            }
+                            canEdit={false}
                             onEdit={() => {
                                 router.push(
-                                    buildEditUserRoute(row.getValue('id'))
+                                    buildEditDelivererRoute(row.getValue('id'))
                                 )
                             }}
                             onDelete={() => {
@@ -95,19 +91,19 @@ const UsersPage = () => {
                         />
                         {showModal ? (
                             <ConfirmDialog
-                                message={t('page.users.confirm_dialog.message')}
+                                message={t('page.deliverers.confirm_dialog.message')}
                                 cancelLabel={t(
-                                    'page.users.confirm_dialog.cancel'
+                                    'page.deliverers.confirm_dialog.cancel'
                                 )}
                                 confirmLabel={t(
-                                    'page.users.confirm_dialog.confirm'
+                                    'page.deliverers.confirm_dialog.confirm'
                                 )}
                                 loading={isPending}
                                 onCancel={() => {
                                     setShowModal(false)
                                 }}
                                 onConfirm={() => {
-                                    deleteUser()
+                                    deleteDeliverer()
                                     if (!isPending) {
                                         setShowModal(false)
                                     }
@@ -139,7 +135,7 @@ const UsersPage = () => {
     return (
         <Fragment>
             <h2 className="mb-6 cursor-default text-2xl font-semibold text-black">
-                {t('page.users.title')}
+                {t('page.deliverers.title')}
             </h2>
             {/* <Link href={route.DELIVERERS + route.ITEM_ADD}>
                 <Button className="mb-4 mt-4" size="medium">
@@ -157,4 +153,4 @@ const UsersPage = () => {
     )
 }
 
-export default withRoleGuard([role.admin], UsersPage)
+export default withRoleGuard([role.admin], DeliverersPage)

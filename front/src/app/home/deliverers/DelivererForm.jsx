@@ -11,26 +11,13 @@ import { z } from 'zod'
 
 const fields = {
     phone: 'phone',
-    user: 'user',
 }
 
 const DelivererForm = ({ operation, values, onSubmit, loading = true }) => {
     const { t } = useTranslation()
-    const { isLoading, data, error } = User.useUsers()
-    const log = data?.filter((user) => user.role !== role.admin && user.role !== role.support)
-    console.log('log', log)
 
     const validationSchema = z.object({
         [fields.phone]: z
-            .string()
-            .trim()
-            .min(
-                1,
-                t('deliverer_form.input.phone.required', {
-                    ns: t_NAMESPACES.VALIDATION,
-                })
-            ),
-        [fields.user]: z
             .string()
             .trim()
             .min(
