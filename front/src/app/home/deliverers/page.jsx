@@ -141,11 +141,11 @@ const UsersPage = () => {
             <h2 className="mb-6 cursor-default text-2xl font-semibold text-black">
                 {t('page.users.title')}
             </h2>
-            <Link href={route.USERS + route.ITEM_ADD}>
+            {/* <Link href={route.DELIVERERS + route.ITEM_ADD}>
                 <Button className="mb-4 mt-4" size="medium">
-                    {t('page.users.button.add')}
+                    {t('page.deliverers.button.add')}
                 </Button>
-            </Link>
+            </Link> */}
             <Table
                 columns={columns}
                 data={data ?? []}

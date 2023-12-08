@@ -32,5 +32,20 @@
             "add": "Add",
             "edit": "Edit"
         }
+    },
+    "deliverer_form": {
+        "input": {
+            "phone": "Enter phone number",
+            "user": "Select a user"
+        },
+        "button": {
+            "add": "Add",
+            "edit": "Edit"
+        },
+        "submit": {
+            "error_message": "something went wrong Sorry!",
+            "adding_success_message": "Deliverer successfuly added",
+            "editing_success_message": "Deliverer successfuly updated"
+        }
     }
 }

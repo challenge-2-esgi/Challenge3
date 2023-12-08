@@ -38,5 +38,15 @@
                 "not_valid" : "rating must be between 0 and 5"
             }
         }
+    },
+    "deliverer_form": {
+        "input": {
+            "phone" : {
+                "required" : "phone number is required"
+            },
+            "user" : {
+                "required" : "user number is required"
+            }
+        }
     }
 }
