@@ -7,6 +7,7 @@ const validators = require('../validators')
 const RolesGuard = require('../middlewares/roles-guard')
 const Validator = require('../middlewares/validator')
 const OwnerOrDeliveryPerson = require('../middlewares/owner-or-delivery-person-guard')
+const { isClient } = require('../utils/authorization')
 
 function OrderRouter() {
     const router = new Router()
@@ -20,9 +21,29 @@ function OrderRouter() {
     router.use(
         '/orders',
         AuthGuard,
+        (req, res, next) => {
+            if (isClient(req.user)) {
+                req.query = { clientId: req.user.id }
+            }
+            next()
+        },
         CRUDRouter({
             model: Order,
-            collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin])],
+            includeCollectionModels: [
+                {
+                    association: 'user',
+                },
+                {
+                    association: 'pickupAddress',
+                },
+                {
+                    association: 'deliveryAddress',
+                },
+            ],
+            collectionMiddlewares: [
+                AuthGuard,
+                RolesGuard([ROLE.admin, ROLE.client]),
+            ],
             itemCreateMiddlewares: [
                 AuthGuard,
                 RolesGuard([ROLE.admin, ROLE.client]),
