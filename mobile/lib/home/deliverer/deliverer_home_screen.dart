@@ -53,13 +53,6 @@ class _DelivererHomeScreenState extends State<DelivererHomeScreen> {
           });
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.read<AuthBloc>().add(AuthLogout());
-        },
-        backgroundColor: context.theme.colors.primary,
-        child: const Icon(Icons.logout_rounded),
-      ),
       body: _views.elementAt(_selectedIndex),
     );
   }
