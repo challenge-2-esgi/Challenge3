@@ -32,4 +32,12 @@ function isAdminOrOwner(ownerId, user) {
     return user.role === ROLE.admin || isOwner(ownerId, user)
 }
 
-module.exports = { isAdmin, isOwner, isAdminOrOwner, hasOneOfRoles }
+function isClient(user) {
+    if (!user) {
+        return false
+    }
+
+    return user.role === ROLE.client
+}
+
+module.exports = { isAdmin, isOwner, isAdminOrOwner, isClient, hasOneOfRoles }
