@@ -6,6 +6,12 @@ import 'package:mobile/home/client/client_home_screen.dart';
 import 'package:mobile/home/deliverer/deliverer_home_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  static const routeName = "home";
+
+  static navigateTo(BuildContext context) {
+    Navigator.of(context).pushNamed(routeName);
+  }
+
   const HomeScreen({super.key});
 
   @override

@@ -33,9 +33,12 @@ class App extends StatelessWidget {
           },
         ),
         onGenerateRoute: (settings) {
-          // TODO: add routes
-          // switch (settings.name) {
-          // }
+          switch (settings.name) {
+            case HomeScreen.routeName:
+              return MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              );
+          }
 
           // TODO: add not found screen
           return null;

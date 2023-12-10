@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mobile/core/models/order.dart';
 import 'package:mobile/core/models/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
 
@@ -31,6 +32,15 @@ class ApiService {
     try {
       final response = await _client.get("/users/current");
       return User.fromJson(response.data);
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<Order>> getOrders() async {
+    try {
+      final response = await _client.get("/orders");
+      return response.data.map<Order>((e) => Order.fromJson(e)).toList();
     } on Exception catch (e) {
       throw Exception(e);
     }
