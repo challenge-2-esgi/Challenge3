@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/blocs/auth/auth_bloc.dart';
 
 class DelivererProfile extends StatelessWidget {
   @override
@@ -15,7 +17,14 @@ class DelivererProfile extends StatelessWidget {
               'Informations sur le Livreur',
               style: Theme.of(context).textTheme.headline6,
             ),
-            //
+            // Add other profile information widgets here
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(AuthLogout());
+              },
+              child: Text('Déconnexion'),
+            ),
           ],
         ),
       ),
