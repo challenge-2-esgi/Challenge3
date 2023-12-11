@@ -1,3 +1,5 @@
+// user.dart
+
 enum UserRole { CLIENT, DELIVERER }
 
 class User {
@@ -6,6 +8,7 @@ class User {
   final String firstname;
   final String email;
   final String role;
+  final bool isActive;
 
   User({
     required this.id,
@@ -13,6 +16,7 @@ class User {
     required this.firstname,
     required this.email,
     required this.role,
+    required this.isActive,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -22,6 +26,25 @@ class User {
       firstname: json['firstname'],
       email: json['email'],
       role: json['role'],
+      isActive: json['deliverer']['isActive'] ?? false,
+    );
+  }
+
+  User copyWith({
+    String? id,
+    String? lastname,
+    String? firstname,
+    String? email,
+    String? role,
+    bool? isActive,
+  }) {
+    return User(
+      id: id ?? this.id,
+      lastname: lastname ?? this.lastname,
+      firstname: firstname ?? this.firstname,
+      email: email ?? this.email,
+      role: role ?? this.role,
+      isActive: isActive ?? this.isActive,
     );
   }
 }
