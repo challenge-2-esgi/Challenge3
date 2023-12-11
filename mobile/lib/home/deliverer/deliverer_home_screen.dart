@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/blocs/auth/auth_bloc.dart';
+import 'package:mobile/deliverer/deliverer_home_view.dart';
 import 'package:mobile/deliverer/deliverer_profile.dart';
 import 'package:mobile/deliverer/orders_view.dart';
 import 'package:mobile/theme/app_theme.dart';
@@ -14,8 +13,8 @@ class DelivererHomeScreen extends StatefulWidget {
 
 class _DelivererHomeScreenState extends State<DelivererHomeScreen> {
   static final List<Widget> _views = [
+    HomeView(),
     OrderView(),
-    const OrderView(),
     DelivererProfile(),
   ];
 
