@@ -66,7 +66,7 @@ Order.belongsTo(Deliverer, {
     as: 'deliverer',
     foreignKey: {
         name: 'delivererId',
-        allowNull: false,
+        allowNull: true,
     },
 })
 Order.belongsTo(Address, {
