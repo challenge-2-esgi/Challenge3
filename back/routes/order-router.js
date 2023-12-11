@@ -7,7 +7,8 @@ const validators = require('../validators')
 const RolesGuard = require('../middlewares/roles-guard')
 const Validator = require('../middlewares/validator')
 const OwnerOrDeliveryPerson = require('../middlewares/owner-or-delivery-person-guard')
-const { isClient } = require('../utils/authorization')
+const { isClient, isDeliverer } = require('../utils/authorization')
+const Deliverer = require('../models/Deliverer')
 
 function OrderRouter() {
     const router = new Router()
@@ -21,9 +22,15 @@ function OrderRouter() {
     router.use(
         '/orders',
         AuthGuard,
-        (req, res, next) => {
+        async (req, res, next) => {
             if (isClient(req.user)) {
                 req.query = { clientId: req.user.id }
+            }
+            if (isDeliverer(req.user)) {
+                const deliverer = await Deliverer.findOne({
+                    where: { userId: req.user.id },
+                })
+                req.query = { delivererId: deliverer.id }
             }
             next()
         },
@@ -42,7 +49,7 @@ function OrderRouter() {
             ],
             collectionMiddlewares: [
                 AuthGuard,
-                RolesGuard([ROLE.admin, ROLE.client]),
+                RolesGuard([ROLE.admin, ROLE.client, ROLE.deliverer]),
             ],
             itemCreateMiddlewares: [
                 AuthGuard,

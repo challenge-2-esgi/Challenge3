@@ -15,7 +15,6 @@ class DelivererProfile extends StatelessWidget {
           children: [
             Text(
               'Informations sur le Livreur',
-              style: Theme.of(context).textTheme.headline6,
             ),
             // Add other profile information widgets here
             SizedBox(height: 20),

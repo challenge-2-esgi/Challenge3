@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/client/blocs/order_bloc.dart';
-import 'package:mobile/client/order_item.dart';
+import 'package:mobile/deliverer/blocs/order_bloc.dart';
+import 'package:mobile/deliverer/order_item.dart';
 import 'package:mobile/shared/custom_error_widget.dart';
 import 'package:mobile/theme/app_theme.dart';
 

@@ -40,4 +40,19 @@ function isClient(user) {
     return user.role === ROLE.client
 }
 
-module.exports = { isAdmin, isOwner, isAdminOrOwner, isClient, hasOneOfRoles }
+function isDeliverer(user) {
+    if (!user) {
+        return false
+    }
+
+    return user.role === ROLE.deliverer
+}
+
+module.exports = {
+    isAdmin,
+    isOwner,
+    isAdminOrOwner,
+    isClient,
+    isDeliverer,
+    hasOneOfRoles,
+}
