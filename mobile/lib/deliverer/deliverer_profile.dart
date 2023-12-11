@@ -5,40 +5,43 @@ import 'package:mobile/core/models/user.dart';
 import 'package:mobile/home/blocs/user_bloc.dart';
 
 class DelivererProfile extends StatelessWidget {
+  const DelivererProfile({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, userState) {
         return Scaffold(
           appBar: AppBar(
-            title: Center(child: const Text('Profil')),
+            title: const Center(child: Text('Profil')),
           ),
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                ElevatedButton(
+                ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple, // Change background color
+                    primary: Colors.deepPurple,
                   ),
                   onPressed: () {
                     context.read<AuthBloc>().add(AuthLogout());
                   },
-                  child: Text('Déconnexion', style: TextStyle(color: Colors.white),),
+                  icon: const Icon(Icons.exit_to_app, color: Colors.white),
+                  label: const Text('Déconnexion', style: TextStyle(color: Colors.white)),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 if (userState.status == UserStatus.loading)
                 // Loading state
-                  CircularProgressIndicator(),
+                  const CircularProgressIndicator(),
                 if (userState.status == UserStatus.success)
                 // Success state
                   _buildUserInfo(userState.user!),
                 if (userState.status == UserStatus.error)
                 // Error state
-                  Text(
+                  const Text(
                     'Erreur lors du chargement du profil.',
                   ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -49,7 +52,7 @@ class DelivererProfile extends StatelessWidget {
 
   Widget _buildUserInfo(User user) {
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -79,16 +82,16 @@ class DelivererProfile extends StatelessWidget {
       children: [
         Text(
           '$title:',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.black54,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Text(
           value,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const Divider(height: 20, thickness: 1, color: Colors.deepPurpleAccent),
       ],
