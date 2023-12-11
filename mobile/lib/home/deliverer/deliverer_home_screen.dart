@@ -35,7 +35,7 @@ class _DelivererHomeScreenState extends State<DelivererHomeScreen> {
             icon: Icon(
               Icons.shopping_bag,
             ),
-            label: 'Mes Commandes',
+            label: 'Courses',
           ),
           BottomNavigationBarItem(
             icon: Icon(

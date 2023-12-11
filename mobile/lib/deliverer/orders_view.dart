@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/deliverer/blocs/order_bloc.dart';
 import 'package:mobile/deliverer/order_item.dart';
+import 'package:mobile/deliverer/orders_details.dart';
 import 'package:mobile/shared/custom_error_widget.dart';
 import 'package:mobile/theme/app_theme.dart';
 
@@ -52,9 +53,19 @@ class OrderView extends StatelessWidget {
                         Expanded(
                           child: ListView.builder(
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: OrderItem(order: state.orders[index]),
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OrderDetailsPage(order: state.orders[index]),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: OrderItem(order: state.orders[index]),
+                                ),
                               );
                             },
                             itemCount: state.orders.length,
