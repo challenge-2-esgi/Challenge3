@@ -12,6 +12,7 @@ const RolesGuard = require('../middlewares/roles-guard')
 const OwnershipGuard = require('../middlewares/ownership-guard')
 const Validator = require('../middlewares/validator')
 const { isAdmin } = require('../utils/authorization')
+const Deliverer = require('../models/Deliverer')
 
 function UserRouter() {
     const router = new Router()
@@ -22,8 +23,36 @@ function UserRouter() {
         })
     }
 
-    router.get('/users/current', AuthGuard, (req, res) => {
-        res.status(200).json(req.user)
+    router.get('/users/current', AuthGuard, async (req, res) => {
+        const user = req.user
+
+        const deliverer = await Deliverer.findOne({
+            where: { userId: user.id },
+        })
+
+        if (deliverer) {
+            user.deliverer = deliverer
+        }
+
+        res.status(200).json(user)
+    })
+
+    router.post('/users/update-availability', AuthGuard, async (req, res) => {
+        console.log(req.body)
+        const deliverer = await Deliverer.findOne({
+            where: { userId: req.user.id },
+        })
+
+        const updateDeliverer = await Deliverer.update(
+            {
+                isActive: req.body.isActive,
+            },
+            {
+                where: { id: deliverer.id },
+            }
+        )
+
+        res.status(200).json(updateDeliverer)
     })
 
     router.use(

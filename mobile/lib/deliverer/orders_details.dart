@@ -29,7 +29,6 @@ class OrderDetailsPage extends StatelessWidget {
           ),
           child: ListView(
             padding: EdgeInsets.zero,
-            shrinkWrap: true,
             children: [
               _buildDetailRow('Client', '${order.clientFirstName} ${order.clientLastName}'),
               _buildDetailRow('Statut', _getStatusString(order.status)),
