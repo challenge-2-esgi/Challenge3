@@ -33,7 +33,7 @@ class _DelivererHomeScreenState extends State<DelivererHomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.calendar_today,
+              Icons.shopping_bag,
             ),
             label: 'Mes Commandes',
           ),

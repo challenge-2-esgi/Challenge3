@@ -12,12 +12,16 @@ class Order {
   final Address pickupAddress;
   final Address deliveryAddress;
   final Status status;
+  final String clientFirstName;
+  final String clientLastName;
 
   Order({
     required this.id,
     required this.status,
     required this.pickupAddress,
     required this.deliveryAddress,
+    required this.clientFirstName,
+    required this.clientLastName,
   });
 
   factory Order.fromJson(Map<String, dynamic> json) {
@@ -38,6 +42,8 @@ class Order {
       }()),
       pickupAddress: Address.fromJson(json['pickupAddress']),
       deliveryAddress: Address.fromJson(json['deliveryAddress']),
+      clientFirstName: json['user']['firstname'],
+      clientLastName: json['user']['lastname'],
     );
   }
 }

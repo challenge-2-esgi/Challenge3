@@ -52,18 +52,18 @@ class OrderItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
               Expanded(
                 child: Text(
-                  "Name",
-                  style: TextStyle(
+                  "${order.clientFirstName} ${order.clientLastName}",
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_outlined,
                 size: 20,
               ),
