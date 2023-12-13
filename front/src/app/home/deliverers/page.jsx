@@ -9,7 +9,7 @@ import Table from '@/components/Table'
 import TableCrudActions from '@/components/TableCrudActions'
 import { role } from '@/constants'
 import { t_NAMESPACES } from '@/i18n'
-import { buildEditDelivererRoute } from '@/utils/route'
+import { buildEditDelivererRoute, buildViewDelivererRoute } from '@/utils/route'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import withRoleGuard from '@/HOC/withRoleGuard'
@@ -84,6 +84,11 @@ const DeliverersPage = () => {
                     <Fragment>
                         <TableCrudActions
                             canView={false}
+                            onView={() => {
+                                router.push(
+                                    buildViewDelivererRoute(row.getValue('id'))
+                                )
+                            }}
                             canEdit={false}
                             onEdit={() => {
                                 router.push(

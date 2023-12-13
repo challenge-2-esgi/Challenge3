@@ -32,3 +32,7 @@ export function buildEditRatingRoute(ratingId) {
 export function buildEditDelivererRoute(delivererId) {
     return buildItemRoute(route.DELIVERERS + '/', delivererId, itemOperation.edit)
 }
+
+export function buildViewDelivererRoute(delivererId) {
+    return buildItemRoute(route.DELIVERERS + '/', delivererId, itemOperation.view)
+}

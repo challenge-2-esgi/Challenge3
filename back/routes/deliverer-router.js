@@ -52,6 +52,12 @@ function DelivererRouter() {
                     nested: true,
                 },
             ],
+            includeReadModels: [
+                {
+                    all: true,
+                    nested: true,
+                },
+            ]
         })
     )
     return router
