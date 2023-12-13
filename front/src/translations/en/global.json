@@ -109,7 +109,8 @@
         "not_found": {
             "title": "Sorry, the page can’t be found",
             "description": "The page you were looking for appears to have been moved, deleted or does not exist.",
-            "button_label": "Back to Home"
+            "button_label": "Back to Home",
+            "no_data": "No data available"
         }
     },
     "error": {

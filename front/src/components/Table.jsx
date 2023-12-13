@@ -10,6 +10,7 @@ import PropTypes from 'prop-types'
 import Container from './Container'
 import Loader from './Loader'
 import Pagination from './Pagination'
+import { useTranslation } from 'react-i18next'
 
 // TODO: add sort
 
@@ -20,6 +21,8 @@ const Table = ({
     loading = false,
     pageSize = 10,
 }) => {
+    const { t } = useTranslation();
+    
     const table = useReactTable({
         columns,
         data,
@@ -36,40 +39,50 @@ const Table = ({
     })
 
     return (
-        <Container className="items-end">
-            <table className="w-full table-auto">
-                <TableHead headerGroups={table.getHeaderGroups()} />
-                {loading ? null : <TableBody rows={table.getRowModel().rows} />}
-            </table>
-            {loading ? (
-                <Loader
-                    className="mt-9 self-center"
-                    size="medium"
-                    color="black"
-                />
-            ) : table.getPageCount() === 0 ? null : (
-                <Pagination
-                    className="mt-4"
-                    currentPage={table.getState().pagination.pageIndex}
-                    numberOfPages={table.getPageCount()}
-                    onPrevious={() => {
-                        if (!table.getCanNextPage()) {
-                            return
-                        }
-                        table.nextPage()
-                    }}
-                    onNext={() => {
-                        if (!table.getCanPreviousPage()) {
-                            return
-                        }
-                        table.previousPage()
-                    }}
-                    onSelect={(page) => {
-                        table.setPageIndex(page)
-                    }}
-                />
+        <>
+            {data.length === 0 ? (
+                <Container className="text-center text-black">
+                    <p>{t('page.not_found.no_data')}</p>
+                </Container>
+            ) : (
+                <Container className="items-end">
+                    <table className="w-full table-auto">
+                        <TableHead headerGroups={table.getHeaderGroups()} />
+                        {loading ? null : (
+                            <TableBody rows={table.getRowModel().rows} />
+                        )}
+                    </table>
+                    {loading ? (
+                        <Loader
+                            className="mt-9 self-center"
+                            size="medium"
+                            color="black"
+                        />
+                    ) : table.getPageCount() === 0 ? null : (
+                        <Pagination
+                            className="mt-4"
+                            currentPage={table.getState().pagination.pageIndex}
+                            numberOfPages={table.getPageCount()}
+                            onPrevious={() => {
+                                if (!table.getCanNextPage()) {
+                                    return
+                                }
+                                table.nextPage()
+                            }}
+                            onNext={() => {
+                                if (!table.getCanPreviousPage()) {
+                                    return
+                                }
+                                table.previousPage()
+                            }}
+                            onSelect={(page) => {
+                                table.setPageIndex(page)
+                            }}
+                        />
+                    )}
+                </Container>
             )}
-        </Container>
+        </>
     )
 }
 

@@ -107,7 +107,8 @@
         "not_found": {
             "title": "Désolé, la page est introuvable",
             "description": "La page que vous recherchez semble avoir été déplacée, supprimée ou n'existe pas.",
-            "button_label": "Retour à l'accueil"
+            "button_label": "Retour à l'accueil",
+            "no_data": "Pas de données disponible"
         }
     },
     "error": {
