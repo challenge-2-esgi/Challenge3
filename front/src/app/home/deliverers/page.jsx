@@ -4,16 +4,12 @@ import { Fragment, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Deliverer } from '@/api'
-import Button from '@/components/Button'
 import ConfirmDialog from '@/components/ConfirmDialog'
-import Pill from '@/components/Pill'
 import Table from '@/components/Table'
 import TableCrudActions from '@/components/TableCrudActions'
 import { role } from '@/constants'
-import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
 import { buildEditDelivererRoute } from '@/utils/route'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import withRoleGuard from '@/HOC/withRoleGuard'
@@ -23,7 +19,7 @@ const DeliverersPage = () => {
 
     const { t } = useTranslation()
 
-    const { isLoading, data, error } = Deliverer.useDeliverers()
+    const { isLoading, data, error, refetch } = Deliverer.useDeliverers()
 
     const columns = [
         {
@@ -68,12 +64,21 @@ const DeliverersPage = () => {
             accessorKey: 'id',
             cell: ({ row }) => {
                 const [showModal, setShowModal] = useState(false)
-                const { mutate: deleteDeliverer, isPending } = Deliverer.useDelete(
-                    row.getValue('id'),
-                    () => {
-                        toast.error(t('page.deliverers.delete_error_message'))
-                    }
-                )
+                const { mutate: deleteDeliverer, isPending } =
+                    Deliverer.useDelete(
+                        row.getValue('id'),
+                        () => {
+                            toast.success(
+                                t('page.deliverers.delete_success_message')
+                            )
+                            refetch()
+                        },
+                        () => {
+                            toast.error(
+                                t('page.deliverers.delete_error_message')
+                            )
+                        }
+                    )
 
                 return (
                     <Fragment>
@@ -91,7 +96,9 @@ const DeliverersPage = () => {
                         />
                         {showModal ? (
                             <ConfirmDialog
-                                message={t('page.deliverers.confirm_dialog.message')}
+                                message={t(
+                                    'page.deliverers.confirm_dialog.message'
+                                )}
                                 cancelLabel={t(
                                     'page.deliverers.confirm_dialog.cancel'
                                 )}
