@@ -28,3 +28,11 @@ export function buildEditOrderRoute(orderId) {
 export function buildEditRatingRoute(ratingId) {
     return buildItemRoute(route.RATINGS + '/', ratingId, itemOperation.edit)
 }
+
+export function buildEditDelivererRoute(delivererId) {
+    return buildItemRoute(route.DELIVERERS + '/', delivererId, itemOperation.edit)
+}
+
+export function buildViewDelivererRoute(delivererId) {
+    return buildItemRoute(route.DELIVERERS + '/', delivererId, itemOperation.view)
+}

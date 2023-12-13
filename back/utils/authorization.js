@@ -48,11 +48,4 @@ function isDeliverer(user) {
     return user.role === ROLE.deliverer
 }
 
-module.exports = {
-    isAdmin,
-    isOwner,
-    isAdminOrOwner,
-    isClient,
-    isDeliverer,
-    hasOneOfRoles,
-}
+module.exports = { isAdmin, isOwner, isAdminOrOwner, hasOneOfRoles, isClient, isDeliverer }

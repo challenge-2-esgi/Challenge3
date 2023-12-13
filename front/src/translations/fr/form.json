@@ -32,5 +32,20 @@
             "add": "Ajouter",
             "edit": "Modifier"
         }
+    },
+    "deliverer_form": {
+        "input": {
+            "phone": "Saisir le numéro de téléphone",
+            "user": "Choisir un utilisateur"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        },
+        "submit": {
+            "error_message": "quelque chose s'est mal passé Désolé!",
+            "adding_success_message": "Le livreur a été ajouté avec succès",
+            "editing_success_message": "Le livreur a été mis à jour avec succès"
+        }
     }
 }

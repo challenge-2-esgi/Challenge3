@@ -25,7 +25,10 @@ Rating.belongsTo(User, {
 })
 Rating.belongsTo(Deliverer, {
     as: 'deliverer',
-    foreignKey: 'delivererId',
+    foreignKey: {
+        name: 'delivererId',
+        allowNull: true,
+    }
 })
 
 module.exports = Rating
