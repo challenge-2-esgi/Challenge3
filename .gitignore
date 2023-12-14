@@ -23,22 +23,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# vercel
-.vercel
-
-# next.js
-.next/
-out/
-
-# production
-build
-
-# testing
-coverage
-
-# front
-/front/cache
-.out
-.storybook-out
-storybook-static

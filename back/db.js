@@ -1,14 +1,15 @@
 const { Sequelize } = require('sequelize')
 const mongoose = require('mongoose')
-const config = require('./config/app-config')
 
 const MONGO_TIME_OUT = 3000
 
-const sequelize = new Sequelize(config.postgresUrl)
+let sequelize = null
 
 module.exports = {
-    open: async () => {
+    // sequelize:
+    init: async (config) => {
         // init sequelize
+        sequelize = new Sequelize(config.postgresUrl)
         try {
             await sequelize.authenticate()
             console.log(

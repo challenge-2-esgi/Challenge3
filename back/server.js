@@ -1,9 +1,20 @@
-const config = require('./config/app-config')
+const express = require('express')
+const cors = require('cors')
+const config = require('./config')
 const db = require('./db')
-const app = require('./app')
+
+// TODO: define cors options
+// const corsOptions = {}
+
+const app = express()
+app.use(cors())
+
+app.get('/', (req, res) => {
+    res.send('challenge')
+})
 
 const init = async () => {
-    await db.open()
+    await db.init(config)
     app.listen(config.port, () => {
         console.log(`app listening on port ${config.port}`)
     })
