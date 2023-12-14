@@ -9,6 +9,7 @@ const Validator = require('../middlewares/validator')
 const OwnerOrDeliveryPerson = require('../middlewares/owner-or-delivery-person-guard')
 const { isClient, isDeliverer } = require('../utils/authorization')
 const Deliverer = require('../models/Deliverer')
+const { uuidv7 } = require('uuidv7')
 
 function OrderRouter() {
     const router = new Router()
@@ -17,6 +18,14 @@ function OrderRouter() {
         return await Order.findOne({
             where: { id: req.params.id },
         })
+    }
+
+    // TODO: generate order SKU and validation code
+    function generateValidationCode() {
+        return uuidv7()
+    }
+    function generateSKU() {
+        return uuidv7()
     }
 
     router.use(
@@ -55,6 +64,27 @@ function OrderRouter() {
                 AuthGuard,
                 RolesGuard([ROLE.admin, ROLE.client]),
                 Validator(validators.createOrder),
+                (req, res, next) => {
+                    req.body = {
+                        ...req.body,
+                        sku: generateSKU(),
+                        validationCode: generateValidationCode(),
+                        clientId: req.user.id,
+                        pickupAddress: {
+                            ...req.body.pickupAddress,
+                            id: uuidv7(),
+                        },
+                        deliveryAddress: {
+                            ...req.body.deliveryAddress,
+                            id: uuidv7(),
+                        },
+                    }
+                    next()
+                },
+            ],
+            includeCreateModels: [
+                { association: 'pickupAddress' },
+                { association: 'deliveryAddress' },
             ],
             itemReadMiddlewares: [
                 AuthGuard,

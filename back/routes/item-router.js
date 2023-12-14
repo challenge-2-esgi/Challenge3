@@ -13,6 +13,7 @@ function ItemRouter({
     itemDeleteGuards = [],
     includeReadModels = [],
     includeCollectionModels = [],
+    includeCreateModels = [],
 }) {
     const router = new Router()
 
@@ -33,7 +34,12 @@ function ItemRouter({
             async function (req, res, next) {
                 try {
                     const id = uuidv7()
-                    const item = await Model.create({ id, ...req.body })
+                    const item = await Model.create(
+                        { id, ...req.body },
+                        {
+                            include: includeCreateModels,
+                        }
+                    )
                     res.status(201).json(item)
                 } catch (error) {
                     if (error.name === 'SequelizeValidationError') {
