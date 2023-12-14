@@ -1,6 +1,6 @@
 // user.dart
 
-enum UserRole { client, deliverer }
+enum UserRole { CLIENT, DELIVERER }
 
 class User {
   final String id;
@@ -26,7 +26,7 @@ class User {
       firstname: json['firstname'],
       email: json['email'],
       role: json['role'],
-      isActive: json['deliverer']?['isActive'] ?? false,
+      isActive: json['deliverer']['isActive'] ?? false,
     );
   }
 

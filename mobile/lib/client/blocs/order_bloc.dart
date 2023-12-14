@@ -9,47 +9,15 @@ part 'order_event.dart';
 part 'order_state.dart';
 
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
-  OrderBloc() : super(OrderState(orders: [], selectedStatuses: [])) {
+  OrderBloc() : super(OrderInitial()) {
     on<OrdersLoaded>((event, emit) async {
+      emit(OrdersLoading());
       try {
         final orders = await ApiService.instance.getOrders();
-        orders.sort(
-          (a, b) => b.createdAt.compareTo(a.createdAt),
-        );
-        emit(
-          state.copyWith(
-            status: OrderStateStatus.success,
-            orders: orders,
-            selectedStatuses: [Status.waitingForPickUp],
-          ),
-        );
+        emit(OrdersLoadSuccess(orders: orders));
       } catch (e) {
         log(e.toString());
-        emit(
-          OrderState(
-            status: OrderStateStatus.error,
-            orders: [],
-            selectedStatuses: [],
-          ),
-        );
-      }
-    });
-
-    on<OrdersFiltered>((event, emit) {
-      if (state.selectedStatuses.contains(event.status)) {
-        emit(
-          state.copyWith(
-            selectedStatuses: List.of(state.selectedStatuses)
-                .where((element) => element != event.status)
-                .toList(),
-          ),
-        );
-      } else {
-        emit(
-          state.copyWith(
-            selectedStatuses: [...state.selectedStatuses, event.status],
-          ),
-        );
+        emit(OrdersLoadError());
       }
     });
   }

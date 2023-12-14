@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/home/blocs/user_bloc.dart';
+import 'package:mobile/theme/app_theme.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             backgroundColor: Colors.purple,
-            titleTextStyle: const TextStyle(color: Colors.white, fontSize: 28),
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 28),
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),

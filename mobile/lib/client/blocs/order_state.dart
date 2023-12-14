@@ -1,41 +1,15 @@
 part of 'order_bloc.dart';
 
-enum OrderStateStatus {
-  loading,
-  success,
-  error,
-}
+sealed class OrderState {}
 
-class OrderState {
-  final OrderStateStatus status;
+class OrderInitial extends OrderState {}
+
+class OrdersLoading extends OrderState {}
+
+class OrdersLoadSuccess extends OrderState {
   final List<Order> orders;
-  final List<Status> selectedStatuses;
 
-  OrderState({
-    this.status = OrderStateStatus.loading,
-    required this.orders,
-    required this.selectedStatuses,
-  });
-
-  List<Order> get filteredOrders {
-    if (selectedStatuses.isEmpty) {
-      return orders;
-    }
-
-    return orders
-        .where((element) => selectedStatuses.contains(element.status))
-        .toList();
-  }
-
-  OrderState copyWith({
-    OrderStateStatus? status,
-    List<Order>? orders,
-    List<Status>? selectedStatuses,
-  }) {
-    return OrderState(
-      status: status ?? this.status,
-      orders: orders ?? this.orders,
-      selectedStatuses: selectedStatuses ?? this.selectedStatuses,
-    );
-  }
+  OrdersLoadSuccess({required this.orders});
 }
+
+class OrdersLoadError extends OrderState {}

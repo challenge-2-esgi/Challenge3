@@ -6,7 +6,7 @@ import 'package:mobile/core/services/storage_service.dart';
 class ApiService {
   static ApiService? _instance;
 
-  static ApiService get instance {
+  static get instance {
     if (_instance != null) _instance!;
     _instance = ApiService._internal();
     return _instance!;
@@ -14,7 +14,7 @@ class ApiService {
 
   ApiService._internal();
 
-  final Dio _client = Client._buildClient(StorageService.instance);
+  final _client = Client._buildClient(StorageService.instance);
 
   Future<String> login(String email, String password) async {
     try {
@@ -46,14 +46,6 @@ class ApiService {
     }
   }
 
-  Future<void> addOrder(Map<String, dynamic> json) async {
-    try {
-      await _client.post("/orders", data: json);
-    } on Exception catch (e) {
-      throw Exception(e);
-    }
-  }
-
   Future<bool> updateDelivererAvailability(bool isActive) async {
     try {
       final response = await _client.post(
@@ -62,9 +54,11 @@ class ApiService {
       );
 
       return response.statusCode == 200;
+
     } on Exception catch (e) {
       throw Exception(e);
     }
+
   }
 }
 
