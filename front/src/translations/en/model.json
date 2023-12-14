@@ -1,0 +1,41 @@
+{
+    "order": {
+        "status": "Status",
+        "statusTypes": {
+            "waiting_for_pick_up": "Waiting for pick up",
+            "delivering": "Delivering",
+            "delivered": "Delivered",
+            "cancelled": "Cancelled"
+        },
+        "sku": "SKU",
+        "reciever_email": "Reciever email",
+        "reciever_phone": "Reciever phone",
+        "is_delivered": "Is delivered",
+        "pickup_time": "Pickup time (delivery person)",
+        "deliver_time": "Delivery time"
+    },
+    "user": {
+        "firstname": "First name",
+        "lastname": "Last name",
+        "email": "Email",
+        "role": "Role",
+        "role_title": {
+            "deliverer": "Deliverer"
+        }
+    },
+    "rating": {
+        "rating": "Rating",
+        "clientName": "Client name",
+        "delivererName": "Deliverer name"
+    },
+    "deliverer": {
+        "firstname": "Firstname",
+        "lastname": "Lastname",
+        "status": {
+            "status": "Status",
+            "online": "Online",
+            "offline": "Offline"
+        },
+        "phone": "Phone"
+    }
+}

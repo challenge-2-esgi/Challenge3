@@ -1,0 +1,51 @@
+{
+    "user_form": {
+        "input": {
+            "firstname": "Saisir le prénom",
+            "lastname": "Saisir le nom",
+            "email": "Saisir l'addresse mail"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        },
+        "submit": {
+            "error_message": "quelque chose s'est mal passé Désolé!",
+            "adding_success_message": "Utilisateur ajouté avec succès",
+            "editing_success_message": "L'utilisateur est mis à jour avec succès"
+        }
+    },
+    "order_form": {
+        "input": {
+            "sku" : "Saisir le SKU"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        }
+    },
+    "rating_form": {
+        "input": {
+            "rating": "Saisir la note"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        }
+    },
+    "deliverer_form": {
+        "input": {
+            "phone": "Saisir le numéro de téléphone",
+            "user": "Choisir un utilisateur"
+        },
+        "button": {
+            "add": "Ajouter",
+            "edit": "Modifier"
+        },
+        "submit": {
+            "error_message": "quelque chose s'est mal passé Désolé!",
+            "adding_success_message": "Le livreur a été ajouté avec succès",
+            "editing_success_message": "Le livreur a été mis à jour avec succès"
+        }
+    }
+}
