@@ -13,9 +13,9 @@ class DelivererHomeScreen extends StatefulWidget {
 
 class _DelivererHomeScreenState extends State<DelivererHomeScreen> {
   static final List<Widget> _views = [
-    HomeView(),
-    OrderView(),
-    DelivererProfile(),
+    const HomeView(),
+    const OrderView(),
+    const DelivererProfile(),
   ];
 
   int _selectedIndex = 0;
