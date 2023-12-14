@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 import 'address.dart';
 
 enum Status {
@@ -14,6 +16,9 @@ class Order {
   final Status status;
   final String clientFirstName;
   final String clientLastName;
+  final DateTime createdAt;
+  final DateTime? pickupTime;
+  final DateTime? deliverTime;
 
   Order({
     required this.id,
@@ -22,7 +27,18 @@ class Order {
     required this.deliveryAddress,
     required this.clientFirstName,
     required this.clientLastName,
+    required this.createdAt,
+    required this.pickupTime,
+    required this.deliverTime,
   });
+
+  String _formatDate(DateTime dateTime) =>
+      DateFormat("dd MMM, ''${(dateTime.year % 100)}").format(dateTime);
+
+  String getPickupTime() => pickupTime == null ? "" : _formatDate(pickupTime!);
+
+  String getDeliverTime() =>
+      deliverTime == null ? "" : _formatDate(deliverTime!);
 
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
@@ -44,6 +60,13 @@ class Order {
       deliveryAddress: Address.fromJson(json['deliveryAddress']),
       clientFirstName: json['user']['firstname'],
       clientLastName: json['user']['lastname'],
+      createdAt: DateTime.parse(json['createdAt']),
+      pickupTime: json['pickupTime'] == null
+          ? null
+          : DateTime.parse(json['pickupTime']),
+      deliverTime: json['deliverTime'] == null
+          ? null
+          : DateTime.parse(json['deliverTime']),
     );
   }
 }

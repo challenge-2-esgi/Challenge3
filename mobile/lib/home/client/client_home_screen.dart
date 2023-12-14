@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/blocs/auth/auth_bloc.dart';
+import 'package:mobile/client/add_order_screen.dart';
+import 'package:mobile/client/client_profile.dart';
 import 'package:mobile/client/orders_view.dart';
 import 'package:mobile/theme/app_theme.dart';
 
@@ -12,12 +12,25 @@ class ClientHomeScreen extends StatefulWidget {
 }
 
 class _ClientHomeScreenState extends State<ClientHomeScreen> {
-  static const List<Widget> _views = [
-    OrderView(),
-    OrderView(),
-  ];
-
+  List<Widget> _views = [];
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    _selectedIndex = 0;
+    _views = [
+      const OrdersView(),
+      AddOrderView(
+        onAdded: () {
+          setState(() {
+            _selectedIndex = 0;
+          });
+        },
+      ),
+      const ClientProfile(),
+    ];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +39,22 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.map_outlined,
+              Icons.shopping_bag_rounded,
             ),
-            label: 'Suivi',
+            label: 'Mes Colis',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.calendar_today,
+              Icons.local_shipping_rounded,
+              size: 30,
             ),
-            label: 'Mes Commandes',
+            label: 'Envoyer un colis',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+            ),
+            label: 'Profil',
           ),
         ],
         currentIndex: _selectedIndex,
@@ -45,22 +65,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
           });
         },
       ),
-      floatingActionButton: (() {
-        if (_selectedIndex == 1) {
-          return FloatingActionButton(
-            onPressed: () {},
-            backgroundColor: context.theme.colors.primary,
-            child: const Icon(Icons.add),
-          );
-        }
-        return FloatingActionButton(
-          onPressed: () {
-            context.read<AuthBloc>().add(AuthLogout());
-          },
-          backgroundColor: context.theme.colors.primary,
-          child: const Icon(Icons.logout_rounded),
-        );
-      }()),
       body: _views.elementAt(_selectedIndex),
     );
   }

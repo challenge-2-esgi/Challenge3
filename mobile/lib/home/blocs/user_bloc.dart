@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/models/user.dart';
 import 'package:mobile/core/services/api/api_service.dart';
 
 part 'user_event.dart';
+
 part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -13,15 +16,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final user = await ApiService.instance.getLoggedInUser();
         emit(state.copyWith(status: UserStatus.success, user: user));
       } catch (e) {
+        log("error on loading user ${e.toString()}");
         emit(state.copyWith(status: UserStatus.error, user: null));
       }
     });
 
     on<UserUpdateAvailability>((event, emit) async {
-      emit(state.copyWith(user: state.user?.copyWith(isActive: event.isActive)));
+      emit(
+          state.copyWith(user: state.user?.copyWith(isActive: event.isActive)));
 
       try {
-        final success = await ApiService.instance.updateDelivererAvailability(event.isActive);
+        final success = await ApiService.instance
+            .updateDelivererAvailability(event.isActive);
 
         if (success) {
           emit(state.copyWith(status: UserStatus.success));
@@ -32,6 +38,5 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(state.copyWith(status: UserStatus.error));
       }
     });
-
   }
 }
