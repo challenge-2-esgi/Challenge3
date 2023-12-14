@@ -26,7 +26,8 @@
     "rating": {
         "rating": "Note",
         "clientName": "Nom du client",
-        "delivererName": "Nom du livreur"
+        "delivererName": "Nom du livreur",
+        "no_deliverer": "N/A"
     },
     "deliverer": {
         "firstname": "Prénom",

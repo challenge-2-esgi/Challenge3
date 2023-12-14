@@ -42,7 +42,9 @@ const RatingsPage = () => {
             id: 'delivererId',
             header: t('rating.delivererName', { ns: t_NAMESPACES.MODEL }),
             accessorFn: (data) => {
-                return data.deliverer.user.firstname + ' ' + data.deliverer.user.lastname
+                if (data.deliverer)
+                    return data.deliverer.user.firstname + ' ' + data.deliverer.user.lastname
+                return t('rating.no_deliverer', { ns: t_NAMESPACES.MODEL })
              },
         },
         {
