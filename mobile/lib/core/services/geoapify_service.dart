@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/models/address.dart';
 
 class Point {
@@ -24,7 +25,7 @@ class GeoapifyService {
 
   GeoapifyService._internal();
 
-  static const _apiKey = "be3d7670819f44af9a10dee5b19e1973";
+  final _apiKey = dotenv.env['GEOAPIFY_KEY'];
   static const _autocomplete = "/geocode/autocomplete";
 
   static const _routematrix = "/routematrix";
