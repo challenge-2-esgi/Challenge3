@@ -18,6 +18,7 @@ class Address {
   });
 
   String get geoapify => "$streetNumber $street, $zipCode $city, $country";
+  String get pretty => "$streetNumber $street \n$city, $country";
 
   bool isValidGeoapifyAddress() =>
       streetNumber.isNotEmpty &&

@@ -17,6 +17,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
 
   @override
   void initState() {
+    super.initState();
     _selectedIndex = 0;
     _views = [
       const OrdersView(),
@@ -29,7 +30,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
       ),
       const ClientProfile(),
     ];
-    super.initState();
   }
 
   @override

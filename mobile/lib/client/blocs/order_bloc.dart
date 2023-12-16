@@ -20,7 +20,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           state.copyWith(
             status: OrderStateStatus.success,
             orders: orders,
-            selectedStatuses: [Status.waitingForPickUp],
           ),
         );
       } catch (e) {
