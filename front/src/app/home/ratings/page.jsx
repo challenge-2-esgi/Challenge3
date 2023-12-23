@@ -27,7 +27,6 @@ const RatingsPage = () => {
         if (data) {
             setFilteredData(data.filter((rating) => rating.deliverer !== null))
             setDataNotFiltered(false)
-            console.log(filteredData)
         }
     }, [data])
 
