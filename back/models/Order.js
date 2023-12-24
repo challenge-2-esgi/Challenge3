@@ -4,6 +4,8 @@ const { ORDER_STATUS } = require('../constants')
 const User = require('./User')
 const Deliverer = require('./Deliverer')
 const Address = require('./Address')
+const sseChannel = require('../sse/channel')
+const sseEvent = require('../sse/events')
 
 class Order extends Model {}
 
@@ -82,6 +84,15 @@ Order.belongsTo(Address, {
         name: 'deliveryAddressId',
         allowNull: false,
     },
+})
+
+Order.addHook('afterUpdate', (instance, { fields }) => {
+    if (fields.includes('status')) {
+        sseChannel.publish(
+            { orderId: instance.id, status: instance.status },
+            sseEvent.orderStatus
+        )
+    }
 })
 
 module.exports = Order

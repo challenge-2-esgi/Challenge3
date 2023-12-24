@@ -50,6 +50,9 @@ function OrderRouter() {
                     association: 'user',
                 },
                 {
+                    association: 'deliverer',
+                },
+                {
                     association: 'pickupAddress',
                 },
                 {

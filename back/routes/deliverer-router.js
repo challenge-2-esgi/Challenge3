@@ -42,7 +42,7 @@ function DelivererRouter() {
                 AuthGuard,
                 OwnershipGuard({
                     findResource: findDeliverer,
-                    ownerKey: 'id',
+                    ownerKey: 'userId',
                 }),
             ],
             itemDeleteGuards: [AuthGuard, RolesGuard([ROLE.admin])],
