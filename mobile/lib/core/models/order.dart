@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:mobile/core/models/deliverer.dart';
 
 import 'address.dart';
 
@@ -16,6 +17,7 @@ class Order {
   final Status status;
   final String clientFirstName;
   final String clientLastName;
+  final Deliverer? deliverer;
   final DateTime createdAt;
   final DateTime? pickupTime;
   final DateTime? deliverTime;
@@ -27,6 +29,7 @@ class Order {
     required this.deliveryAddress,
     required this.clientFirstName,
     required this.clientLastName,
+    required this.deliverer,
     required this.createdAt,
     required this.pickupTime,
     required this.deliverTime,
@@ -40,26 +43,56 @@ class Order {
   String getDeliverTime() =>
       deliverTime == null ? "" : _formatDate(deliverTime!);
 
+  static Status stringToStatus(String status) {
+    switch (status) {
+      case 'WAITING_FOR_PICK_UP':
+        return Status.waitingForPickUp;
+      case 'DELIVERING':
+        return Status.delivering;
+      case 'DELIVERED':
+        return Status.delivered;
+      default:
+        return Status.canceled;
+    }
+  }
+
+  Order copyWith({
+    String? id,
+    Status? status,
+    Address? pickupAddress,
+    Address? deliveryAddress,
+    String? clientFirstName,
+    String? clientLastName,
+    Deliverer? deliverer,
+    DateTime? createdAt,
+    DateTime? pickupTime,
+    DateTime? deliverTime,
+  }) {
+    return Order(
+      id: id ?? this.id,
+      status: status ?? this.status,
+      pickupAddress: pickupAddress ?? this.pickupAddress,
+      deliveryAddress: deliveryAddress ?? this.deliveryAddress,
+      clientFirstName: clientFirstName ?? this.clientFirstName,
+      clientLastName: clientLastName ?? this.clientLastName,
+      deliverer: deliverer ?? this.deliverer,
+      createdAt: createdAt ?? this.createdAt,
+      pickupTime: pickupTime ?? this.pickupTime,
+      deliverTime: deliverTime ?? this.deliverTime,
+    );
+  }
+
   factory Order.fromJson(Map<String, dynamic> json) {
     return Order(
       id: json['id'],
-      status: (() {
-        if (json['status'] == 'WAITING_FOR_PICK_UP') {
-          return Status.waitingForPickUp;
-        }
-        if (json['status'] == 'DELIVERING') {
-          return Status.delivering;
-        }
-        if (json['status'] == 'DELIVERED') {
-          return Status.delivered;
-        }
-
-        return Status.canceled;
-      }()),
+      status: stringToStatus(json['status']),
       pickupAddress: Address.fromJson(json['pickupAddress']),
       deliveryAddress: Address.fromJson(json['deliveryAddress']),
       clientFirstName: json['user']['firstname'],
       clientLastName: json['user']['lastname'],
+      deliverer: json['deliverer'] == null
+          ? null
+          : Deliverer.fromJson(json['deliverer']),
       createdAt: DateTime.parse(json['createdAt']),
       pickupTime: json['pickupTime'] == null
           ? null

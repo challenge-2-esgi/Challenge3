@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/client/blocs/order_bloc.dart';
 import 'package:mobile/client/order_screen.dart';
 import 'package:mobile/core/models/order.dart';
 import 'package:mobile/theme/app_theme.dart';
@@ -137,7 +139,13 @@ class OrderItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        OrderScreen.navigateTo(context, order: order);
+        OrderScreen.navigateTo(
+          context,
+          OrderScreenArguments(
+            order: order,
+            onClose: () => context.read<OrderBloc>().add(OrdersLoaded()),
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(15),

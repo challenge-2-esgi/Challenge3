@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/models/order.dart';
-import 'package:mobile/core/services/api/api_service.dart';
+import 'package:mobile/core/services/api_service.dart';
 
 part 'order_event.dart';
 
@@ -20,7 +20,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           state.copyWith(
             status: OrderStateStatus.success,
             orders: orders,
-            selectedStatuses: [Status.waitingForPickUp],
           ),
         );
       } catch (e) {

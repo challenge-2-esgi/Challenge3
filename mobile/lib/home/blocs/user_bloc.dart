@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/models/user.dart';
-import 'package:mobile/core/services/api/api_service.dart';
+import 'package:mobile/core/services/api_service.dart';
 
 part 'user_event.dart';
 
