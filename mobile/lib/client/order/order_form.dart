@@ -5,7 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:mobile/core/models/address.dart';
-import 'package:mobile/core/services/api/api_service.dart';
+import 'package:mobile/core/services/api_service.dart';
 import 'package:mobile/core/services/geoapify_service.dart';
 import 'package:mobile/theme/app_theme.dart';
 

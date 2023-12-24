@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/models/order.dart';
 import 'package:mobile/core/models/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
@@ -69,7 +70,7 @@ class ApiService {
 }
 
 class Client {
-  static const _baseUrl = "http://10.0.2.2:3001";
+  static final String _baseUrl = dotenv.env["BACK_URL"] ?? "";
   static const _nonAuthorizationPaths = ['/login'];
 
   static _buildClient(StorageService storageService) {
