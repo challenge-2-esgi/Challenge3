@@ -103,14 +103,15 @@ class ApiService {
     }
   }
 
-  Future<bool> updateDelivererAvailability(bool isActive) async {
+  Future<void> updateDelivererAvailability(
+    String delivererId,
+    bool isActive,
+  ) async {
     try {
-      final response = await _client.post(
-        "/users/update-availability",
+      await _client.patch(
+        "/deliverers/$delivererId",
         data: {'isActive': isActive},
       );
-
-      return response.statusCode == 200;
     } on Exception catch (e) {
       throw Exception(e);
     }
