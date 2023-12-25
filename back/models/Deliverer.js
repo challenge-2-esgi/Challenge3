@@ -4,7 +4,16 @@ const User = require('./User')
 const sseChannel = require('../sse/channel')
 const sseEvent = require('../sse/events')
 
-class Deliverer extends Model {}
+class Deliverer extends Model {
+    toJSON() {
+        const attributes = Object.assign({}, this.get())
+        if (attributes.user != null) {
+            delete attributes.user['password']
+        }
+
+        return attributes
+    }
+}
 
 Deliverer.init(
     {
@@ -46,7 +55,7 @@ Deliverer.addHook('afterUpdate', (instance, { fields }) => {
             },
             sseEvent.delivererLocation
         )
-        
+
         sseChannel.publish(
             {
                 delivererId: instance.id,

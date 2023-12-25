@@ -8,6 +8,8 @@ const RolesGuard = require('../middlewares/roles-guard')
 const Validator = require('../middlewares/validator')
 const OwnerOrClientPerson = require('../middlewares/owner-or-client-person-guard')
 const OwnershipGuard = require('../middlewares/ownership-guard')
+const { uuidv7 } = require('uuidv7')
+const LoggedInUser = require('../middlewares/logged-in-user')
 
 function DelivererRouter() {
     const router = new Router()
@@ -20,14 +22,35 @@ function DelivererRouter() {
 
     router.use(
         '/deliverers',
-        AuthGuard,
         CRUDRouter({
             model: Deliverer,
             collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin])],
             itemCreateMiddlewares: [
-                AuthGuard,
-                RolesGuard([ROLE.admin, ROLE.deliverer]),
                 Validator(validators.createDeliverer),
+                LoggedInUser,
+                (req, res, next) => {
+                    if (req.user != null) {
+                        return res.sendStatus(403)
+                    }
+
+                    next()
+                },
+                (req, res, next) => {
+                    req.body = {
+                        user: {
+                            id: uuidv7(),
+                            firstname: req.body['firstname'],
+                            lastname: req.body['lastname'],
+                            email: req.body['email'],
+                            password: req.body['password'],
+                            role: req.body['role'],
+                        },
+                        phone: req.body['phone'],
+                        isActive: true,
+                    }
+
+                    next()
+                },
             ],
             itemReadMiddlewares: [
                 AuthGuard,
@@ -57,7 +80,12 @@ function DelivererRouter() {
                     all: true,
                     nested: true,
                 },
-            ]
+            ],
+            includeCreateModels: [
+                {
+                    association: 'user',
+                },
+            ],
         })
     )
     return router
