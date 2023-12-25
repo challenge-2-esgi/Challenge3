@@ -11,3 +11,9 @@ class AuthLogin extends AuthEvent {
 }
 
 class AuthLogout extends AuthEvent {}
+
+class AuthScreenChanged extends AuthEvent {
+  final AuthScreen screen;
+
+  AuthScreenChanged({required this.screen});
+}

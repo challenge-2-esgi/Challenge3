@@ -1,6 +1,4 @@
-// user.dart
-
-enum UserRole { client, deliverer }
+enum Role { client, deliverer }
 
 class User {
   final String id;
@@ -18,6 +16,11 @@ class User {
     required this.role,
     required this.isActive,
   });
+
+  static String roleToString(Role role) {
+    if (role == Role.client) return "CLIENT";
+    return "DELIVERER";
+  }
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(

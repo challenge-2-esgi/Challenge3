@@ -29,6 +29,54 @@ class ApiService {
     }
   }
 
+  Future<void> registerClient({
+    required String firstname,
+    required String lastname,
+    required String email,
+    required String password,
+    required String role,
+  }) async {
+    try {
+      await _client.post(
+        "/users",
+        data: {
+          "firstname": firstname,
+          "lastname": lastname,
+          "email": email,
+          "password": password,
+          "role": role,
+        },
+      );
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> registerDeliverer({
+    required String firstname,
+    required String lastname,
+    required String email,
+    required String password,
+    required String phone,
+    required String role,
+  }) async {
+    try {
+      await _client.post(
+        "/deliverers",
+        data: {
+          "firstname": firstname,
+          "lastname": lastname,
+          "email": email,
+          "password": password,
+          "phone": phone,
+          "role": role,
+        },
+      );
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+
   Future<User> getLoggedInUser() async {
     try {
       final response = await _client.get("/users/current");
@@ -72,6 +120,7 @@ class ApiService {
 class Client {
   static final String _baseUrl = dotenv.env["BACK_URL"] ?? "";
   static const _nonAuthorizationPaths = ['/login'];
+  static const _registrationPaths = ["/users", "/deliverers"];
 
   static _buildClient(StorageService storageService) {
     final dio = Dio(
@@ -86,6 +135,11 @@ class Client {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
+          if (_registrationPaths.any(options.path.startsWith) &&
+              options.method == "POST") {
+            return handler.next(options);
+          }
+
           if (!_nonAuthorizationPaths.any(options.path.startsWith)) {
             options.headers['Authorization'] =
                 'Bearer ${await storageService.getToken()}';
