@@ -22,20 +22,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
 
     on<UserUpdateAvailability>((event, emit) async {
-      emit(
-          state.copyWith(user: state.user?.copyWith(isActive: event.isActive)));
-
+      emit(state.copyWith(delivererStatus: DelivererStatus.loading));
       try {
-        final success = await ApiService.instance
-            .updateDelivererAvailability(event.isActive);
-
-        if (success) {
-          emit(state.copyWith(status: UserStatus.success));
-        } else {
-          emit(state.copyWith(status: UserStatus.error));
-        }
+        await ApiService.instance
+            .updateDelivererAvailability(event.delivererId, event.isActive);
+        emit(
+          state.copyWith(
+            delivererStatus: DelivererStatus.success,
+            user: state.user?.copyWith(isActive: event.isActive),
+          ),
+        );
       } catch (e) {
-        emit(state.copyWith(status: UserStatus.error));
+        emit(state.copyWith(delivererStatus: DelivererStatus.error));
       }
     });
   }

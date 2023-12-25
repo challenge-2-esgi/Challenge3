@@ -21,7 +21,7 @@ class DelivererProfile extends StatelessWidget {
               children: [
                 ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
+                    backgroundColor: Colors.deepPurple,
                   ),
                   onPressed: () {
                     context.read<AuthBloc>().add(AuthLogout());

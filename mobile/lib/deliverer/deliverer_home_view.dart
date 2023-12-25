@@ -6,10 +6,10 @@ class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
-  _HomeViewState createState() => _HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
@@ -43,7 +43,9 @@ class _HomeViewState extends State<HomeView> {
                     Switch(
                       value: isAvailable,
                       onChanged: (value) {
-                        context.read<UserBloc>().add(UserUpdateAvailability(isActive: value));
+                        context.read<UserBloc>().add(UserUpdateAvailability(
+                            delivererId: userState.user!.delivererId ?? "",
+                            isActive: value));
                       },
                     ),
                   ],
