@@ -42,5 +42,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       },
     );
+
+    on<AuthScreenChanged>(
+      (event, emit) {
+        emit(
+          state.copyWith(screen: event.screen),
+        );
+      },
+    );
   }
 }

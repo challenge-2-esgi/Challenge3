@@ -5,6 +5,7 @@ import 'package:mobile/blocs/auth/auth_bloc.dart';
 import 'package:mobile/client/order_screen.dart';
 import 'package:mobile/home/home_screen.dart';
 import 'package:mobile/login/login_screen.dart';
+import 'package:mobile/register/register_screen.dart';
 import 'package:mobile/theme/app_theme.dart';
 
 Future<void> main() async {
@@ -28,8 +29,12 @@ class App extends StatelessWidget {
         theme: AppTheme.themeData,
         home: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if (!state.isAuthenticated) {
+            if (!state.isAuthenticated && state.screen == AuthScreen.login) {
               return const LoginScreen();
+            }
+
+            if (!state.isAuthenticated && state.screen == AuthScreen.register) {
+              return const RegisterScreen();
             }
 
             return const HomeScreen();

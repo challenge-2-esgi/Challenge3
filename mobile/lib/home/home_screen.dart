@@ -20,7 +20,8 @@ class HomeScreen extends StatelessWidget {
       create: (context) => UserBloc()..add(UserLoaded()),
       child: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
-          if (state.status == UserStatus.loading) {
+          if (state.status == UserStatus.initial ||
+              state.status == UserStatus.loading) {
             return const Scaffold(
               body: SafeArea(
                 child: Center(
