@@ -178,9 +178,9 @@ class OrderItem extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      const Text(
-                        "John Doe",
-                        style: TextStyle(
+                      Text(
+                        order.receiverFullName,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

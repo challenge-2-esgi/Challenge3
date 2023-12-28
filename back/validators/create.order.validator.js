@@ -11,6 +11,8 @@ const addressSchema = joi.object({
 })
 
 const createOrderSchema = joi.object({
+    receiverFirstname: joi.string().max(25).required(),
+    receiverLastname: joi.string().max(25).required(),
     receiverEmail: joi.string().email().required(),
     receiverPhone: joi.string().length(10).required(),
     pickupAddress: addressSchema,

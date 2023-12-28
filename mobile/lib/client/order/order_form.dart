@@ -96,6 +96,10 @@ class _OrderFormState extends State<OrderForm> {
           {
             "pickupAddress": _pickupAddress?.toJson(),
             "deliveryAddress": _deliveryAddress?.toJson(),
+            "receiverFirstname":
+                _formKey.currentState?.value["receiverFirstname"],
+            "receiverLastname":
+                _formKey.currentState?.value["receiverLastname"],
             "receiverEmail": _formKey.currentState?.value["receiverEmail"],
             "receiverPhone": _formKey.currentState?.value["receiverPhone"],
             "distance": distance,
