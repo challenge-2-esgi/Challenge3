@@ -98,11 +98,11 @@ module.exports = {
                 type: Sequelize.ENUM(Object.values(ORDER_STATUS)),
                 defaultValue: ORDER_STATUS.waitingForPickup,
             },
-            recieverEmail: {
+            receiverEmail: {
                 type: Sequelize.TEXT,
                 allowNull: false,
             },
-            recieverPhone: {
+            receiverPhone: {
                 type: Sequelize.STRING(10),
                 allowNull: false,
             },
