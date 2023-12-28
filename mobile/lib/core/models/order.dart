@@ -17,6 +17,8 @@ class Order {
   final Status status;
   final String clientFirstName;
   final String clientLastName;
+  final String receiverFirstname;
+  final String receiverLastname;
   final Deliverer? deliverer;
   final DateTime createdAt;
   final DateTime? pickupTime;
@@ -29,6 +31,8 @@ class Order {
     required this.deliveryAddress,
     required this.clientFirstName,
     required this.clientLastName,
+    required this.receiverFirstname,
+    required this.receiverLastname,
     required this.deliverer,
     required this.createdAt,
     required this.pickupTime,
@@ -42,6 +46,8 @@ class Order {
 
   String getDeliverTime() =>
       deliverTime == null ? "" : _formatDate(deliverTime!);
+
+  String get receiverFullName => "${receiverLastname.toUpperCase()} $receiverFirstname";
 
   static Status stringToStatus(String status) {
     switch (status) {
@@ -63,6 +69,8 @@ class Order {
     Address? deliveryAddress,
     String? clientFirstName,
     String? clientLastName,
+    String? receiverFirstname,
+    String? receiverLastname,
     Deliverer? deliverer,
     DateTime? createdAt,
     DateTime? pickupTime,
@@ -79,6 +87,8 @@ class Order {
       createdAt: createdAt ?? this.createdAt,
       pickupTime: pickupTime ?? this.pickupTime,
       deliverTime: deliverTime ?? this.deliverTime,
+      receiverFirstname: receiverFirstname ?? this.receiverFirstname,
+      receiverLastname: receiverLastname ?? this.receiverLastname,
     );
   }
 
@@ -90,6 +100,8 @@ class Order {
       deliveryAddress: Address.fromJson(json['deliveryAddress']),
       clientFirstName: json['user']['firstname'],
       clientLastName: json['user']['lastname'],
+      receiverFirstname: json['receiverFirstname'],
+      receiverLastname: json['receiverLastname'],
       deliverer: json['deliverer'] == null
           ? null
           : Deliverer.fromJson(json['deliverer']),

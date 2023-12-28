@@ -42,11 +42,19 @@ Order.init(
             type: DataTypes.ENUM(Object.values(ORDER_STATUS)),
             defaultValue: ORDER_STATUS.waitingForPickup,
         },
-        recieverEmail: {
+        receiverFirstname: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+        },
+        receiverLastname: {
+            type: DataTypes.STRING(25),
+            allowNull: false,
+        },
+        receiverEmail: {
             type: DataTypes.TEXT,
             allowNull: false,
         },
-        recieverPhone: {
+        receiverPhone: {
             type: DataTypes.STRING(10),
             allowNull: false,
         },

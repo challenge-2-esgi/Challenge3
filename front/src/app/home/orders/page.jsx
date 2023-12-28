@@ -38,14 +38,14 @@ const OrdersPage = () => {
             accessorKey: 'sku',
         },
         {
-            id: 'recieverEmail',
+            id: 'receiverEmail',
             header: t('order.reciever_email', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'recieverEmail',
+            accessorKey: 'receiverEmail',
         },
         {
-            id: 'recieverPhone',
+            id: 'receiverPhone',
             header: t('order.reciever_phone', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'recieverPhone',
+            accessorKey: 'receiverPhone',
         },
         {
             id: 'isDelivered',
