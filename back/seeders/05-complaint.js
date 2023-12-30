@@ -3,11 +3,14 @@
 const { uuidv7 } = require('uuidv7')
 const { faker } = require('@faker-js/faker')
 const { Order, User } = require('../models')
+const { ROLE } = require('../constants')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        const users = await queryInterface.select(User, 'user', {})
+        const users = await queryInterface.select(User, 'user', {
+            where: { role: ROLE.client },
+        })
         const orders = await queryInterface.select(Order, 'order', {})
 
         if (users.length < 3) {
