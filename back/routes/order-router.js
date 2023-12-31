@@ -2,7 +2,7 @@ const { Router } = require('express')
 const AuthGuard = require('../middlewares/auth-guard')
 const CRUDRouter = require('./item-router')
 const Order = require('../models/Order')
-const { ROLE } = require('../constants')
+const { ROLE, ORDER_STATUS } = require('../constants')
 const validators = require('../validators')
 const RolesGuard = require('../middlewares/roles-guard')
 const Validator = require('../middlewares/validator')
@@ -10,6 +10,7 @@ const OwnerOrDeliveryPerson = require('../middlewares/owner-or-delivery-person-g
 const { isClient, isDeliverer } = require('../utils/authorization')
 const Deliverer = require('../models/Deliverer')
 const { uuidv7 } = require('uuidv7')
+const NotDeliveringGuard = require('../middlewares/not-delivering-guard')
 
 function OrderRouter() {
     const router = new Router()
@@ -28,21 +29,49 @@ function OrderRouter() {
         return uuidv7()
     }
 
+    router.post(
+        '/orders/:id/assign',
+        AuthGuard,
+        RolesGuard([ROLE.deliverer]),
+        NotDeliveringGuard,
+        async (req, res, next) => {
+            try {
+                const order = await Order.findOne({
+                    where: {
+                        id: req.params.id,
+                    },
+                })
+
+                if (!order) {
+                    return res.sendStatus(404)
+                }
+
+                if (order.delivererId) {
+                    return res.sendStatus(403)
+                }
+
+                await Order.update(
+                    {
+                        delivererId: req.user.deliverer.id,
+                        status: ORDER_STATUS.waitingForPickup,
+                    },
+                    {
+                        where: {
+                            id: order.id,
+                        },
+                        individualHooks: true,
+                    }
+                )
+
+                res.sendStatus(200)
+            } catch (error) {
+                next(error)
+            }
+        }
+    )
     router.use(
         '/orders',
         AuthGuard,
-        async (req, res, next) => {
-            if (isClient(req.user)) {
-                req.query = { clientId: req.user.id }
-            }
-            if (isDeliverer(req.user)) {
-                const deliverer = await Deliverer.findOne({
-                    where: { userId: req.user.id },
-                })
-                req.query = { delivererId: deliverer.id }
-            }
-            next()
-        },
         CRUDRouter({
             model: Order,
             includeCollectionModels: [
@@ -61,7 +90,16 @@ function OrderRouter() {
             ],
             collectionMiddlewares: [
                 AuthGuard,
-                RolesGuard([ROLE.admin, ROLE.client, ROLE.deliverer]),
+                RolesGuard([ROLE.admin, ROLE.deliverer]),
+                (req, res, next) => {
+                    if (isDeliverer(req.user)) {
+                        req.query = {
+                            status: ORDER_STATUS.waitingForDeliverer,
+                        }
+                        return next()
+                    }
+                    next()
+                },
             ],
             itemCreateMiddlewares: [
                 AuthGuard,

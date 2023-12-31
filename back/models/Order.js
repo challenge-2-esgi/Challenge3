@@ -40,7 +40,7 @@ Order.init(
         },
         status: {
             type: DataTypes.ENUM(Object.values(ORDER_STATUS)),
-            defaultValue: ORDER_STATUS.waitingForPickup,
+            defaultValue: ORDER_STATUS.waitingForDeliverer,
         },
         receiverFirstname: {
             type: DataTypes.STRING(25),
@@ -92,6 +92,27 @@ Order.belongsTo(Address, {
         name: 'deliveryAddressId',
         allowNull: false,
     },
+})
+
+Order.addHook('afterCreate', async (order) => {
+    const user = await order.getUser()
+    sseChannel.publish(
+        {
+            id: order.id,
+            distance: order.distance,
+            status: order.status,
+            receiverFirstname: order.receiverFirstname,
+            receiverLastname: order.receiverLastname,
+            receiverEmail: order.receiverEmail,
+            receiverPhone: order.receiverPhone,
+            pickupAddress: order.pickupAddress,
+            deliveryAddress: order.deliveryAddress,
+            createdAt: order.createdAt,
+            user: user,
+            deliverer: null,
+        },
+        sseEvent.newOrder
+    )
 })
 
 Order.addHook('afterUpdate', (instance, { fields }) => {
