@@ -4,7 +4,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/services/storage_service.dart';
 import 'package:mobile/core/sse/sse_client.dart';
 
-enum SseEvent { orderLocation, orderStatus }
+enum SseEvent {
+  orderLocation,
+  orderStatus,
+  newOrder,
+}
 
 class SseService {
   static SseService? _instance;
@@ -30,16 +34,16 @@ class SseService {
       case SseEvent.orderLocation:
         return Uri.parse("$_baseUrl/notifications/order-location")
             .replace(queryParameters: params);
+      case SseEvent.newOrder:
+        return Uri.parse("$_baseUrl/notifications/new-order");
       default:
         return Uri();
     }
   }
 
   Future<void> subscribe(
-    SseEvent sseEvent,
-    Function(Map<String, dynamic> data) onData,
-    Map<String, dynamic>? queryParams,
-  ) async {
+      SseEvent sseEvent, Function(Map<String, dynamic> data) onData,
+      {Map<String, dynamic>? queryParams}) async {
     SseClient.subscribeToSSE(
       uri: _buildUri(sseEvent, queryParams),
       headers: {

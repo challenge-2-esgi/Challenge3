@@ -36,10 +36,14 @@ class _OrderScreenState extends State<OrderScreen> {
   void initState() {
     super.initState();
     _order = widget.order.copyWith();
-    if (widget.order.deliverer != null) {
+    if (widget.order.deliverer != null &&
+        widget.order.deliverer?.latitude != null &&
+        widget.order.deliverer?.longitude != null &&
+        (widget.order.status == Status.waitingForPickUp ||
+            widget.order.status == Status.delivering)) {
       _delivererLocation = Location(
-        latitude: widget.order.deliverer!.latitude,
-        longitude: widget.order.deliverer!.longitude,
+        latitude: widget.order.deliverer!.latitude!,
+        longitude: widget.order.deliverer!.longitude!,
       );
     }
 
@@ -52,20 +56,20 @@ class _OrderScreenState extends State<OrderScreen> {
             _delivererLocation = Location.fromJson(data);
           });
         },
-        {"orderId": widget.order.id},
-      );
-
-      SseService.instance.subscribe(
-        SseEvent.orderStatus,
-        (data) {
-          setState(() {
-            _order = widget.order
-                .copyWith(status: Order.stringToStatus(data['status']));
-          });
-        },
-        {"orderId": widget.order.id},
+        queryParams: {"orderId": widget.order.id},
       );
     }
+
+    SseService.instance.subscribe(
+      SseEvent.orderStatus,
+      (data) {
+        setState(() {
+          _order = widget.order
+              .copyWith(status: Order.stringToStatus(data['status']));
+        });
+      },
+      queryParams: {"orderId": widget.order.id},
+    );
   }
 
   @override

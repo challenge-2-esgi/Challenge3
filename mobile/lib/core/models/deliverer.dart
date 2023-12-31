@@ -2,8 +2,8 @@ class Deliverer {
   final String id;
   final bool isActive;
   final String phone;
-  final double latitude;
-  final double longitude;
+  final double? latitude;
+  final double? longitude;
 
   Deliverer({
     required this.id,
@@ -18,8 +18,10 @@ class Deliverer {
       id: json['id'],
       isActive: json['isActive'],
       phone: json['phone'],
-      latitude: double.parse(json['latitude']),
-      longitude: double.parse(json['longitude']),
+      latitude:
+          json['latitude'] == null ? null : double.parse(json['latitude']),
+      longitude:
+          json['longitude'] == null ? null : double.parse(json['longitude']),
     );
   }
 }

@@ -9,8 +9,10 @@ class OrderItem extends StatelessWidget {
 
   String _statusToString(Status status) {
     switch (status) {
-      case Status.waitingForPickUp:
+      case Status.waitingForDeliverer:
         return "En attente de livreur";
+      case Status.waitingForPickUp:
+        return "En attente de récupération";
       case Status.delivering:
         return "En cours de livraison";
       case Status.delivered:
@@ -22,6 +24,7 @@ class OrderItem extends StatelessWidget {
 
   Color? _statusToColor(BuildContext context, Status status) {
     switch (status) {
+      case Status.waitingForDeliverer:
       case Status.waitingForPickUp:
         return Colors.grey;
       case Status.delivering:

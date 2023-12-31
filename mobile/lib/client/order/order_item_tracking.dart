@@ -11,9 +11,15 @@ class OrderItemTracking extends StatelessWidget {
   OrderItemTracking({super.key, required this.order}) {
     _steps = [
       _TrackingStep(
+        label: "En attente de livreur",
+        dateTime: null,
+        completed: order.status != Status.waitingForDeliverer,
+      ),
+      _TrackingStep(
         label: "Retiré",
         dateTime: order.pickupTime,
-        completed: order.status != Status.waitingForPickUp,
+        completed: order.status != Status.waitingForPickUp &&
+            order.status != Status.waitingForDeliverer,
       ),
       _TrackingStep(
         label: "En route",

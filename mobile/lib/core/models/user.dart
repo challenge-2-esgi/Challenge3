@@ -6,7 +6,11 @@ class User {
   final String firstname;
   final String email;
   final String role;
-  final bool isActive;
+
+  // deliverer
+  final String? delivererId;
+  final String? phone;
+  final bool? isActive;
 
   User({
     required this.id,
@@ -14,7 +18,9 @@ class User {
     required this.firstname,
     required this.email,
     required this.role,
-    required this.isActive,
+    this.delivererId,
+    this.phone,
+    this.isActive,
   });
 
   static String roleToString(Role role) {
@@ -29,7 +35,9 @@ class User {
       firstname: json['firstname'],
       email: json['email'],
       role: json['role'],
-      isActive: json['deliverer']?['isActive'] ?? false,
+      delivererId: json['deliverer']?['id'],
+      phone: json['deliverer']?['phone'],
+      isActive: json['deliverer']?['isActive'],
     );
   }
 
@@ -39,6 +47,8 @@ class User {
     String? firstname,
     String? email,
     String? role,
+    String? delivererId,
+    String? phone,
     bool? isActive,
   }) {
     return User(
@@ -47,6 +57,8 @@ class User {
       firstname: firstname ?? this.firstname,
       email: email ?? this.email,
       role: role ?? this.role,
+      delivererId: delivererId ?? this.delivererId,
+      phone: phone ?? this.phone,
       isActive: isActive ?? this.isActive,
     );
   }
