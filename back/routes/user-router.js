@@ -11,8 +11,9 @@ const LoggedInUser = require('../middlewares/logged-in-user')
 const RolesGuard = require('../middlewares/roles-guard')
 const OwnershipGuard = require('../middlewares/ownership-guard')
 const Validator = require('../middlewares/validator')
-const { isAdmin } = require('../utils/authorization')
+const { isAdmin, isClient } = require('../utils/authorization')
 const Deliverer = require('../models/Deliverer')
+const Order = require('../models/Order')
 
 function UserRouter() {
     const router = new Router()
@@ -26,16 +27,40 @@ function UserRouter() {
     router.get('/users/current', AuthGuard, async (req, res) => {
         const user = req.user
 
-        const deliverer = await Deliverer.findOne({
-            where: { userId: user.id },
-        })
-
-        if (deliverer) {
-            user.deliverer = deliverer
-        }
-
         res.status(200).json(user)
     })
+    router.get(
+        '/users/current/orders',
+        AuthGuard,
+        RolesGuard([ROLE.client, ROLE.deliverer]),
+        async (req, res, next) => {
+            const query = {
+                ...(isClient(req.user)
+                    ? { clientId: req.user.id }
+                    : { delivererId: req.user.deliverer.id }),
+            }
+
+            const orders = await Order.findAll({
+                where: query,
+                include: [
+                    {
+                        association: 'user',
+                    },
+                    {
+                        association: 'deliverer',
+                    },
+                    {
+                        association: 'pickupAddress',
+                    },
+                    {
+                        association: 'deliveryAddress',
+                    },
+                ],
+            })
+
+            res.json(orders)
+        }
+    )
 
     router.post('/users/update-availability', AuthGuard, async (req, res) => {
         console.log(req.body)

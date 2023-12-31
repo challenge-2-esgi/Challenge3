@@ -96,7 +96,7 @@ module.exports = {
             },
             status: {
                 type: Sequelize.ENUM(Object.values(ORDER_STATUS)),
-                defaultValue: ORDER_STATUS.waitingForPickup,
+                defaultValue: ORDER_STATUS.waitingForDeliverer,
             },
             receiverEmail: {
                 type: Sequelize.TEXT,

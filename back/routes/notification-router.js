@@ -7,6 +7,7 @@ const RolesGuard = require('../middlewares/roles-guard')
 const { ROLE } = require('../constants')
 const { Subscriber, OrderSubscriber } = require('../sse/subscribers')
 const OwnershipGuard = require('../middlewares/ownership-guard')
+const NotDeliveringGuard = require('../middlewares/not-delivering-guard')
 
 function NotificationRouter() {
     const router = new Router()
@@ -74,6 +75,18 @@ function NotificationRouter() {
                     res,
                     res.locals.resource
                 )
+            )
+        }
+    )
+
+    router.get(
+        '/notifications/new-order',
+        AuthGuard,
+        RolesGuard([ROLE.deliverer]),
+        NotDeliveringGuard,
+        (req, res) => {
+            sseChannel.subscribe(
+                new Subscriber(req.user.deliverer.id, sseEvent.newOrder, res)
             )
         }
     )

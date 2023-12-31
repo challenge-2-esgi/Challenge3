@@ -6,6 +6,7 @@ const ROLE = {
 }
 
 const ORDER_STATUS = {
+    waitingForDeliverer: 'WAITING_FOR_DELIVERER',
     waitingForPickup: 'WAITING_FOR_PICK_UP',
     delivering: 'DELIVERING',
     delivered: 'DELIVERED',

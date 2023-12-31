@@ -1,5 +1,8 @@
+const { ROLE } = require('../constants')
+const Deliverer = require('../models/Deliverer')
 const User = require('../models/User')
 const jwt = require('../services/jwt')
+const { isDeliverer } = require('../utils/authorization')
 
 function AuthGuard(req, res, next) {
     const authHeader = req.headers['authorization']
@@ -11,16 +14,34 @@ function AuthGuard(req, res, next) {
         if (err) return res.sendStatus(401)
 
         const user = await User.findByPk(payload.sub)
-        req.user =
-            user == null
-                ? null
-                : {
-                      id: user.id,
-                      role: user.role,
-                      firstname: user.firstname,
-                      lastname: user.lastname,
-                      email: user.email,
-                  }
+
+        if (user == null) {
+            req.user = null
+            return next()
+        }
+
+        req.user = {
+            id: user.id,
+            role: user.role,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+        }
+
+        if (isDeliverer(user)) {
+            const deliverer = await Deliverer.findOne({
+                where: {
+                    userId: user.id,
+                },
+            })
+            req.user.deliverer =
+                deliverer == null
+                    ? null
+                    : {
+                          id: deliverer.id,
+                          isActive: deliverer.isActive,
+                      }
+        }
 
         next()
     })
