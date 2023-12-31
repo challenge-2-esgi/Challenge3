@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/models/order.dart';
@@ -88,7 +90,7 @@ class ApiService {
 
   Future<List<Order>> getOrders() async {
     try {
-      final response = await _client.get("/orders");
+      final response = await _client.get("/users/current/orders");
       return response.data.map<Order>((e) => Order.fromJson(e)).toList();
     } on Exception catch (e) {
       throw Exception(e);
@@ -113,6 +115,30 @@ class ApiService {
         data: {'isActive': isActive},
       );
     } on Exception catch (e) {
+      log("error on updating deliverer availability\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<List<Order>> getAvailableOrders() async {
+    try {
+      final response = await _client.get("/orders");
+      final List<Order> orders =
+          response.data.map<Order>((e) => Order.fromJson(e)).toList();
+      orders.sort(
+        (a, b) => b.createdAt.compareTo(a.createdAt),
+      );
+      return orders;
+    } on Exception catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<void> assignToOrder(String orderId) async {
+    try {
+      await _client.post("/orders/$orderId/assign");
+    } on Exception catch (e) {
+      log("error on assigning order ${e.toString()}");
       throw Exception(e);
     }
   }

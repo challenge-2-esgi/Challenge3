@@ -30,10 +30,14 @@ class OrderDetailsPage extends StatelessWidget {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
-              _buildDetailRow('Client', '${order.clientFirstName} ${order.clientLastName}'),
+              _buildDetailRow(
+                  'Client', '${order.clientFirstName} ${order.clientLastName}'),
               _buildDetailRow('Statut', _getStatusString(order.status)),
-              _buildDetailRow('Adresse de récupération', order.pickupAddress.toString()),
-              _buildDetailRow('Adresse de livraison', order.deliveryAddress.toString(), isLastItem: true),
+              _buildDetailRow(
+                  'Adresse de récupération', order.pickupAddress.toString()),
+              _buildDetailRow(
+                  'Adresse de livraison', order.deliveryAddress.toString(),
+                  isLastItem: true),
               const SizedBox(height: 12),
             ],
           ),
@@ -42,7 +46,8 @@ class OrderDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailRow(String title, String value, {bool isLastItem = false}) {
+  Widget _buildDetailRow(String title, String value,
+      {bool isLastItem = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -60,13 +65,16 @@ class OrderDetailsPage extends StatelessWidget {
             style: const TextStyle(fontSize: 16),
           ),
         ),
-        if (!isLastItem) const Divider(height: 16, thickness: 1, color: Colors.grey),
+        if (!isLastItem)
+          const Divider(height: 16, thickness: 1, color: Colors.grey),
       ],
     );
   }
 
   String _getStatusString(Status status) {
     switch (status) {
+      case Status.waitingForDeliverer:
+        return 'En attente de livreur';
       case Status.waitingForPickUp:
         return 'En attente de récupération';
       case Status.delivering:

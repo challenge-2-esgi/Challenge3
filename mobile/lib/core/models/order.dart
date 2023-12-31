@@ -4,6 +4,7 @@ import 'package:mobile/core/models/deliverer.dart';
 import 'address.dart';
 
 enum Status {
+  waitingForDeliverer,
   waitingForPickUp,
   delivering,
   delivered,
@@ -47,10 +48,13 @@ class Order {
   String getDeliverTime() =>
       deliverTime == null ? "" : _formatDate(deliverTime!);
 
-  String get receiverFullName => "${receiverLastname.toUpperCase()} $receiverFirstname";
+  String get receiverFullName =>
+      "${receiverLastname.toUpperCase()} $receiverFirstname";
 
   static Status stringToStatus(String status) {
     switch (status) {
+      case 'WAITING_FOR_DELIVERER':
+        return Status.waitingForDeliverer;
       case 'WAITING_FOR_PICK_UP':
         return Status.waitingForPickUp;
       case 'DELIVERING':
@@ -59,6 +63,21 @@ class Order {
         return Status.delivered;
       default:
         return Status.canceled;
+    }
+  }
+
+  static String statusToString(Status status) {
+    switch (status) {
+      case Status.waitingForDeliverer:
+        return "WAITING_FOR_DELIVERER";
+      case Status.waitingForPickUp:
+        return "WAITING_FOR_PICK_UP";
+      case Status.delivering:
+        return "DELIVERING";
+      case Status.delivered:
+        return "DELIVERED";
+      case Status.canceled:
+        return "CANCELLED";
     }
   }
 
