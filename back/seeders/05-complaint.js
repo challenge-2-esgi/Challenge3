@@ -1,9 +1,8 @@
 'use strict'
 
 const { uuidv7 } = require('uuidv7')
-const Order = require('../models/Order')
-const User = require('../models/User')
 const { faker } = require('@faker-js/faker')
+const { Order, User } = require('../models')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
