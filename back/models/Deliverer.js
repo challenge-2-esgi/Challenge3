@@ -14,6 +14,12 @@ module.exports = function (connection) {
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             })
+            db.User.hasOne(Deliverer, {
+                as: 'deliverer',
+                foreignKey: { name: 'userId', allowNull: false },
+                onUpdate: 'CASCADE',
+                onDelete: 'CASCADE',
+            })
         }
 
         static addHooks(db) {}

@@ -37,6 +37,7 @@ seed-undo:
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:seed:undo:all
 seed: seed-undo
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:seed:all
+	docker compose exec -ti node npm run dev:seed:mongo
 # dsu => database schema update
 dsu:
 	docker compose exec -ti node npm run dev:sync:db

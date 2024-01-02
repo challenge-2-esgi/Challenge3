@@ -13,6 +13,14 @@ module.exports = function (connection) {
                     allowNull: false,
                 },
             })
+            db.User.hasMany(Order, {
+                as: 'orders',
+                foreignKey: {
+                    name: 'clientId',
+                    allowNull: false,
+                },
+            })
+
             Order.belongsTo(db.Deliverer, {
                 as: 'deliverer',
                 foreignKey: {
@@ -20,6 +28,14 @@ module.exports = function (connection) {
                     allowNull: true,
                 },
             })
+            db.Deliverer.hasMany(Order, {
+                as: 'orders',
+                foreignKey: {
+                    name: 'delivererId',
+                    allowNull: true,
+                },
+            })
+
             Order.belongsTo(db.Address, {
                 as: 'pickupAddress',
                 foreignKey: {

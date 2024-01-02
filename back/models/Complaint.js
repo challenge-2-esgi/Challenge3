@@ -10,6 +10,14 @@ module.exports = function (connection) {
                     allowNull: false,
                 },
             })
+            db.User.hasMany(Complaint, {
+                as: 'complaints',
+                foreignKey: {
+                    name: 'userId',
+                    allowNull: false,
+                },
+            })
+            
             Complaint.belongsTo(db.Order, {
                 as: 'order',
                 foreignKey: {

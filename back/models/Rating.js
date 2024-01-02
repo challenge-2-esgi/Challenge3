@@ -7,8 +7,17 @@ module.exports = function (connection) {
                 as: 'client',
                 foreignKey: 'clientId',
             })
+            db.User.hasMany(Rating, { as: 'ratings', foreignKey: 'clientId' })
+
             Rating.belongsTo(db.Deliverer, {
                 as: 'deliverer',
+                foreignKey: {
+                    name: 'delivererId',
+                    allowNull: true,
+                },
+            })
+            db.Deliverer.hasMany(Rating, {
+                as: 'ratings',
                 foreignKey: {
                     name: 'delivererId',
                     allowNull: true,
