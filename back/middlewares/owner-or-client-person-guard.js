@@ -1,4 +1,4 @@
-const Order = require('../models/Order')
+const { Order } = require('../models')
 const { isAdminOrOwner, isOwner, isClient } = require('../utils/authorization')
 
 function OwnerOrClientPerson({ findResource, ownerKey, includeAdmin = false }) {

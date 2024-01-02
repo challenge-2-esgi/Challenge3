@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize')
-const Order = require('../models/Order')
+const { Order } = require('../models')
 const { isDeliverer } = require('../utils/authorization')
 const { ORDER_STATUS } = require('../constants')
 
