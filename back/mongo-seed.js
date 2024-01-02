@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const appConfig = require('./config/app-config')
 
-const { Deliverer, Order, User, Complaint, Rating } = require('./models')
+const { Order, User, Complaint, Rating } = require('./models')
 const MongoUser = require('./mongo-models/User')
 const MongoOrder = require('./mongo-models/Order')
 const MongoRating = require('./mongo-models/Rating')
@@ -17,9 +17,10 @@ async function insertUsers() {
         include: { all: true },
     })
 
-    const deliverers = await Deliverer.findAll({
+    const deliverers = await User.findAll({
+        where: { role: ROLE.deliverer },
         include: {
-            all: true,
+            association: 'deliverer',
         },
     })
 
@@ -31,10 +32,10 @@ async function insertUsers() {
     )
 
     await MongoUser.insertMany(
-        deliverers.map((deliverer) => ({
-            _id: deliverer.user.id,
-            ...deliverer.dataValues,
-            ...deliverer.user.dataValues,
+        deliverers.map((user) => ({
+            ...user.dataValues,
+            delivererId: user.deliverer.id,
+            ...user.deliverer.dataValues,
         }))
     )
 }

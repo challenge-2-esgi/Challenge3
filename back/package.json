@@ -6,6 +6,7 @@
     "dev": "NODE_ENV=dev node --watch server.js",
     "dev:sync:db": "NODE_ENV=dev node ./syncDB.js",
     "dev:seed:mongo": "NODE_ENV=dev node ./mongo-seed.js",
+    "dev:undo:seed:mongo": "NODE_ENV=dev node ./mongo-undo-seed.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
