@@ -1,4 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
+const ratingDto = require('../mongo-models/dtos/rating-dto')
+const operations = require('../mongo-models/dtos/operations')
 
 module.exports = function (connection) {
     class Rating extends Model {
@@ -25,7 +27,19 @@ module.exports = function (connection) {
             })
         }
 
-        static addHooks(db) {}
+        static addHooks(db) {
+            Rating.addHook('afterCreate', (rating) => {
+                ratingDto(rating.id, db.Rating)
+            })
+
+            Rating.addHook('afterUpdate', (rating) => {
+                ratingDto(rating.id, db.Rating, operations.update)
+            })
+
+            Rating.addHook('afterDestroy', (rating) => {
+                ratingDto(rating.id, db.Rating, operations.delete)
+            })
+        }
     }
 
     Rating.init(

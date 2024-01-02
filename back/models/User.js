@@ -1,11 +1,22 @@
 const { Model, DataTypes } = require('sequelize')
 const { ROLE } = require('../constants')
 const hasher = require('../services/hasher')
+const mongoUserDto = require('../mongo-models/dtos/user-dto')
+const operations = require('../mongo-models/dtos/operations')
 
 module.exports = function (connection) {
     class User extends Model {
         static associate(db) {}
-        static addHooks(db) {}
+
+        static addHooks(db) {
+            User.addHook('afterCreate', (user) => {
+                mongoUserDto(user.id, db.User)
+            })
+
+            User.addHook('afterUpdate', (user) => {
+                mongoUserDto(user.id, db.User, operations.update)
+            })
+        }
 
         toJSON() {
             const attributes = Object.assign({}, this.get())

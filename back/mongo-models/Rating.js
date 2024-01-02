@@ -13,7 +13,7 @@ const schema = new mongoose.Schema(
             type: String,
             alias: 'id',
         },
-        rating: String,
+        rating: Number,
         client: userSchemaDef,
         deliverer: userSchemaDef,
     },

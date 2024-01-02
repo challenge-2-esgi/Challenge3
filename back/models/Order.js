@@ -2,6 +2,8 @@ const { Model, DataTypes } = require('sequelize')
 const { ORDER_STATUS } = require('../constants')
 const sseChannel = require('../sse/channel')
 const sseEvent = require('../sse/events')
+const mongoOrderDto = require('../mongo-models/dtos/order-dto')
+const operations = require('../mongo-models/dtos/operations')
 
 module.exports = function (connection) {
     class Order extends Model {
@@ -52,7 +54,15 @@ module.exports = function (connection) {
             })
         }
 
-        static addHooks(db) {}
+        static addHooks(db) {
+            Order.addHook('afterCreate', (order) => {
+                mongoOrderDto(order.id, db.Order)
+            })
+
+            Order.addHook('afterUpdate', (order) => {
+                mongoOrderDto(order.id, db.Order, operations.update)
+            })
+        }
     }
 
     Order.init(

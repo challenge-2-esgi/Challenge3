@@ -5,7 +5,7 @@ const { sequelize: connection } = require('../db')
 const db = {}
 const files = fs.readdirSync(__dirname)
 files.forEach((file) => {
-    if (file === 'db.js' || file === 'index.js') return
+    if (file === 'index.js') return
     const model = require(path.join(__dirname, file))(connection)
     db[model.name] = model
 })

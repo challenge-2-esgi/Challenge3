@@ -126,6 +126,7 @@ function ItemRouter({
                         where: {
                             id: req.params.id,
                         },
+                        individualHooks: true,
                     })
                     res.sendStatus(nbDeleted ? 204 : 404)
                 } catch (error) {
