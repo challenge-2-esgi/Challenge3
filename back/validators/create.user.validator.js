@@ -8,7 +8,7 @@ const schema = joi.object({
     password: joi.string().min(8).required(),
     role: joi
         .string()
-        .valid(...[ROLE.client, ROLE.deliverer, ROLE.support])
+        .valid(...[ROLE.client, ROLE.support])
         .messages({ 'any.only': '"role" is required' }),
 })
 

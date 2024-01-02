@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require('sequelize')
 const sseChannel = require('../sse/channel')
 const sseEvent = require('../sse/events')
+const mongoUserDto = require('../mongo-models/dtos/user-dto')
+const operations = require('../mongo-models/dtos/operations')
 
 module.exports = function (connection) {
     class Deliverer extends Model {
@@ -22,7 +24,12 @@ module.exports = function (connection) {
             })
         }
 
-        static addHooks(db) {}
+        static addHooks(db) {
+            Deliverer.addHook('afterUpdate', async (deliverer) => {
+                const user = await deliverer.getUser()
+                mongoUserDto(user.id, db.User, operations.update)
+            })
+        }
 
         toJSON() {
             const attributes = Object.assign({}, this.get())

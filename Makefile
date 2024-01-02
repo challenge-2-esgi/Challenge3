@@ -35,6 +35,7 @@ seed-file:
 	docker compose exec -ti node npx sequelize-cli seed:generate --name $(filter-out $@,$(MAKECMDGOALS))
 seed-undo:
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:seed:undo:all
+	docker compose exec -ti node npm run dev:undo:seed:mongo
 seed: seed-undo
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:seed:all
 	docker compose exec -ti node npm run dev:seed:mongo
