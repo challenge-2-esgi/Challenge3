@@ -1,8 +1,8 @@
 const { Router } = require('express')
 
 const CRUDRouter = require('./item-router')
+const { User, Deliverer, Order } = require('../models')
 
-const User = require('../models/User')
 const { ROLE } = require('../constants')
 const validators = require('../validators')
 
@@ -12,8 +12,6 @@ const RolesGuard = require('../middlewares/roles-guard')
 const OwnershipGuard = require('../middlewares/ownership-guard')
 const Validator = require('../middlewares/validator')
 const { isAdmin, isClient } = require('../utils/authorization')
-const Deliverer = require('../models/Deliverer')
-const Order = require('../models/Order')
 
 function UserRouter() {
     const router = new Router()
@@ -33,7 +31,7 @@ function UserRouter() {
         '/users/current/orders',
         AuthGuard,
         RolesGuard([ROLE.client, ROLE.deliverer]),
-        async (req, res, next) => {
+        async (req, res) => {
             const query = {
                 ...(isClient(req.user)
                     ? { clientId: req.user.id }

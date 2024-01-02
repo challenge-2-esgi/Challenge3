@@ -1,13 +1,17 @@
 const { Router } = require('express')
+
+const { Order } = require('../models')
+
 const sseChannel = require('../sse/channel')
 const sseEvent = require('../sse/events')
-const AuthGuard = require('../middlewares/auth-guard')
-const Order = require('../models/Order')
-const RolesGuard = require('../middlewares/roles-guard')
-const { ROLE } = require('../constants')
 const { Subscriber, OrderSubscriber } = require('../sse/subscribers')
+
+const AuthGuard = require('../middlewares/auth-guard')
+const RolesGuard = require('../middlewares/roles-guard')
 const OwnershipGuard = require('../middlewares/ownership-guard')
 const NotDeliveringGuard = require('../middlewares/not-delivering-guard')
+
+const { ROLE } = require('../constants')
 
 function NotificationRouter() {
     const router = new Router()

@@ -1,10 +1,10 @@
-const { Router } = require("express");
-const AuthGuard = require("../middlewares/auth-guard");
-const CRUDRouter = require('./item-router');
-const Rating = require("../models/Rating");
-const RolesGuard = require("../middlewares/roles-guard");
-const { ROLE } = require("../constants");
-const OwnershipGuard = require("../middlewares/ownership-guard");
+const { Router } = require('express')
+const AuthGuard = require('../middlewares/auth-guard')
+const CRUDRouter = require('./item-router')
+const { Rating } = require('../models')
+const RolesGuard = require('../middlewares/roles-guard')
+const { ROLE } = require('../constants')
+const OwnershipGuard = require('../middlewares/ownership-guard')
 
 function RatingRouter() {
     const router = new Router()
@@ -16,13 +16,13 @@ function RatingRouter() {
     }
 
     router.use(
-        '/ratings', 
+        '/ratings',
         AuthGuard,
         CRUDRouter({
             model: Rating,
             collectionMiddlewares: [
-                AuthGuard, 
-                RolesGuard([ROLE.client, ROLE.admin])
+                AuthGuard,
+                RolesGuard([ROLE.client, ROLE.admin]),
             ],
             itemCreateMiddlewares: [
                 AuthGuard,
@@ -38,24 +38,26 @@ function RatingRouter() {
                     findResource: findRating,
                     ownerKey: 'clientId',
                     includeAdmin: true,
-                })
+                }),
             ],
             itemDeleteGuards: [
-                AuthGuard, 
+                AuthGuard,
                 OwnershipGuard({
                     findResource: findRating,
                     ownerKey: 'clientId',
                     includeAdmin: true,
-                })
+                }),
             ],
-            includeCollectionModels: [{
+            includeCollectionModels: [
+                {
                     all: true,
                     nested: true,
-            }]
+                },
+            ],
         })
     )
 
     return router
 }
 
-module.exports = RatingRouter;
+module.exports = RatingRouter
