@@ -1,4 +1,4 @@
-const Order = require('../models/Order')
+const { Order } = require('../models')
 const { isAdminOrOwner, isOwner } = require('../utils/authorization')
 
 function OwnerOrDeliveryPerson({ includeAdmin = false }) {

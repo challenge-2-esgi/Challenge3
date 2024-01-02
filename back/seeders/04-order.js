@@ -1,11 +1,9 @@
 'use strict'
 
-const { ROLE, ORDER_STATUS } = require('../constants')
-const Deliverer = require('../models/Deliverer')
-const User = require('../models/User')
-const Address = require('../models/Address')
-const { uuidv7 } = require('uuidv7')
 const { faker } = require('@faker-js/faker')
+const { uuidv7 } = require('uuidv7')
+const { Address, Deliverer, User } = require('../models')
+const { ROLE, ORDER_STATUS } = require('../constants')
 
 function minusDays(amount) {
     const d = new Date()

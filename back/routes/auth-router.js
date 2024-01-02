@@ -1,5 +1,6 @@
 const { Router } = require('express')
-const User = require('../models/User')
+
+const { User } = require('../models')
 const hasher = require('../services/hasher')
 const jwt = require('../services/jwt')
 const Validator = require('../middlewares/validator')

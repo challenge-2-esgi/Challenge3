@@ -1,6 +1,4 @@
-const { ROLE } = require('../constants')
-const Deliverer = require('../models/Deliverer')
-const User = require('../models/User')
+const { User, Deliverer } = require('../models')
 const jwt = require('../services/jwt')
 const { isDeliverer } = require('../utils/authorization')
 

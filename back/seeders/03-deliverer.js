@@ -2,7 +2,7 @@
 
 const { uuidv7 } = require('uuidv7')
 const { ROLE } = require('../constants')
-const User = require('../models/User')
+const { User } = require('../models')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

@@ -1,16 +1,18 @@
 const { Router } = require('express')
-const AuthGuard = require('../middlewares/auth-guard')
+const { uuidv7 } = require('uuidv7')
+
 const CRUDRouter = require('./item-router')
-const Order = require('../models/Order')
-const { ROLE, ORDER_STATUS } = require('../constants')
-const validators = require('../validators')
+const { Order } = require('../models')
+
+const AuthGuard = require('../middlewares/auth-guard')
 const RolesGuard = require('../middlewares/roles-guard')
 const Validator = require('../middlewares/validator')
 const OwnerOrDeliveryPerson = require('../middlewares/owner-or-delivery-person-guard')
-const { isClient, isDeliverer } = require('../utils/authorization')
-const Deliverer = require('../models/Deliverer')
-const { uuidv7 } = require('uuidv7')
 const NotDeliveringGuard = require('../middlewares/not-delivering-guard')
+
+const validators = require('../validators')
+const { ROLE, ORDER_STATUS } = require('../constants')
+const { isDeliverer } = require('../utils/authorization')
 
 function OrderRouter() {
     const router = new Router()

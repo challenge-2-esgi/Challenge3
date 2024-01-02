@@ -1,4 +1,4 @@
-const User = require('../models/User')
+const { User } = require('../models')
 const jwt = require('../services/jwt')
 
 function LoggedInUser(req, res, next) {
