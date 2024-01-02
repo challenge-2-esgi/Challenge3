@@ -1,34 +1,37 @@
 const { Model, DataTypes } = require('sequelize')
-const db = require('../db')
-const User = require('./User')
-const Deliverer = require('./Deliverer')
 
-class Rating extends Model {}
+module.exports = function (connection) {
+    class Rating extends Model {
+        static associate(db) {
+            Rating.belongsTo(db.User, {
+                as: 'client',
+                foreignKey: 'clientId',
+            })
+            Rating.belongsTo(db.Deliverer, {
+                as: 'deliverer',
+                foreignKey: {
+                    name: 'delivererId',
+                    allowNull: true,
+                },
+            })
+        }
 
-Rating.init(
-    {
-        id: { type: DataTypes.UUID, primaryKey: true },
-        rating: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+        static addHooks(db) {}
+    }
+
+    Rating.init(
+        {
+            id: { type: DataTypes.UUID, primaryKey: true },
+            rating: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            },
         },
-    },
-    {
-        sequelize: db.sequelize,
-        tableName: 'rating',
-    }
-)
+        {
+            sequelize: connection,
+            tableName: 'rating',
+        }
+    )
 
-Rating.belongsTo(User, {
-    as: 'client',
-    foreignKey: 'clientId',
-})
-Rating.belongsTo(Deliverer, {
-    as: 'deliverer',
-    foreignKey: {
-        name: 'delivererId',
-        allowNull: true,
-    }
-})
-
-module.exports = Rating
+    return Rating
+}

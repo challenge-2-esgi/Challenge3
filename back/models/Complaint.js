@@ -1,41 +1,44 @@
 const { Model, DataTypes } = require('sequelize')
-const db = require('../db')
-const User = require('./User')
-const Order = require('./Order')
 
-class Complaint extends Model {}
+module.exports = function (connection) {
+    class Complaint extends Model {
+        static associate(db) {
+            Complaint.belongsTo(db.User, {
+                as: 'user',
+                foreignKey: {
+                    name: 'userId',
+                    allowNull: false,
+                },
+            })
+            Complaint.belongsTo(db.Order, {
+                as: 'order',
+                foreignKey: {
+                    name: 'orderId',
+                    allowNull: false,
+                },
+            })
+        }
 
-Complaint.init(
-    {
-        id: { type: DataTypes.UUID, primaryKey: true },
-        subject: {
-            type: DataTypes.STRING(255),
-            allowNull: false,
-        },
-        content: {
-            type: DataTypes.TEXT,
-            allowNull: false,
-        },
-    },
-    {
-        sequelize: db.sequelize,
-        tableName: 'complaint',
+        static addHooks(db) {}
     }
-)
 
-Complaint.belongsTo(User, {
-    as: 'user',
-    foreignKey: {
-        name: 'userId',
-        allowNull: false,
-    },
-})
-Complaint.belongsTo(Order, {
-    as: 'order',
-    foreignKey: {
-        name: 'orderId',
-        allowNull: false,
-    },
-})
+    Complaint.init(
+        {
+            id: { type: DataTypes.UUID, primaryKey: true },
+            subject: {
+                type: DataTypes.STRING(255),
+                allowNull: false,
+            },
+            content: {
+                type: DataTypes.TEXT,
+                allowNull: false,
+            },
+        },
+        {
+            sequelize: connection,
+            tableName: 'complaint',
+        }
+    )
 
-module.exports = Complaint
+    return Complaint
+}

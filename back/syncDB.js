@@ -1,15 +1,9 @@
-const db = require('./db')
-require('./models/Address')
-require('./models/Complaint')
-require('./models/Deliverer')
-require('./models/Order')
-require('./models/Rating')
-require('./models/User')
+const { connection } = require('./models')
 
-db.sequelize
+connection
     .sync({ force: true })
     .then(() => {
-        db.sequelize.close()
+        connection.close()
     })
     .then(() => {
         console.log('[Sequelize]: Database synced')
