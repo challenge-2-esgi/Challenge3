@@ -38,5 +38,18 @@
             "offline": "Offline"
         },
         "phone": "Phone"
+    },
+    "complaint": {
+        "subject": "Subject",
+        "content": "Content",
+        "status": {
+            "status": "Status",
+            "pending": "Pending",
+            "processing": "Processing",
+            "closed": "Closed"
+        },
+        "createdAt": "Creation date",
+        "createdBy": "Created by",
+        "sku": "SKU of order"
     }
 }

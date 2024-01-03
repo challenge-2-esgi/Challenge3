@@ -1,4 +1,7 @@
 const { Model, DataTypes } = require('sequelize')
+const { COMPLAINT_STATUS } = require('../constants')
+const complaintDto = require('../mongo-models/dtos/complaint-dto')
+const operations = require('../mongo-models/dtos/operations')
 
 module.exports = function (connection) {
     class Complaint extends Model {
@@ -17,7 +20,7 @@ module.exports = function (connection) {
                     allowNull: false,
                 },
             })
-            
+
             Complaint.belongsTo(db.Order, {
                 as: 'order',
                 foreignKey: {
@@ -27,7 +30,17 @@ module.exports = function (connection) {
             })
         }
 
-        static addHooks(db) {}
+        static addHooks(db) {
+            Complaint.addHook('afterCreate', async (complaint) => {
+                complaintDto(complaint.id, db.Complaint)
+            })
+            Complaint.addHook('afterUpdate', async (complaint) => {
+                complaintDto(complaint.id, db.Complaint, operations.update)
+            })
+            Complaint.addHook('afterDestroy', async (complaint) => {
+                complaintDto(complaint.id, db.Complaint, operations.delete)
+            })
+        }
     }
 
     Complaint.init(
@@ -40,6 +53,11 @@ module.exports = function (connection) {
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false,
+            },
+            status: {
+                type: COMPLAINT_STATUS,
+                allowNull: false,
+                defaultValue: COMPLAINT_STATUS.pending,
             },
         },
         {

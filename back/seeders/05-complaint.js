@@ -3,11 +3,14 @@
 const { uuidv7 } = require('uuidv7')
 const { faker } = require('@faker-js/faker')
 const { Order, User } = require('../models')
+const { ROLE, COMPLAINT_STATUS } = require('../constants')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        const users = await queryInterface.select(User, 'user', {})
+        const users = await queryInterface.select(User, 'user', {
+            where: { role: ROLE.client },
+        })
         const orders = await queryInterface.select(Order, 'order', {})
 
         if (users.length < 3) {
@@ -34,6 +37,7 @@ module.exports = {
                     updatedAt: new Date(),
                     userId: users[0].id,
                     orderId: orders[0].id,
+                    status: COMPLAINT_STATUS.pending,
                 },
                 {
                     id: uuidv7(),
@@ -43,6 +47,7 @@ module.exports = {
                     updatedAt: new Date(),
                     userId: users[1].id,
                     orderId: orders[1].id,
+                    status: COMPLAINT_STATUS.processing,
                 },
                 {
                     id: uuidv7(),
@@ -52,6 +57,7 @@ module.exports = {
                     updatedAt: new Date(),
                     userId: users[2].id,
                     orderId: orders[2].id,
+                    status: COMPLAINT_STATUS.closed,
                 },
             ],
             {}

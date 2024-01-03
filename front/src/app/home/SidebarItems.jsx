@@ -60,11 +60,24 @@ function buildMenuItem(userRole, t) {
                 segment: route.segment.home.deliverers,
                 icon: null,
             },
+            {
+                title: t('sidebar.item.complaints'),
+                path: route.COMPLAINTS,
+                segment: route.segment.home.complaints,
+                icon: null,
+            },
         ]
     }
 
     if (userRole === role.support) {
-        return []
+        return [
+            {
+                title: t('sidebar.item.complaints'),
+                path: route.COMPLAINTS,
+                segment: route.segment.home.complaints,
+                icon: null,
+            },
+        ]
     }
 
     return []

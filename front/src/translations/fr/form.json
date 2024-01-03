@@ -47,5 +47,25 @@
             "adding_success_message": "Le livreur a été ajouté avec succès",
             "editing_success_message": "Le livreur a été mis à jour avec succès"
         }
+    },
+    "complaint_form": {
+        "input": {
+            "status": "Changer le status",
+            "subject": "Sujet",
+            "content": "Contenu",
+            "createdAt": "Crée le",
+            "createdBy": "Crée par",
+            "order": "Commande",
+            "deliverer": "Livreur"
+        },
+        "button": {
+            "add": "Add",
+            "edit": "Edit"
+        },
+        "submit": {
+            "error_message": "something went wrong Sorry!",
+            "adding_success_message": "La réclamation a été ajouté avec succès",
+            "editing_success_message": "La réclamation a été mis à jour avec succès"
+        }
     }
 }

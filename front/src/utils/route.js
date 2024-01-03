@@ -36,3 +36,11 @@ export function buildEditDelivererRoute(delivererId) {
 export function buildViewDelivererRoute(delivererId) {
     return buildItemRoute(route.DELIVERERS + '/', delivererId, itemOperation.view)
 }
+
+export function buildEditComplaintRoute(complaintId) {
+    return buildItemRoute(route.COMPLAINTS + '/', complaintId, itemOperation.edit)
+}
+
+export function buildViewComplaintRoute(complaintId) {
+    return buildItemRoute(route.COMPLAINTS + '/', complaintId, itemOperation.view)
+}

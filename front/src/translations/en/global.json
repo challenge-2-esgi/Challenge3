@@ -22,7 +22,8 @@
             "orders": "Orders",
             "ratings": "Ratings",
             "fleet": "Fleet",
-            "deliverers": "Deliverers"
+            "deliverers": "Deliverers",
+            "complaints": "Complaints"
         }
     },
     "header": {

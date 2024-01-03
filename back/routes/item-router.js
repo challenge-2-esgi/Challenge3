@@ -68,19 +68,19 @@ function ItemRouter({
         )
     }
 
-    router.put('/:id', async function (req, res, next) {
-        try {
-            const id = req.params.id
-            const nbDeleted = await Model.destroy({ where: { id } })
-            const item = await Model.create({ id, ...req.body })
-            res.status(nbDeleted ? 200 : 201).json(item)
-        } catch (error) {
-            if (error.name === 'SequelizeValidationError') {
-                error = ValidationError.fromSequelize(error)
-            }
-            next(error)
-        }
-    })
+    // router.put('/:id', async function (req, res, next) {
+    //     try {
+    //         const id = req.params.id
+    //         const nbDeleted = await Model.destroy({ where: { id } })
+    //         const item = await Model.create({ id, ...req.body })
+    //         res.status(nbDeleted ? 200 : 201).json(item)
+    //     } catch (error) {
+    //         if (error.name === 'SequelizeValidationError') {
+    //             error = ValidationError.fromSequelize(error)
+    //         }
+    //         next(error)
+    //     }
+    // })
 
     if (allowedMethods.includes('update')) {
         router.patch(

@@ -1,9 +1,10 @@
-const { isAdminOrOwner, isOwner } = require('../utils/authorization')
+const { isAdminOrOwner, isOwner, isSupportOrOwner } = require('../utils/authorization')
 
 function OwnershipGuard({
     findResource,
     ownerKey,
     includeAdmin = false,
+    includeSupport = false,
     passResource = false, // if set to true, resource will be passed to the next middleware (using response locals)
 }) {
     return async (req, res, next) => {
@@ -14,8 +15,8 @@ function OwnershipGuard({
                 return res.sendStatus(404)
             }
 
-            if (includeAdmin) {
-                if (!isAdminOrOwner(item[ownerKey], req.user)) {
+            if (includeAdmin || includeSupport) {
+                if (!isAdminOrOwner(item[ownerKey], req.user) && !isSupportOrOwner(item[ownerKey], req.user)) {
                     return res.sendStatus(403)
                 }
 
