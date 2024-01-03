@@ -1,7 +1,9 @@
 const { Router } = require('express')
 
 const CRUDRouter = require('./item-router')
-const { User, Deliverer, Order } = require('../models')
+const { User } = require('../models')
+const MongoUser = require('../mongo-models/User')
+const MongoOrder = require('../mongo-models/Order')
 
 const { ROLE } = require('../constants')
 const validators = require('../validators')
@@ -23,7 +25,7 @@ function UserRouter() {
     }
 
     router.get('/users/current', AuthGuard, async (req, res) => {
-        const user = req.user
+        const user = await MongoUser.findById(req.user.id)
 
         res.status(200).json(user)
     })
@@ -34,54 +36,22 @@ function UserRouter() {
         async (req, res) => {
             const query = {
                 ...(isClient(req.user)
-                    ? { clientId: req.user.id }
-                    : { delivererId: req.user.deliverer.id }),
+                    ? { 'user.id': req.user.id }
+                    : { 'deliverer.id': req.user.deliverer.id }),
             }
-
-            const orders = await Order.findAll({
-                where: query,
-                include: [
-                    {
-                        association: 'user',
-                    },
-                    {
-                        association: 'deliverer',
-                    },
-                    {
-                        association: 'pickupAddress',
-                    },
-                    {
-                        association: 'deliveryAddress',
-                    },
-                ],
+            const orders = await MongoOrder.find({
+                ...query,
             })
 
             res.json(orders)
         }
     )
 
-    router.post('/users/update-availability', AuthGuard, async (req, res) => {
-        console.log(req.body)
-        const deliverer = await Deliverer.findOne({
-            where: { userId: req.user.id },
-        })
-
-        const updateDeliverer = await Deliverer.update(
-            {
-                isActive: req.body.isActive,
-            },
-            {
-                where: { id: deliverer.id },
-            }
-        )
-
-        res.status(200).json(updateDeliverer)
-    })
-
     router.use(
         '/users',
         CRUDRouter({
             model: User,
+            mongoModel: MongoUser,
             collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin])],
             itemCreateMiddlewares: [
                 Validator(validators.createUser),

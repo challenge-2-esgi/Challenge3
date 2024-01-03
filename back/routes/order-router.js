@@ -3,6 +3,7 @@ const { uuidv7 } = require('uuidv7')
 
 const CRUDRouter = require('./item-router')
 const { Order } = require('../models')
+const MongoOrder = require('../mongo-models/Order')
 
 const AuthGuard = require('../middlewares/auth-guard')
 const RolesGuard = require('../middlewares/roles-guard')
@@ -76,20 +77,7 @@ function OrderRouter() {
         AuthGuard,
         CRUDRouter({
             model: Order,
-            includeCollectionModels: [
-                {
-                    association: 'user',
-                },
-                {
-                    association: 'deliverer',
-                },
-                {
-                    association: 'pickupAddress',
-                },
-                {
-                    association: 'deliveryAddress',
-                },
-            ],
+            mongoModel: MongoOrder,
             collectionMiddlewares: [
                 AuthGuard,
                 RolesGuard([ROLE.admin, ROLE.deliverer]),

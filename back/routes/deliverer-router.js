@@ -3,6 +3,7 @@ const { uuidv7 } = require('uuidv7')
 
 const CRUDRouter = require('./item-router')
 const { Deliverer } = require('../models')
+const MongoUser = require('../mongo-models/User')
 
 const AuthGuard = require('../middlewares/auth-guard')
 const Validator = require('../middlewares/validator')
@@ -27,7 +28,17 @@ function DelivererRouter() {
         '/deliverers',
         CRUDRouter({
             model: Deliverer,
-            collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin])],
+            mongoModel: MongoUser,
+            collectionMiddlewares: [
+                AuthGuard,
+                RolesGuard([ROLE.admin]),
+                (req, res, next) => {
+                    req.query = {
+                        role: ROLE.deliverer,
+                    }
+                    next()
+                },
+            ],
             itemCreateMiddlewares: [
                 Validator(validators.createDeliverer),
                 LoggedInUser,
@@ -72,18 +83,6 @@ function DelivererRouter() {
                 }),
             ],
             itemDeleteGuards: [AuthGuard, RolesGuard([ROLE.admin])],
-            includeCollectionModels: [
-                {
-                    all: true,
-                    nested: true,
-                },
-            ],
-            includeReadModels: [
-                {
-                    all: true,
-                    nested: true,
-                },
-            ],
             includeCreateModels: [
                 {
                     association: 'user',

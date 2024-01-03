@@ -2,6 +2,7 @@ const { Router } = require('express')
 const AuthGuard = require('../middlewares/auth-guard')
 const CRUDRouter = require('./item-router')
 const { Rating } = require('../models')
+const MongoRating = require('../mongo-models/Rating')
 const RolesGuard = require('../middlewares/roles-guard')
 const { ROLE } = require('../constants')
 const OwnershipGuard = require('../middlewares/ownership-guard')
@@ -20,6 +21,7 @@ function RatingRouter() {
         AuthGuard,
         CRUDRouter({
             model: Rating,
+            mongoModel: MongoRating,
             collectionMiddlewares: [
                 AuthGuard,
                 RolesGuard([ROLE.client, ROLE.admin]),
@@ -47,12 +49,6 @@ function RatingRouter() {
                     ownerKey: 'clientId',
                     includeAdmin: true,
                 }),
-            ],
-            includeCollectionModels: [
-                {
-                    all: true,
-                    nested: true,
-                },
             ],
         })
     )

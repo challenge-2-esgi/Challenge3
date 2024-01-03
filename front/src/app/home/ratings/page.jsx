@@ -21,8 +21,8 @@ const RatingsPage = () => {
     const { t } = useTranslation()
 
     const { isLoading, data, error } = Rating.useRatings()
-    let [filteredData, setFilteredData] = useState([]);
-    const [dataNotFiltered, setDataNotFiltered] = useState(true);
+    let [filteredData, setFilteredData] = useState([])
+    const [dataNotFiltered, setDataNotFiltered] = useState(true)
     useEffect(() => {
         if (data) {
             setFilteredData(data.filter((rating) => rating.deliverer !== null))
@@ -49,9 +49,7 @@ const RatingsPage = () => {
             accessorFn: (data) => {
                 if (data.deliverer)
                     return (
-                        data.deliverer.user.firstname +
-                        ' ' +
-                        data.deliverer.user.lastname
+                        data.deliverer.firstname + ' ' + data.deliverer.lastname
                     )
                 return t('rating.no_deliverer', { ns: t_NAMESPACES.MODEL })
             },
