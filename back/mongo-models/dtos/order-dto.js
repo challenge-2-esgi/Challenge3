@@ -6,12 +6,12 @@ module.exports = async (orderId, Order, operation = operations.create) => {
         const order = await Order.findByPk(orderId, {
             include: [
                 { association: 'user' },
-                { association: 'deliverer' },
+                { association: 'deliverer', include: ['user'] },
                 { association: 'pickupAddress' },
                 { association: 'deliveryAddress' },
             ],
         })
-        
+
         await MongoOrder.deleteOne({ _id: orderId })
 
         const mongoOrder = new MongoOrder({
@@ -24,8 +24,9 @@ module.exports = async (orderId, Order, operation = operations.create) => {
                 order.deliverer == null
                     ? null
                     : {
-                          ...order.deliverer.dataValues,
+                          id: order.deliverer.id,
                           ...order.deliverer.user.dataValues,
+                          ...order.deliverer.dataValues,
                       },
         })
 
