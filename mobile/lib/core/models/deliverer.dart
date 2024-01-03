@@ -16,12 +16,10 @@ class Deliverer {
   factory Deliverer.fromJson(Map<String, dynamic> json) {
     return Deliverer(
       id: json['id'],
-      isActive: json['isActive'],
-      phone: json['phone'],
-      latitude:
-          json['latitude'] == null ? null : double.parse(json['latitude']),
-      longitude:
-          json['longitude'] == null ? null : double.parse(json['longitude']),
+      isActive: json['isActive'] ?? false,
+      phone: json['phone'] ?? "",
+      latitude: json['latitude'] ?? 0.0,
+      longitude: json['longitude'] ?? 0.0,
     );
   }
 }

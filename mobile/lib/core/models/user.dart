@@ -35,9 +35,9 @@ class User {
       firstname: json['firstname'],
       email: json['email'],
       role: json['role'],
-      delivererId: json['deliverer']?['id'],
-      phone: json['deliverer']?['phone'],
-      isActive: json['deliverer']?['isActive'],
+      delivererId: json['delivererId'],
+      phone: json['phone'],
+      isActive: json['isActive'],
     );
   }
 

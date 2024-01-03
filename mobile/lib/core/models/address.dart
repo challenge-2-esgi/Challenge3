@@ -18,6 +18,7 @@ class Address {
   });
 
   String get geoapify => "$streetNumber $street, $zipCode $city, $country";
+
   String get pretty => "$streetNumber $street \n$city, $country";
 
   bool isValidGeoapifyAddress() =>
@@ -39,8 +40,8 @@ class Address {
       zipCode: json['zipCode'].toString(),
       city: json['city'],
       country: json['country'],
-      latitude: double.parse(json['latitude']),
-      longitude: double.parse(json['longitude']),
+      latitude: json['latitude'],
+      longitude: json['longitude'],
     );
   }
 
