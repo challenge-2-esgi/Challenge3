@@ -27,6 +27,21 @@ class OrderSubscriber extends Subscriber {
     }
 }
 
+class ComplaintSubscriber extends Subscriber {
+    constructor(id, event, res, complaint) {
+        super(id, event, res)
+        this.complaint = complaint
+    }
+
+    canPublish(data) {
+        if (this.event === sseEvent.orderLocation) {
+            return data.delivererId === this.order.delivererId
+        }
+
+        return data.orderId === this.order.id
+    }
+}
+
 module.exports = {
     Subscriber,
     OrderSubscriber,

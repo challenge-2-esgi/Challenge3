@@ -13,4 +13,10 @@ const ORDER_STATUS = {
     cancelled: 'CANCELLED',
 }
 
-module.exports = { ROLE, ORDER_STATUS }
+const COMPLAINT_STATUS = {
+    pending: 'PENDING',
+    processing: 'PROCESSING',
+    closed: 'CLOSED',
+}
+
+module.exports = { ROLE, ORDER_STATUS, COMPLAINT_STATUS }

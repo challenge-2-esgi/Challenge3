@@ -47,5 +47,19 @@
             "adding_success_message": "Deliverer successfuly added",
             "editing_success_message": "Deliverer successfuly updated"
         }
+    },
+    "complaint_form": {
+        "input": {
+            "Status": "Change status"
+        },
+        "button": {
+            "add": "Add",
+            "edit": "Edit"
+        },
+        "submit": {
+            "error_message": "something went wrong Sorry!",
+            "adding_success_message": "Complaint successfuly added",
+            "editing_success_message": "Complaint successfuly updated"
+        }
     }
 }

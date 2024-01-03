@@ -38,5 +38,18 @@
             "offline": "Hors ligne"
         },
         "phone": "Téléphone"
+    },
+    "complaint": {
+        "subject": "Sujet",
+        "content": "Contenu",
+        "status": {
+            "status": "Status",
+            "pending": "En attente",
+            "processing": "En cours de traitement",
+            "closed": "Résolu"
+        },
+        "createdAt": "Date de création",
+        "createdBy": "Créé par",
+        "sku": "SKU de la commande"
     }
 }

@@ -32,6 +32,14 @@ function isAdminOrOwner(ownerId, user) {
     return user.role === ROLE.admin || isOwner(ownerId, user)
 }
 
+function isSupportOrOwner(ownerId, user) {
+    if (!user) {
+        return false
+    }
+
+    return user.role === ROLE.support || isOwner(ownerId, user)
+}
+
 function isClient(user) {
     if (!user) {
         return false
@@ -48,4 +56,4 @@ function isDeliverer(user) {
     return user.role === ROLE.deliverer
 }
 
-module.exports = { isAdmin, isOwner, isAdminOrOwner, hasOneOfRoles, isClient, isDeliverer }
+module.exports = { isAdmin, isOwner, isAdminOrOwner, hasOneOfRoles, isClient, isDeliverer, isSupportOrOwner }

@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require('sequelize')
+const { COMPLAINT_STATUS } = require('../constants')
 
 module.exports = function (connection) {
     class Complaint extends Model {
@@ -17,7 +18,7 @@ module.exports = function (connection) {
                     allowNull: false,
                 },
             })
-            
+
             Complaint.belongsTo(db.Order, {
                 as: 'order',
                 foreignKey: {
@@ -40,6 +41,11 @@ module.exports = function (connection) {
             content: {
                 type: DataTypes.TEXT,
                 allowNull: false,
+            },
+            status: {
+                type: COMPLAINT_STATUS,
+                allowNull: false,
+                defaultValue: COMPLAINT_STATUS.pending,
             },
         },
         {

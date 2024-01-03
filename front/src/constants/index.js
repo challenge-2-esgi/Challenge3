@@ -24,4 +24,10 @@ const sseEvent = {
     orderStatus: 'ORDER_STATUS_EVENT',
 }
 
-export { orderStatus, role, itemOperation, sseEvent }
+const COMPLAINT_STATUS = {
+    pending: 'PENDING',
+    processing: 'PROCESSING',
+    closed: 'CLOSED',
+}
+
+export { orderStatus, role, itemOperation, sseEvent, COMPLAINT_STATUS }

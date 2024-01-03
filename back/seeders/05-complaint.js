@@ -3,7 +3,7 @@
 const { uuidv7 } = require('uuidv7')
 const { faker } = require('@faker-js/faker')
 const { Order, User } = require('../models')
-const { ROLE } = require('../constants')
+const { ROLE, COMPLAINT_STATUS } = require('../constants')
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -37,6 +37,7 @@ module.exports = {
                     updatedAt: new Date(),
                     userId: users[0].id,
                     orderId: orders[0].id,
+                    status: COMPLAINT_STATUS.pending,
                 },
                 {
                     id: uuidv7(),
@@ -46,6 +47,7 @@ module.exports = {
                     updatedAt: new Date(),
                     userId: users[1].id,
                     orderId: orders[1].id,
+                    status: COMPLAINT_STATUS.processing,
                 },
                 {
                     id: uuidv7(),
@@ -55,6 +57,7 @@ module.exports = {
                     updatedAt: new Date(),
                     userId: users[2].id,
                     orderId: orders[2].id,
+                    status: COMPLAINT_STATUS.closed,
                 },
             ],
             {}

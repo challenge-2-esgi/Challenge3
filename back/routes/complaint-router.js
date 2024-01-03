@@ -26,7 +26,7 @@ function ComplaintRouter() {
         '/complaints',
         CRUDRouter({
             model: Complaint,
-            collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin])],
+            collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin, ROLE.support])],
             itemCreateMiddlewares: [
                 Validator(validators.createComplaint),
                 LoggedInUser,
@@ -48,6 +48,7 @@ function ComplaintRouter() {
                     findResource: findComplaint,
                     ownerKey: 'userId',
                     includeAdmin: true,
+                    includeSupport: true,
                 }),
             ],
             itemUpdateMiddlewares: [
@@ -57,6 +58,7 @@ function ComplaintRouter() {
                     findResource: findComplaint,
                     ownerKey: 'userId',
                     includeAdmin: true,
+                    includeSupport: true,
                 }),
             ],
             itemDeleteGuards: [AuthGuard, RolesGuard([ROLE.admin])],
