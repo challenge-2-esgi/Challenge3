@@ -37,6 +37,7 @@ const schema = new mongoose.Schema(
         deliveryAddress: addressSchemaDef,
         user: userSchemaDef,
         deliverer: userSchemaDef,
+        createdAt: Date,
     },
     { collection: 'orders' }
 )

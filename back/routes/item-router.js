@@ -4,6 +4,7 @@ const ValidationError = require('../errors/ValidationError')
 
 function ItemRouter({
     model: Model,
+    mongoModel: MongoModel,
     allowedMethods = ['findAll', 'create', 'findOne', 'update', 'delete'],
     // middlewares order is important
     collectionMiddlewares = [],
@@ -11,18 +12,13 @@ function ItemRouter({
     itemReadMiddlewares = [],
     itemUpdateMiddlewares = [],
     itemDeleteGuards = [],
-    includeReadModels = [],
-    includeCollectionModels = [],
     includeCreateModels = [],
 }) {
     const router = new Router()
 
     if (allowedMethods.includes('findAll')) {
         router.get('/', ...collectionMiddlewares, async function (req, res) {
-            const items = await Model.findAll({
-                where: req.query,
-                include: includeCollectionModels,
-            })
+            const items = await MongoModel.find({ ...req.query })
             res.json(items)
         })
     }
@@ -57,11 +53,8 @@ function ItemRouter({
             ...itemReadMiddlewares,
             async function (req, res, next) {
                 try {
-                    const item = await Model.findOne({
-                        where: {
-                            id: req.params.id,
-                        },
-                        include: includeReadModels,
+                    const item = await MongoModel.findOne({
+                        _id: req.params.id,
                     })
                     if (item) {
                         res.json(item)

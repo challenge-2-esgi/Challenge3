@@ -30,12 +30,12 @@ const DeliverersPage = () => {
         {
             id: 'firstname',
             header: t('deliverer.firstname', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'user.firstname',
+            accessorKey: 'firstname',
         },
         {
             id: 'lastname',
             header: t('deliverer.lastname', { ns: t_NAMESPACES.MODEL }),
-            accessorKey: 'user.lastname',
+            accessorKey: 'lastname',
         },
         {
             id: 'phone',

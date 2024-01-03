@@ -15,6 +15,7 @@ async function insertUsers() {
     const users = await User.findAll({
         where: { role: { [Op.ne]: ROLE.deliverer } },
         include: { all: true },
+        logging: false,
     })
 
     const deliverers = await User.findAll({
@@ -22,6 +23,7 @@ async function insertUsers() {
         include: {
             association: 'deliverer',
         },
+        logging: false,
     })
 
     await MongoUser.insertMany(
@@ -33,6 +35,7 @@ async function insertUsers() {
 
     await MongoUser.insertMany(
         deliverers.map((user) => ({
+            _id: user.id,
             ...user.dataValues,
             delivererId: user.deliverer.id,
             ...user.deliverer.dataValues,
@@ -46,6 +49,7 @@ async function insertOrders() {
             all: true,
             nested: true,
         },
+        logging: false,
     })
 
     await MongoOrder.insertMany(
@@ -59,8 +63,9 @@ async function insertOrders() {
                 order.deliverer == null
                     ? null
                     : {
-                          ...order.deliverer.dataValues,
+                          id: order.deliverer.id,
                           ...order.deliverer.user.dataValues,
+                          ...order.deliverer.dataValues,
                       },
         }))
     )
@@ -69,8 +74,9 @@ async function insertOrders() {
 async function insertComplaints() {
     const complaints = await Complaint.findAll({
         include: { all: true, nested: true },
+        logging: false,
     })
-    console.log(complaints)
+
     await MongoComplaint.insertMany(
         complaints.map((complaint) => ({
             ...complaint.dataValues,
@@ -82,6 +88,7 @@ async function insertComplaints() {
 async function insertRatings() {
     const ratings = await Rating.findAll({
         include: { all: true, nested: true },
+        logging: false,
     })
 
     await MongoRating.insertMany(
