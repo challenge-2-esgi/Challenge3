@@ -81,6 +81,7 @@ async function insertComplaints() {
         complaints.map((complaint) => ({
             ...complaint.dataValues,
             user: complaint.user.dataValues,
+            order: complaint.order.dataValues,
         }))
     )
 }

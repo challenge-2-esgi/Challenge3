@@ -85,20 +85,13 @@ const ComplaintsPage = () => {
                     <Fragment>
                         <TableCrudActions
                             canView={false}
-                            onView={() => {
-                                router.push(
-                                    buildViewDelivererRoute(row.getValue('id'))
-                                )
-                            }}
                             canEdit={true}
                             onEdit={() => {
                                 router.push(
                                     buildEditComplaintRoute(row.getValue('id'))
                                 )
                             }}
-                            onDelete={() => {
-                                setShowModal(true)
-                            }}
+                            canDelete={false}
                         />
                         {showModal ? (
                             <ConfirmDialog

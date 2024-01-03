@@ -7,6 +7,11 @@ const userSchemaDef = {
     email: String,
 }
 
+const orderSchemaDef = {
+    id: String,
+    sku: String,
+}
+
 const schema = new mongoose.Schema(
     {
         _id: {
@@ -15,7 +20,9 @@ const schema = new mongoose.Schema(
         },
         subject: String,
         content: String,
+        status: String,
         user: userSchemaDef,
+        order: orderSchemaDef,
     },
     { collection: 'complaints' }
 )

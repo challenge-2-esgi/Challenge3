@@ -10,8 +10,9 @@ const OwnerOrClientPerson = require('../middlewares/owner-or-client-person-guard
 const OwnershipGuard = require('../middlewares/ownership-guard')
 const { uuidv7 } = require('uuidv7')
 const LoggedInUser = require('../middlewares/logged-in-user')
-const Complaint = require('../models/Complaint')
+const { Complaint } = require('../models')
 const User = require('../models/User')
+const MongoComplaint = require('../mongo-models/Complaint')
 
 function ComplaintRouter() {
     const router = new Router()
@@ -26,6 +27,7 @@ function ComplaintRouter() {
         '/complaints',
         CRUDRouter({
             model: Complaint,
+            mongoModel: MongoComplaint,
             collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin, ROLE.support])],
             itemCreateMiddlewares: [
                 Validator(validators.createComplaint),
@@ -62,18 +64,6 @@ function ComplaintRouter() {
                 }),
             ],
             itemDeleteGuards: [AuthGuard, RolesGuard([ROLE.admin])],
-            includeCollectionModels: [
-                {
-                    all: true,
-                    nested: true,
-                },
-            ],
-            includeReadModels: [
-                {
-                    all: true,
-                    nested: true,
-                },
-            ],
         })
     )
     return router
