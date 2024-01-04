@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import withRoleGuard from '@/HOC/withRoleGuard'
 import ErrorRequest from '@/components/ErrorRequest'
+import useStore from '@/store'
 
 const UsersPage = () => {
     const router = useRouter()
@@ -25,6 +26,10 @@ const UsersPage = () => {
     const { t } = useTranslation()
 
     const { isLoading, data, error } = User.useUsers()
+    const loggedInUser = useStore((state) => state.loggedinUser)
+
+    const users =
+        data == null ? [] : data.filter((e) => e.id !== loggedInUser.id)
 
     const columns = [
         {
@@ -58,18 +63,8 @@ const UsersPage = () => {
                               ns: t_NAMESPACES.MODEL,
                           }).toLowerCase()
                         : cell.getValue().toLowerCase()
-                return <Pill title={title} color="info" />
+                return <Pill title={title} color="primary" />
             },
-        },
-        {
-            id: 'createdAt',
-            header: 'Créer',
-            accessorKey: 'createdAt',
-        },
-        {
-            id: 'updateddAt',
-            header: 'Met à jour',
-            accessorKey: 'createdAt',
         },
         {
             id: 'actions',
@@ -129,9 +124,7 @@ const UsersPage = () => {
     ]
 
     if (error) {
-        return (
-           <ErrorRequest />
-        )
+        return <ErrorRequest />
     }
 
     return (
@@ -146,7 +139,7 @@ const UsersPage = () => {
             </Link>
             <Table
                 columns={columns}
-                data={data ?? []}
+                data={users}
                 columnVisibility={{ id: false }}
                 loading={isLoading}
                 pageSize={5}

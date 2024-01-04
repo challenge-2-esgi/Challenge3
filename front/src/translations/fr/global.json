@@ -73,7 +73,7 @@
         "users": {
             "title": "Utilisateurs",
             "button": {
-                "add": "Ajouter"
+                "add": "Ajouter un Support"
             },
             "confirm_dialog": {
                 "message": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",

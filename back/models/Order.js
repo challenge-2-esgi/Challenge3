@@ -55,12 +55,52 @@ module.exports = function (connection) {
         }
 
         static addHooks(db) {
-            Order.addHook('afterCreate', (order) => {
+            Order.addHook('afterCreate', async (order) => {
                 mongoOrderDto(order.id, db.Order)
+
+                const user = await order.getUser()
+                sseChannel.publish(
+                    {
+                        id: order.id,
+                        distance: order.distance,
+                        status: order.status,
+                        receiverFirstname: order.receiverFirstname,
+                        receiverLastname: order.receiverLastname,
+                        receiverEmail: order.receiverEmail,
+                        receiverPhone: order.receiverPhone,
+                        pickupAddress: {
+                            ...order.pickupAddress.dataValues,
+                            latitude: parseFloat(order.pickupAddress.latitude),
+                            longitude: parseFloat(
+                                order.pickupAddress.longitude
+                            ),
+                        },
+                        deliveryAddress: {
+                            ...order.deliveryAddress.dataValues,
+                            latitude: parseFloat(
+                                order.deliveryAddress.latitude
+                            ),
+                            longitude: parseFloat(
+                                order.deliveryAddress.longitude
+                            ),
+                        },
+                        createdAt: order.createdAt,
+                        user: user,
+                        deliverer: null,
+                    },
+                    sseEvent.newOrder
+                )
             })
 
-            Order.addHook('afterUpdate', (order) => {
+            Order.addHook('afterUpdate', (order, { fields }) => {
                 mongoOrderDto(order.id, db.Order, operations.update)
+
+                if (fields.includes('status')) {
+                    sseChannel.publish(
+                        { orderId: order.id, status: order.status },
+                        sseEvent.orderStatus
+                    )
+                }
             })
         }
     }
@@ -120,36 +160,6 @@ module.exports = function (connection) {
             tableName: 'order',
         }
     )
-
-    Order.addHook('afterCreate', async (order) => {
-        const user = await order.getUser()
-        sseChannel.publish(
-            {
-                id: order.id,
-                distance: order.distance,
-                status: order.status,
-                receiverFirstname: order.receiverFirstname,
-                receiverLastname: order.receiverLastname,
-                receiverEmail: order.receiverEmail,
-                receiverPhone: order.receiverPhone,
-                pickupAddress: order.pickupAddress,
-                deliveryAddress: order.deliveryAddress,
-                createdAt: order.createdAt,
-                user: user,
-                deliverer: null,
-            },
-            sseEvent.newOrder
-        )
-    })
-
-    Order.addHook('afterUpdate', (instance, { fields }) => {
-        if (fields.includes('status')) {
-            sseChannel.publish(
-                { orderId: instance.id, status: instance.status },
-                sseEvent.orderStatus
-            )
-        }
-    })
 
     return Order
 }

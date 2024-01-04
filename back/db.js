@@ -4,7 +4,7 @@ const config = require('./config/app-config')
 
 const MONGO_TIME_OUT = 3000
 
-const sequelize = new Sequelize(config.postgresUrl)
+const sequelize = new Sequelize(config.postgresUrl, { logging: false })
 
 module.exports = {
     open: async () => {

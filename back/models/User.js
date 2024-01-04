@@ -16,6 +16,10 @@ module.exports = function (connection) {
             User.addHook('afterUpdate', (user) => {
                 mongoUserDto(user.id, db.User, operations.update)
             })
+
+            User.addHook('afterDestroy', (user) => {
+                mongoUserDto(user.id, db.User, operations.delete)
+            })
         }
 
         toJSON() {
