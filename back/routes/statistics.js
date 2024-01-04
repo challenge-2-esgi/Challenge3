@@ -41,7 +41,7 @@ function StatisticsRouter() {
         }
     });
 
-    // Endpoint to get the number of new users created per week
+    // Endpoint to get the counts of new users and new deliverers created per week
     router.get('/new-users-count', async (req, res) => {
         try {
             // Calculate the start of the current week
@@ -49,10 +49,17 @@ function StatisticsRouter() {
 
             // Query MongoDB for the count of new users created during the current week
             const newUsersCount = await MongoUser.countDocuments({
-                createdAt: { $gte: startOfWeek.toDate() },
+                createdAt: { $gte: startOfWeek.toDate(), $lt: moment().toDate() },
+                role: 'CLIENT', // 'CLIENT' is the role for regular users
             });
 
-            res.json({ newUsersCount });
+            // Query MongoDB for the count of new deliverers created during the current week
+            const newDeliverersCount = await MongoUser.countDocuments({
+                createdAt: { $gte: startOfWeek.toDate(), $lt: moment().toDate() },
+                role: 'DELIVERER', // 'DELIVERER' is the role for deliverers
+            });
+
+            res.json({ newUsersCount, newDeliverersCount });
         } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');
