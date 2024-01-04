@@ -26,6 +26,21 @@ function StatisticsRouter() {
         }
     });
 
+    // Endpoint to get the average rating of deliverers
+    router.get('/average-deliverer-rating', async (req, res) => {
+        try {
+            const averageRating = await MongoRating.aggregate([
+                { $match: {  'rating': { $exists: true } } },
+                { $group: { _id: null, averageRating: { $avg: '$rating' } } },
+            ]);
+
+            res.json({ averageRating: averageRating[0]?.averageRating || 0 });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
+    });
+
     return router;
 }
 
