@@ -16,4 +16,11 @@ class Location {
       longitude: double.parse(json['longitude']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "latitude": latitude,
+      "longitude": longitude,
+    };
+  }
 }

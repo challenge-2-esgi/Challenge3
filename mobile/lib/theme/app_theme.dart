@@ -42,10 +42,20 @@ class AppTheme {
   );
 
   static ThemeData _build() {
-    final base = ThemeData.light();
-
-    return base.copyWith(
+    return ThemeData(
+      useMaterial3: true,
       extensions: [_colors],
+      textButtonTheme: const TextButtonThemeData(
+        style: ButtonStyle(
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(8),
+              ),
+            ),
+          ),
+        ),
+      ),
       elevatedButtonTheme: const ElevatedButtonThemeData(
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(AppColors.primary),
@@ -59,9 +69,11 @@ class AppTheme {
           padding: MaterialStatePropertyAll(
             EdgeInsets.symmetric(horizontal: 28, vertical: 15),
           ),
+          foregroundColor: MaterialStatePropertyAll(Colors.white),
         ),
       ),
       inputDecorationTheme: const InputDecorationTheme(
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         floatingLabelStyle: TextStyle(
           color: AppColors.primary,

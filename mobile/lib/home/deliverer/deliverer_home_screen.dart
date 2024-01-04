@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/core/services/api_service.dart';
+import 'package:mobile/core/services/location_service.dart';
 import 'package:mobile/deliverer/deliverer_home_view.dart';
 import 'package:mobile/deliverer/deliverer_profile.dart';
 import 'package:mobile/deliverer/orders_view.dart';
+import 'package:mobile/home/blocs/user_bloc.dart';
 import 'package:mobile/theme/app_theme.dart';
 
 class DelivererHomeScreen extends StatefulWidget {
@@ -19,6 +23,33 @@ class _DelivererHomeScreenState extends State<DelivererHomeScreen> {
   ];
 
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    LocationService.instance.requestPermission().then(
+      (hasPermission) {
+        if (hasPermission) {
+          LocationService.instance.listen(
+            (location) {
+              if (context.read<UserBloc>().state.user?.delivererId != null) {
+                ApiService.instance.updateDelivererLocation(
+                  context.read<UserBloc>().state.user!.delivererId!,
+                  location,
+                );
+              }
+            },
+          );
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    LocationService.instance.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

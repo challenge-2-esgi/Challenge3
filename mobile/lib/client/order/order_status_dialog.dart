@@ -57,11 +57,16 @@ class OrderStatusDialog extends StatelessWidget {
     final orderBloc = context.read<OrderBloc>();
     return AlertDialog(
       alignment: Alignment.topRight,
-      shadowColor: null,
       contentPadding: const EdgeInsets.all(0),
       content: Container(
         height: 220,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.0),
+          ),
+        ),
         child: Column(
           children: [
             _buildPopupMenuItem(orderBloc, Status.waitingForPickUp),

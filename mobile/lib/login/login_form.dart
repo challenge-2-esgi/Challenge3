@@ -85,8 +85,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
         color: context.theme.colors.white,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Text(
               "Se connecter",

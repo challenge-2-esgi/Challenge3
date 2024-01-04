@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mobile/core/models/location.dart';
 import 'package:mobile/core/models/order.dart';
 import 'package:mobile/core/models/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
@@ -27,6 +28,7 @@ class ApiService {
       );
       return response.data['token'];
     } on Exception catch (e) {
+      log("error on login user\n${e.toString()}");
       throw Exception(e);
     }
   }
@@ -139,6 +141,19 @@ class ApiService {
       await _client.post("/orders/$orderId/assign");
     } on Exception catch (e) {
       log("error on assigning order ${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateDelivererLocation(
+      String delivererId, Location location) async {
+    try {
+      await _client.patch(
+        "/deliverers/$delivererId",
+        data: location.toJson(),
+      );
+    } on Exception catch (e) {
+      log("error on updating deliverer location\n${e.toString()}");
       throw Exception(e);
     }
   }

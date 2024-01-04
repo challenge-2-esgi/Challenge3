@@ -32,6 +32,7 @@ class RegisterScreen extends StatelessWidget {
                   labelColor: context.theme.colors.primary,
                   unselectedLabelColor:
                       context.theme.colors.black!.withOpacity(0.7),
+                  dividerColor: Colors.transparent,
                   tabs: const [
                     Tab(
                       child: Row(
