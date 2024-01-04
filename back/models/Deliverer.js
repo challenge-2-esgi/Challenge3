@@ -25,9 +25,37 @@ module.exports = function (connection) {
         }
 
         static addHooks(db) {
-            Deliverer.addHook('afterUpdate', async (deliverer) => {
+            Deliverer.addHook('afterUpdate', async (deliverer, { fields }) => {
                 const user = await deliverer.getUser()
                 mongoUserDto(user.id, db.User, operations.update)
+
+                if (
+                    fields.includes('latitude') ||
+                    fields.includes('longitude')
+                ) {
+                    sseChannel.publish(
+                        {
+                            delivererId: deliverer.id,
+                            latitude: deliverer.latitude,
+                            longitude: deliverer.longitude,
+                        },
+                        sseEvent.delivererLocation
+                    )
+
+                    sseChannel.publish(
+                        {
+                            delivererId: deliverer.id,
+                            latitude: deliverer.latitude,
+                            longitude: deliverer.longitude,
+                        },
+                        sseEvent.orderLocation
+                    )
+                }
+            })
+
+            Deliverer.addHook('afterDestroy', async (deliverer) => {
+                const user = await deliverer.getUser()
+                mongoUserDto(user.id, db.User, operations.delete)
             })
         }
 
@@ -60,28 +88,6 @@ module.exports = function (connection) {
             tableName: 'deliverer',
         }
     )
-
-    Deliverer.addHook('afterUpdate', (instance, { fields }) => {
-        if (fields.includes('latitude') || fields.includes('longitude')) {
-            sseChannel.publish(
-                {
-                    delivererId: instance.id,
-                    latitude: instance.latitude,
-                    longitude: instance.longitude,
-                },
-                sseEvent.delivererLocation
-            )
-
-            sseChannel.publish(
-                {
-                    delivererId: instance.id,
-                    latitude: instance.latitude,
-                    longitude: instance.longitude,
-                },
-                sseEvent.orderLocation
-            )
-        }
-    })
 
     return Deliverer
 }

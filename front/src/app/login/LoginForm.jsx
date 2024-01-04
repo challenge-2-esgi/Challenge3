@@ -1,6 +1,7 @@
 import { Auth } from '@/api'
 import Button from '@/components/Button'
 import Input from '@/components/Input'
+import Loader from '@/components/Loader'
 import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
 import useStore from '@/store'
@@ -46,7 +47,7 @@ const LoginForm = () => {
     } = useForm({
         resolver: zodResolver(validationSchema),
     })
-    const { mutate: login } = Auth.useLogin({
+    const { mutate: login, isPending } = Auth.useLogin({
         onSuccess: (token) => {
             loginAction(token)
             router.replace(route.HOME)
@@ -118,8 +119,17 @@ const LoginForm = () => {
                 }
                 iconPosition="right"
             />
-            <Button className="mb-5 w-full" type="submit" size="large">
-                {t('login_form.button.login_in')}
+            <Button
+                className="mb-5 w-full"
+                type="submit"
+                size="large"
+                disabled={isPending}
+            >
+                {isPending ? (
+                    <Loader className="bg-transparent" color="white" />
+                ) : (
+                    t('login_form.button.login_in')
+                )}
             </Button>
         </form>
     )

@@ -27,7 +27,7 @@ migration:
 	docker compose exec -ti node npx sequelize-cli migration:create --name $(filter-out $@,$(MAKECMDGOALS))
 migrate: 
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:migrate
-reset-db:
+reset-db: seed-undo
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:migrate:undo:all
 	docker compose exec -ti node env NODE_ENV=dev npx sequelize-cli db:migrate
 seed-file:

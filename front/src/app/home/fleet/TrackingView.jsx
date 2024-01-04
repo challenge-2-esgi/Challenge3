@@ -9,12 +9,12 @@ const TrackingView = ({ deliverers }) => {
     const markers = useMemo(() => {
         if (location) {
             const deliverer = deliverers.find(
-                (d) => d.id === location.delivererId
+                (d) => d.delivererId === location.delivererId
             )
 
             if (deliverer) {
                 const filteredDeliverers = deliverers.filter(
-                    (d) => d.id !== deliverer.id
+                    (d) => d.delivererId !== deliverer.delivererId
                 )
 
                 filteredDeliverers.push({

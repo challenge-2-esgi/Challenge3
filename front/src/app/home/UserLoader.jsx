@@ -1,10 +1,10 @@
 'use client'
 
 import { User } from '@/api'
-import ErrorRequest from '@/components/ErrorRequest'
 import Loader from '@/components/Loader'
 import useStore from '@/store'
 import { Fragment, useEffect } from 'react'
+import ServerError from './ServerError'
 
 const UserLoader = ({ children }) => {
     const setUser = useStore((state) => state.setUser)
@@ -20,9 +20,7 @@ const UserLoader = ({ children }) => {
     }
 
     if (error) {
-        return (
-            <ErrorRequest />
-        )
+        return <ServerError />
     }
 
     return <Fragment>{children}</Fragment>
