@@ -1,0 +1,121 @@
+{
+    "yes": "Yes",
+    "no": "No",
+    "login_form": {
+        "title": "Sign In",
+        "label": {
+            "email": "Email",
+            "password": "Password"
+        },
+        "input": {
+            "email": "Enter your email",
+            "password": "Enter your password"
+        },
+        "button": {
+            "login_in": "Sign In"
+        }
+    },
+    "sidebar": {
+        "item": {
+            "dashboard": "Dashboard",
+            "users": "Users",
+            "orders": "Orders",
+            "ratings": "Ratings",
+            "fleet": "Fleet",
+            "deliverers": "Deliverers",
+            "complaints": "Complaints"
+        }
+    },
+    "header": {
+        "menu": {
+            "account": "Account Settings",
+            "logout": "Log Out"
+        }
+    },
+    "page": {
+        "dashboard": {
+            "main_title": "DASHBOARD"
+        },
+        "statistics": {
+            "averageRatingsDeliverers": "Average ratings of deliverers",
+            "averageDeliveryTime": "Average delivery time",
+            "titleNewClientsPerDay": "Number of new clients per day",
+            "nbOfNewClients": "Number of new clients",
+            "titleDeliveriesPerDay": "Number of deliveries per day",
+            "nbOfDeliveries": "Number of deliveries",
+            "date": "Date",
+            "titleTopClients": "Top clients",
+            "rank": "Rank",
+            "firstname": "Firstname",
+            "lastname": "Lastname",
+            "nbOfOrders": "Number of orders"
+        },
+        "fleet": {
+            "filters": {
+                "all": "All",
+                "delivering": "On delivery",
+                "waiting": "Waiting"
+            }
+        },
+        "orders": {
+            "title": "Orders",
+            "button": {
+                "add": "Add"
+            },
+            "confirm_dialog": {
+                "message": "Are you sure you want to delete this order?",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "delete_error_message": "something went wrong Sorry!",
+            "delete_success_message": "Order deleted successfully"
+        },
+        "users": {
+            "title": "Users",
+            "button": {
+                "add": "Add Support"
+            },
+            "confirm_dialog": {
+                "message": "Are you sure you want to delete this user?",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "delete_error_message": "something went wrong Sorry!"
+        },
+        "ratings": {
+            "title": "Ratings",
+            "button": {
+                "add": "Add"
+            },
+            "confirm_dialog": {
+                "message": "Are you sure you want to delete this rating?",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "delete_error_message": "something went wrong Sorry!",
+            "delete_success_message": "Rating deleted successfully"
+        },
+        "deliverers": {
+            "title": "Deliverers",
+            "button": {
+                "add": "Add"
+            },
+            "confirm_dialog": {
+                "message": "Are you sure you want to delete this deliverer?",
+                "cancel": "Cancel",
+                "confirm": "Delete"
+            },
+            "delete_error_message": "something went wrong Sorry!"
+        },
+        "not_found": {
+            "title": "Sorry, the page can’t be found",
+            "description": "The page you were looking for appears to have been moved, deleted or does not exist.",
+            "button_label": "Back to Home",
+            "no_data": "No data available"
+        }
+    },
+    "error": {
+        "title": "Uh oh, something went wrong",
+        "description": "Sorry! There was a problem with your request"
+    }
+}
