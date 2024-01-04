@@ -10,6 +10,7 @@ const schema = new mongoose.Schema(
         lastname: String,
         email: String,
         role: String,
+        createdAt: Date,
 
         // deliverer properties
         delivererId: {
