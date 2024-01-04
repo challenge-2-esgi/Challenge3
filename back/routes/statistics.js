@@ -41,18 +41,41 @@ function StatisticsRouter() {
         }
     });
 
-    // Endpoint to get the number of new users created per week
+    // Endpoint to get the counts of new users and new deliverers created per week
     router.get('/new-users-count', async (req, res) => {
         try {
-            // Calculate the start of the current week
-            const startOfWeek = moment().startOf('week');
+            // Calculate the start of the last 7 days
+            const startOfLast7Days = moment().subtract(7, 'days').startOf('day');
 
-            // Query MongoDB for the count of new users created during the current week
-            const newUsersCount = await MongoUser.countDocuments({
-                createdAt: { $gte: startOfWeek.toDate() },
-            });
+            // Response object to store counts for each day
+            const response = {};
 
-            res.json({ newUsersCount });
+            // Loop through each day within the last 7 days
+            let currentDate = moment(startOfLast7Days);
+            while (currentDate.isSameOrBefore(moment())) {
+                const currentDay = currentDate.format('YYYY-MM-DD');
+
+                // Query MongoDB for the counts of new users and new deliverers created on the current day
+                const newUsers = await MongoUser.countDocuments({
+                    createdAt: { $gte: currentDate.toDate(), $lt: currentDate.clone().endOf('day').toDate() },
+                    role: 'CLIENT', // 'CLIENT' is the role for regular users
+                });
+
+                const newDeliverers = await MongoUser.countDocuments({
+                    createdAt: { $gte: currentDate.toDate(), $lt: currentDate.clone().endOf('day').toDate() },
+                    role: 'DELIVERER', // 'DELIVERER' is the role for deliverers
+                });
+
+                // Add counts to the response object for the current day
+                response[currentDay] = {
+                    nbNewUsers: newUsers,
+                    nbNewDeliverers: newDeliverers,
+                };
+
+                currentDate.add(1, 'day');
+            }
+
+            res.json(response);
         } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');
