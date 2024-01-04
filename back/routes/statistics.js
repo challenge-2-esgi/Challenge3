@@ -41,6 +41,24 @@ function StatisticsRouter() {
         }
     });
 
+    // Endpoint to get the number of new users created per week
+    router.get('/new-users-count', async (req, res) => {
+        try {
+            // Calculate the start of the current week
+            const startOfWeek = moment().startOf('week');
+
+            // Query MongoDB for the count of new users created during the current week
+            const newUsersCount = await MongoUser.countDocuments({
+                createdAt: { $gte: startOfWeek.toDate() },
+            });
+
+            res.json({ newUsersCount });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
+    });
+
     return router;
 }
 
