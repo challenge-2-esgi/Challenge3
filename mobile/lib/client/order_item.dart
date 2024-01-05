@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/client/blocs/order_bloc.dart';
 import 'package:mobile/client/order_screen.dart';
+import 'package:mobile/client/rating_items.dart';
 import 'package:mobile/core/models/order.dart';
 import 'package:mobile/theme/app_theme.dart';
 
@@ -217,7 +218,11 @@ class OrderItem extends StatelessWidget {
               children: [
                 ..._buildTracking(context),
               ],
-            )
+            ),
+            const SizedBox(height: 20),
+            if (order.status == Status.delivered ||
+                order.status == Status.canceled)
+              RatingItems(order: order),
           ],
         ),
       ),

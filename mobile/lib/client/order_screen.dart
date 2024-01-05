@@ -60,16 +60,19 @@ class _OrderScreenState extends State<OrderScreen> {
       );
     }
 
-    SseService.instance.subscribe(
-      SseEvent.orderStatus,
-      (data) {
-        setState(() {
-          _order = widget.order
-              .copyWith(status: Order.stringToStatus(data['status']));
-        });
-      },
-      queryParams: {"orderId": widget.order.id},
-    );
+    if (widget.order.status != Status.delivered &&
+        widget.order.status != Status.canceled) {
+      SseService.instance.subscribe(
+        SseEvent.orderStatus,
+        (data) {
+          setState(() {
+            _order = widget.order
+                .copyWith(status: Order.stringToStatus(data['status']));
+          });
+        },
+        queryParams: {"orderId": widget.order.id},
+      );
+    }
   }
 
   @override
