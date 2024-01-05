@@ -15,7 +15,8 @@ function OwnerOrDeliveryPerson({ includeAdmin = false }) {
             }
 
             if (includeAdmin) {
-                return isAdminOrOwner(item[userId], req.user)
+                return isAdminOrOwner(item[userId], req.user) ||
+                    item.delivererId === req.user.deliverer?.id
                     ? next()
                     : res.sendStatus(403)
             }
