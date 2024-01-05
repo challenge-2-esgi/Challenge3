@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobile/core/models/location.dart';
 import 'package:mobile/core/models/order.dart';
+import 'package:mobile/core/models/rating.dart';
 import 'package:mobile/core/models/user.dart';
 import 'package:mobile/core/services/storage_service.dart';
 
@@ -173,6 +174,52 @@ class ApiService {
       );
     } on Exception catch (e) {
       log("error on updating order status\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<Rating?> getRating(
+    String orderId,
+    String clientId,
+    String delivererId,
+  ) async {
+    try {
+      final response = await _client.get("/ratings");
+      final List<Rating> ratings =
+          response.data.map<Rating>((e) => Rating.fromJson(e)).toList();
+      return ratings
+          .where((element) =>
+              element.delivererId == delivererId && element.orderId == orderId)
+          .firstOrNull;
+    } on Exception catch (e) {
+      log("error on retrieving user ratings\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<Rating> rateDeliverer(Rating rating) async {
+    try {
+      final data = rating.toJson();
+      data.remove("id");
+      final response = await _client.post(
+        "/ratings",
+        data: data,
+      );
+      return Rating.fromJson(response.data);
+    } on Exception catch (e) {
+      log("error while rating deliverer\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<void> updateDelivererRate(String ratingId, int rating) async {
+    try {
+      await _client.patch(
+        "/ratings/$ratingId",
+        data: {"rating": rating},
+      );
+    } on Exception catch (e) {
+      log("error while updating deliverer rating\n${e.toString()}");
       throw Exception(e);
     }
   }
