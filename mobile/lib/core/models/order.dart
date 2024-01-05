@@ -48,8 +48,23 @@ class Order {
   String getDeliverTime() =>
       deliverTime == null ? "" : _formatDate(deliverTime!);
 
+  String get clientFullName =>
+      "${clientLastName.toUpperCase()} $clientFirstName";
+
   String get receiverFullName =>
       "${receiverLastname.toUpperCase()} $receiverFirstname";
+
+  Status get nextStatus {
+    if (status == Status.waitingForDeliverer) {
+      return Status.waitingForPickUp;
+    }
+
+    if (status == Status.waitingForPickUp) {
+      return Status.delivering;
+    }
+
+    return Status.delivered;
+  }
 
   static Status stringToStatus(String status) {
     switch (status) {

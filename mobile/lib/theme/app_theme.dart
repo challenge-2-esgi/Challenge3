@@ -45,6 +45,11 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       extensions: [_colors],
+      scaffoldBackgroundColor: AppColors.white,
+      dialogTheme: DialogTheme(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+        surfaceTintColor: Colors.white,
+      ),
       textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
           shape: MaterialStatePropertyAll(

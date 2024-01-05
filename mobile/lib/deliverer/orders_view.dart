@@ -3,83 +3,87 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/deliverer/blocs/order_bloc.dart';
 import 'package:mobile/deliverer/order_item.dart';
 import 'package:mobile/deliverer/orders_details.dart';
-import 'package:mobile/shared/custom_error_widget.dart';
-import 'package:mobile/theme/app_theme.dart';
 
 class OrderView extends StatelessWidget {
   const OrderView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OrderBloc()
-        ..add(
-          OrdersLoaded(),
-        ),
-      child: SafeArea(
-        child: BlocBuilder<OrderBloc, OrderState>(
-          builder: (context, state) {
-            if (state is OrdersLoading || state is OrderInitial) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
+    final blocOrder = context.watch<OrderBloc>();
+    final orders = blocOrder.state.orders;
 
-            if (state is OrdersLoadSuccess) {
-              return state.orders.isEmpty
-                  ? Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.warning_rounded,
-                          color: context.theme.colors.primary,
-                          size: 48,
+    return SafeArea(
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Courses",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          orders.isEmpty
+              ? const SizedBox(
+                  height: 400,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.find_in_page_rounded,
+                        color: Colors.grey,
+                        size: 60,
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Aucune course trouvée.",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
                         ),
-                        const SizedBox(height: 8),
-                        Center(
-                          child: Text(
-                            "aucune commande",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: context.theme.colors.primary,
-                            ),
+                      ),
+                    ],
+                  ),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0,
+                    ),
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    OrderDetailsPage(order: orders[index]),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: OrderItem(order: orders[index]),
                           ),
-                        ),
-                      ],
-                    )
-                  : Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => OrderDetailsPage(order: state.orders[index]),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: OrderItem(order: state.orders[index]),
-                                ),
-                              );
-                            },
-                            itemCount: state.orders.length,
-                          ),
-                        ),
-                      ],
-                    );
-            }
-
-            return const Center(
-              child: CustomErrorWidget(),
-            );
-          },
-        ),
+                        );
+                      },
+                      itemCount: orders.length,
+                    ),
+                  ),
+                )
+        ],
       ),
     );
   }
