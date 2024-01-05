@@ -25,6 +25,11 @@ module.exports = function (connection) {
                     allowNull: true,
                 },
             })
+
+            Rating.belongsTo(db.Order, {
+                as: 'order',
+                foreignKey: { name: 'orderId', allowNull: true },
+            })
         }
 
         static addHooks(db) {

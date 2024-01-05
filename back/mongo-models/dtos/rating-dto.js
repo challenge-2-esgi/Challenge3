@@ -7,6 +7,7 @@ module.exports = async (ratingId, Rating, operation = operations.create) => {
             include: [
                 { association: 'client' },
                 { association: 'deliverer', include: ['user'] },
+                { association: 'order' },
             ],
         })
         await MongoRating.deleteOne({ _id: ratingId })
@@ -16,9 +17,10 @@ module.exports = async (ratingId, Rating, operation = operations.create) => {
             ...rating.dataValues,
             client: rating.client.dataValues,
             deliverer: {
-                ...rating.deliverer.dataValues,
                 ...rating.deliverer.user.dataValues,
+                ...rating.deliverer.dataValues,
             },
+            orderId: rating.order.id,
         })
 
         await mongoRating.save()

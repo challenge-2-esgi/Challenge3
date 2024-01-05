@@ -6,6 +6,9 @@ const MongoRating = require('../mongo-models/Rating')
 const RolesGuard = require('../middlewares/roles-guard')
 const { ROLE } = require('../constants')
 const OwnershipGuard = require('../middlewares/ownership-guard')
+const { isClient } = require('../utils/authorization')
+const Validator = require('../middlewares/validator')
+const validators = require('../validators')
 
 function RatingRouter() {
     const router = new Router()
@@ -25,10 +28,19 @@ function RatingRouter() {
             collectionMiddlewares: [
                 AuthGuard,
                 RolesGuard([ROLE.client, ROLE.admin]),
+                (req, res, next) => {
+                    if (isClient(req.user)) {
+                        req.query = {
+                            ['client.id']: req.user.id,
+                        }
+                    }
+                    next()
+                },
             ],
             itemCreateMiddlewares: [
                 AuthGuard,
                 RolesGuard([ROLE.admin, ROLE.client]),
+                Validator(validators.createRating),
             ],
             itemReadMiddlewares: [
                 AuthGuard,
@@ -41,6 +53,7 @@ function RatingRouter() {
                     ownerKey: 'clientId',
                     includeAdmin: true,
                 }),
+                Validator(validators.updateRating),
             ],
             itemDeleteGuards: [
                 AuthGuard,
