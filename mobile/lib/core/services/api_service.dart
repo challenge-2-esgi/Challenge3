@@ -157,6 +157,25 @@ class ApiService {
       throw Exception(e);
     }
   }
+
+  Future<void> updateOrderStatus(String orderId, Status status) async {
+    try {
+      Map<String, dynamic> data = {"status": Order.statusToString(status)};
+      if (status == Status.delivering) {
+        data['pickupTime'] = DateTime.now().toIso8601String();
+      } else if (status == Status.delivered) {
+        data['deliverTime'] = DateTime.now().toIso8601String();
+      }
+
+      await _client.patch(
+        "/orders/$orderId",
+        data: data,
+      );
+    } on Exception catch (e) {
+      log("error on updating order status\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
 }
 
 class Client {

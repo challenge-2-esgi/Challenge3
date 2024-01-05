@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/core/models/order.dart';
 import 'package:mobile/core/services/api_service.dart';
+import 'package:mobile/deliverer/blocs/order_bloc.dart';
 import 'package:mobile/theme/app_theme.dart';
 
 class OrderItem extends StatefulWidget {
@@ -49,31 +51,8 @@ class _OrderItemState extends State<OrderItem> {
     );
   }
 
-  _showSuccess() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: Text(
-          "Operation réussit",
-          style: TextStyle(
-            color: context.theme.colors.success,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(
-              'OK',
-              style: TextStyle(
-                color: context.theme.colors.success,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+  void _emitOrderAssignedEvent(Order order) {
+    context.read<OrderBloc>().add(OrderAssigned(order: order));
   }
 
   Future<void> _acceptOrder(Order order) async {
@@ -82,8 +61,7 @@ class _OrderItemState extends State<OrderItem> {
     });
     try {
       await ApiService.instance.assignToOrder(order.id);
-      // TODO show delivering screen
-      _showSuccess();
+      _emitOrderAssignedEvent(order);
     } on Exception {
       _showError("Une erreur est survenue.\nVeuillez réessayer ultérieurement");
     } finally {

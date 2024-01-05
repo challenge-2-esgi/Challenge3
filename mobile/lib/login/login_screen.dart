@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/blocs/auth/auth_bloc.dart';
 import 'package:mobile/core/services/api_service.dart';
 import 'package:mobile/login/login_form.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = "login";
