@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import client from '../client';
 
-const prefix = 'statistics';
+const prefix = '';
 
 export default {
     useDeliveriesPerDay: () =>

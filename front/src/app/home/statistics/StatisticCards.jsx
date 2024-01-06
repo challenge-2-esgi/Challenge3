@@ -3,36 +3,54 @@
 import { Order } from '@/api'
 import { useTranslation } from 'react-i18next'
 import StatisticCard from './StatisticCard'
+import Statistics from '@/api/services/Statistics'
 
 const StatisticCards = () => {
     const { t } = useTranslation()
-    const { data, isLoading: fetchingOrder } = Order.useOrder('')
+    const { data: averageDelivererRating, isLoading: fetchingAverageRating } =
+        Statistics.useAverageDelivererRating('')
+    const { data: deliveriesPerDay, isLoading: fetchingDeliveriesPerDay } =
+        Statistics.useDeliveriesPerDay('')
 
-    const statistics = [
-        {
-            title: 'averageRatingsDeliverers',
-            value: 10,
-        },
-        {
-            title: 'averageDeliveryTime',
-            value: 70,
-        },
-    ]
-
+        console.log(deliveriesPerDay)
     return (
         <div className="mb-5 flex flex-row items-center justify-center gap-3">
-            {statistics.map((statistic, index) => {
-                console.log(statistic[0])
-                return (
-                    <div className="">
-                        <StatisticCard
-                            key={index}
-                            title={t(`page.statistics.${statistic.title}`)}
-                            value={statistic.value}
-                        />
-                    </div>
-                )
-            })}
+            <div>
+                {averageDelivererRating && (
+                    <StatisticCard
+                        title={t(`page.statistics.averageRatingsDeliverers`)}
+                        value={averageDelivererRating?.averageRating?.toFixed(
+                            1
+                        )}
+                    />
+                )}
+            </div>
+            <div>
+                {deliveriesPerDay && (
+                    <StatisticCard
+                        title={t(`page.statistics.averageDeliveryTime`)}
+                        value={deliveriesPerDay?.deliveriesCount?.toFixed(
+                            1
+                        )}
+                    />
+                )}
+            </div>
+            <div>
+                {deliveriesPerDay && (
+                    <StatisticCard
+                        title={t(`page.statistics.totalDeliverers`)}
+                        value={deliveriesPerDay?.deliveriesCount}
+                    />
+                )}
+            </div>
+            <div>
+                {deliveriesPerDay && (
+                    <StatisticCard
+                        title={t(`page.statistics.totalClients`)}
+                        value={deliveriesPerDay?.deliveriesCount}
+                    />
+                )}
+            </div>
         </div>
     )
 }
