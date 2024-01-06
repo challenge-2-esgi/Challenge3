@@ -7,7 +7,7 @@ const StatisticCard = ({ title, value, loading = false }) => {
     const { t } = useTranslation()
     return (
         <div>
-            <div className="mx-auto flex h-24 w-96 flex-col items-center justify-center bg-white shadow-lg">
+            <div className="mx-auto flex h-24 w-72 flex-col items-center justify-center bg-white shadow-lg">
                 {loading ? (
                     <Loader size="medium" />
                 ) : (

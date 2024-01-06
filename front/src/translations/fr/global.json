@@ -48,7 +48,9 @@
             "rank": "Rang",
             "firstname": "Prénom",
             "lastname": "Nom",
-            "nbOfOrders": "Nombre de commandes"
+            "nbOfOrders": "Nombre de commandes",
+            "totalDeliverers": "Nombre de livreurs total",
+            "totalClients": "Nombre de clients total"
         },
         "fleet": {
             "filters": {

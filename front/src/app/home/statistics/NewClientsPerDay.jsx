@@ -1,42 +1,14 @@
 'use client'
 
 import { Order } from '@/api'
+import Statistics from '@/api/services/Statistics'
 import Loader from '@/components/Loader'
 import { useTranslation } from 'react-i18next'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const NewClientsPerDay = ({ params }) => {
     const { t } = useTranslation()
-    const { data, isLoading } = Order.useOrder('')
-
-    const statistics = {
-        nbOfNewClientsPerDay: [
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfNewClients: 100,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfNewClients: 200,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfNewClients: 300,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfNewClients: 400,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfNewClients: 500,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfNewClients: 600,
-            },
-        ],
-    }
+    const { data: newUsers, isLoading } = Statistics.useNewUsersCount()
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -49,7 +21,7 @@ const NewClientsPerDay = ({ params }) => {
                 <LineChart
                     width={500}
                     height={300}
-                    data={statistics.nbOfNewClientsPerDay}
+                    data={[newUsers]}
                     margin={{
                         top: 5,
                         right: 30,
@@ -59,7 +31,7 @@ const NewClientsPerDay = ({ params }) => {
                 >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis dataKey="nbOfNewClients" />
+                    <YAxis dataKey="nbNewUsers" />
                     <Tooltip />
                     <Line
                         name={t('page.statistics.date')}
@@ -71,7 +43,7 @@ const NewClientsPerDay = ({ params }) => {
                     <Line
                         name={t('page.statistics.nbOfNewClients')}
                         type="monotone"
-                        dataKey="nbOfNewClients"
+                        dataKey="nbNewUsers"
                         stroke="#82ca9d"
                     />
                 </LineChart>
