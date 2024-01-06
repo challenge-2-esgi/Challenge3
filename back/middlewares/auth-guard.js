@@ -14,8 +14,7 @@ function AuthGuard(req, res, next) {
         const user = await User.findByPk(payload.sub)
 
         if (user == null) {
-            req.user = null
-            return next()
+            return res.sendStatus(403)
         }
 
         req.user = {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/client/add_order_screen.dart';
 import 'package:mobile/client/client_profile.dart';
+import 'package:mobile/client/complaint/complaints_view.dart';
 import 'package:mobile/client/orders_view.dart';
 import 'package:mobile/theme/app_theme.dart';
 
@@ -28,6 +29,7 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
           });
         },
       ),
+      const ComplaintsView(),
       const ClientProfile(),
     ];
   }
@@ -36,6 +38,15 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: context.theme.colors.primary,
+        unselectedItemColor: Colors.grey,
+        unselectedLabelStyle: const TextStyle(color: Colors.red),
+        currentIndex: _selectedIndex,
+        onTap: (value) {
+          setState(() {
+            _selectedIndex = value;
+          });
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
@@ -46,9 +57,14 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.local_shipping_rounded,
-              size: 30,
             ),
             label: 'Envoyer un colis',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.feedback_rounded,
+            ),
+            label: 'Mes réclamations',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -57,13 +73,6 @@ class _ClientHomeScreenState extends State<ClientHomeScreen> {
             label: 'Profil',
           ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: context.theme.colors.primary,
-        onTap: (value) {
-          setState(() {
-            _selectedIndex = value;
-          });
-        },
       ),
       body: _views.elementAt(_selectedIndex),
     );

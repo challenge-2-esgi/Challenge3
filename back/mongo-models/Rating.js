@@ -16,6 +16,7 @@ const schema = new mongoose.Schema(
         rating: Number,
         client: userSchemaDef,
         deliverer: userSchemaDef,
+        orderId: String,
     },
     { collection: 'ratings' }
 )

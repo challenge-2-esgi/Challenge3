@@ -9,6 +9,7 @@ const NotificationRouter = require('./routes/notification-router')
 const Deliverer = require('./models/Deliverer')
 const DelivererRouter = require('./routes/deliverer-router')
 const ComplaintRouter = require('./routes/complaint-router')
+const StatisticsRouter = require('./routes/statistics')
 
 // TODO: define cors options
 // const corsOptions = {}
@@ -24,6 +25,7 @@ app.use(RatingRouter())
 app.use(NotificationRouter())
 app.use(DelivererRouter())
 app.use(ComplaintRouter())
+app.use(StatisticsRouter())
 
 // errors middleware
 app.use(function (err, req, res, next) {

@@ -2,6 +2,7 @@ const { Model, DataTypes } = require('sequelize')
 const { COMPLAINT_STATUS } = require('../constants')
 const complaintDto = require('../mongo-models/dtos/complaint-dto')
 const operations = require('../mongo-models/dtos/operations')
+const mongoOrderDto = require('../mongo-models/dtos/order-dto')
 
 module.exports = function (connection) {
     class Complaint extends Model {
@@ -28,17 +29,29 @@ module.exports = function (connection) {
                     allowNull: false,
                 },
             })
+            db.Order.hasOne(Complaint, {
+                as: 'complaint',
+                foreignKey: {
+                    name: 'orderId',
+                    allowNull: false,
+                },
+            })
         }
 
         static addHooks(db) {
             Complaint.addHook('afterCreate', async (complaint) => {
                 complaintDto(complaint.id, db.Complaint)
+                mongoOrderDto(complaint.orderId, db.Order)
             })
+
             Complaint.addHook('afterUpdate', async (complaint) => {
                 complaintDto(complaint.id, db.Complaint, operations.update)
+                mongoOrderDto(complaint.orderId, db.Order, operations.update)
             })
+
             Complaint.addHook('afterDestroy', async (complaint) => {
                 complaintDto(complaint.id, db.Complaint, operations.delete)
+                mongoOrderDto(complaint.orderId, db.Order, operations.update)
             })
         }
     }

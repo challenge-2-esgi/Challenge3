@@ -67,6 +67,7 @@ async function insertOrders() {
                           ...order.deliverer.user.dataValues,
                           ...order.deliverer.dataValues,
                       },
+            complaintId: order.complaint?.id,
         }))
     )
 }
@@ -97,9 +98,10 @@ async function insertRatings() {
             ...rating.dataValues,
             client: rating.client.dataValues,
             deliverer: {
-                ...rating.deliverer.dataValues,
                 ...rating.deliverer.user.dataValues,
+                ...rating.deliverer.dataValues,
             },
+            orderId: rating.order.id,
         }))
     )
 }

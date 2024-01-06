@@ -7,6 +7,8 @@ const updateDeliverer = require('./update.deliverer.validator')
 const createDeliverer = require('./create.deliverer.validator')
 const createComplaint = require('./create.complaint.validator')
 const updateComplaint = require('./update.complaint.validator')
+const createRating = require('./create.rating.validator')
+const updateRating = require('./update.rating.validator')
 
 module.exports = {
     login,
@@ -17,5 +19,7 @@ module.exports = {
     updateDeliverer,
     createDeliverer,
     createComplaint,
-    updateComplaint
+    updateComplaint,
+    createRating,
+    updateRating,
 }

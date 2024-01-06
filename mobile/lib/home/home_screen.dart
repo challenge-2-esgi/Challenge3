@@ -43,7 +43,6 @@ class HomeScreen extends StatelessWidget {
             }
           }
 
-          // TODO: handle error
           return Scaffold(
             body: SafeArea(
               child: Center(
@@ -51,19 +50,37 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "error on loading user !",
+                      "500",
                       style: TextStyle(
+                        fontSize: 64,
                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Text(
+                      "Uh oh, quelque chose s'est mal passé",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 4.0,
+                    ),
+                    const Text(
+                      "Désolé ! Il y a eu un problème avec votre demande",
+                      style: TextStyle(
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(
                       height: 32,
                     ),
-                    ElevatedButton(
+                    ElevatedButton.icon(
                       onPressed: () {
                         context.read<AuthBloc>().add(AuthLogout());
                       },
-                      child: const Text('Logout'),
+                      icon: const Icon(Icons.arrow_back),
+                      label: const Text("Retour à l'accueil"),
                     ),
                   ],
                 ),
