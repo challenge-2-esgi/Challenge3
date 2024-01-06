@@ -3,14 +3,16 @@ name: CI/CD front
 on:
   push:
     branches:
-      - "main"
-      - "feat/ci-cd"
-    paths:
-      - "front/**"
-      - ".github/workflows/front.yml"
+      - "front"
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "test"
+      - name: Deploy Front
+        uses: izemaghilas/platformsh-nodejs-deploy-action@v1.1
+        with:
+          project-id: ${{ secrets.FRONT_PLATFORM_PROJECT_ID }}
+          cli-token: ${{ secrets.FRONT_PLATFORM_API_TOKEN }}
+          force-push: true
+          environment-name: main
