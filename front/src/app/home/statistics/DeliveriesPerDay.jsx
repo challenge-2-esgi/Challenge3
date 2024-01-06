@@ -1,13 +1,14 @@
 'use client'
 
 import { Order } from '@/api'
+import Statistics from '@/api/services/Statistics'
 import Loader from '@/components/Loader'
 import { useTranslation } from 'react-i18next'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const DeliveriesPerDay = ({ params }) => {
     const { t } = useTranslation()
-    const { data, isLoading } = Order.useOrder('')
+    const { data, isLoading } = Statistics.useNewUsersCount()
 
     const statistics = {
         nbOfDeliveriesPerDay: [

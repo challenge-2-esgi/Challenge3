@@ -100,6 +100,7 @@ function StatisticsRouter() {
 
                     // Add counts to the response object for the current day
                     response[currentDay] = {
+                        date: currentDay,
                         nbNewUsers: newUsers,
                         nbNewDeliverers: newDeliverers,
                     }
