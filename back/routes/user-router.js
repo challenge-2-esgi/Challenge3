@@ -4,6 +4,7 @@ const CRUDRouter = require('./item-router')
 const { User } = require('../models')
 const MongoUser = require('../mongo-models/User')
 const MongoOrder = require('../mongo-models/Order')
+const MongoComplaint = require('../mongo-models/Complaint')
 
 const { ROLE } = require('../constants')
 const validators = require('../validators')
@@ -44,6 +45,17 @@ function UserRouter() {
             })
 
             res.json(orders)
+        }
+    )
+    router.get(
+        '/users/current/complaints',
+        AuthGuard,
+        RolesGuard([ROLE.client]),
+        async (req, res) => {
+            const complaints = await MongoComplaint.find({
+                'user.id': req.user.id,
+            })
+            res.json(complaints)
         }
     )
 
