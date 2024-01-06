@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/client/blocs/order_bloc.dart';
+import 'package:mobile/client/complaint/add_complaint.dart';
 import 'package:mobile/client/order_screen.dart';
 import 'package:mobile/client/rating_items.dart';
 import 'package:mobile/core/models/order.dart';
@@ -220,9 +221,44 @@ class OrderItem extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            if (order.status == Status.delivered ||
-                order.status == Status.canceled)
-              RatingItems(order: order),
+            Row(
+              mainAxisAlignment: order.canSendComplaint
+                  ? MainAxisAlignment.spaceBetween
+                  : MainAxisAlignment.end,
+              children: [
+                if (order.canSendComplaint)
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll(context.theme.colors.danger),
+                      padding: const MaterialStatePropertyAll(
+                        EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 8.0,
+                        ),
+                      ),
+                    ),
+                    onPressed: () => AddComplaintScreen.navigateTo(
+                      context,
+                      AddComplaintArguments(
+                        order: order,
+                        onAdded: () {
+                          context.read<OrderBloc>().add(OrdersLoaded());
+                          Navigator.maybePop(context);
+                        },
+                      ),
+                    ),
+                    child: const Row(
+                      children: [
+                        Text("Réclamation"),
+                        SizedBox(width: 10.0),
+                        Icon(Icons.arrow_forward),
+                      ],
+                    ),
+                  ),
+                if (order.isDelivered) RatingItems(order: order),
+              ],
+            ),
           ],
         ),
       ),

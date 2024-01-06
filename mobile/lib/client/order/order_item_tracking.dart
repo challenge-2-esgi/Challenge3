@@ -135,7 +135,7 @@ class OrderItemTracking extends StatelessWidget {
       if (i < _steps.length - 1) {
         widgets.add(
           SizedBox(
-            height: _spacerHeight + 5,
+            height: _spacerHeight,
           ),
         );
       }

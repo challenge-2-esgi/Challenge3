@@ -24,6 +24,7 @@ class Order {
   final DateTime createdAt;
   final DateTime? pickupTime;
   final DateTime? deliverTime;
+  final String? complaintId;
 
   Order({
     required this.id,
@@ -38,6 +39,7 @@ class Order {
     required this.createdAt,
     required this.pickupTime,
     required this.deliverTime,
+    required this.complaintId,
   });
 
   String _formatDate(DateTime dateTime) =>
@@ -65,6 +67,13 @@ class Order {
 
     return Status.delivered;
   }
+
+  bool get isDelivered =>
+      status == Status.delivered || status == Status.canceled;
+
+  bool get canSendComplaint =>
+      complaintId == null &&
+      (status == Status.delivered || status == Status.canceled);
 
   static Status stringToStatus(String status) {
     switch (status) {
@@ -109,6 +118,7 @@ class Order {
     DateTime? createdAt,
     DateTime? pickupTime,
     DateTime? deliverTime,
+    String? complaintId,
   }) {
     return Order(
       id: id ?? this.id,
@@ -123,6 +133,7 @@ class Order {
       deliverTime: deliverTime ?? this.deliverTime,
       receiverFirstname: receiverFirstname ?? this.receiverFirstname,
       receiverLastname: receiverLastname ?? this.receiverLastname,
+      complaintId: complaintId ?? this.complaintId,
     );
   }
 
@@ -146,6 +157,7 @@ class Order {
       deliverTime: json['deliverTime'] == null
           ? null
           : DateTime.parse(json['deliverTime']),
+      complaintId: json['complaintId'],
     );
   }
 }
