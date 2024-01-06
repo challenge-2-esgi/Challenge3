@@ -1,0 +1,16 @@
+name: CI/CD front
+
+on:
+  push:
+    branches:
+      - "main"
+      - "feat/ci-cd"
+    paths:
+      - "front/**"
+      - ".github/workflows/front.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "test"
