@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mobile/core/models/complaint.dart';
 import 'package:mobile/core/models/location.dart';
 import 'package:mobile/core/models/order.dart';
 import 'package:mobile/core/models/rating.dart';
@@ -220,6 +221,30 @@ class ApiService {
       );
     } on Exception catch (e) {
       log("error while updating deliverer rating\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<void> sendComplaint(Map<String, dynamic> data) async {
+    try {
+      await _client.post(
+        "/complaints",
+        data: data,
+      );
+    } on Exception catch (e) {
+      log("error on sending complaint\n${e.toString()}");
+      throw Exception(e);
+    }
+  }
+
+  Future<List<Complaint>> getComplaints() async {
+    try {
+      final response = await _client.get("/users/current/complaints");
+      return response.data
+          .map<Complaint>((e) => Complaint.fromJson(e))
+          .toList();
+    } on Exception catch (e) {
+      log("error on loading complaints\n${e.toString()}");
       throw Exception(e);
     }
   }
