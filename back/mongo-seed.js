@@ -67,6 +67,7 @@ async function insertOrders() {
                           ...order.deliverer.user.dataValues,
                           ...order.deliverer.dataValues,
                       },
+            complaintId: order.complaint?.id,
         }))
     )
 }

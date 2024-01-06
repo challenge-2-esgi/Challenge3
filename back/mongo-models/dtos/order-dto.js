@@ -9,9 +9,9 @@ module.exports = async (orderId, Order, operation = operations.create) => {
                 { association: 'deliverer', include: ['user'] },
                 { association: 'pickupAddress' },
                 { association: 'deliveryAddress' },
+                { association: 'complaint' },
             ],
         })
-
         await MongoOrder.deleteOne({ _id: orderId })
 
         const mongoOrder = new MongoOrder({
@@ -28,6 +28,7 @@ module.exports = async (orderId, Order, operation = operations.create) => {
                           ...order.deliverer.user.dataValues,
                           ...order.deliverer.dataValues,
                       },
+            complaintId: order.complaint?.id,
         })
 
         await mongoOrder.save()

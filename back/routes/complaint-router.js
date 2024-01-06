@@ -1,17 +1,13 @@
 const { Router } = require('express')
 const AuthGuard = require('../middlewares/auth-guard')
 const CRUDRouter = require('./item-router')
-const Deliverer = require('../models/Deliverer')
-const { ROLE } = require('../constants')
+const { ROLE, ORDER_STATUS } = require('../constants')
 const validators = require('../validators')
 const RolesGuard = require('../middlewares/roles-guard')
 const Validator = require('../middlewares/validator')
-const OwnerOrClientPerson = require('../middlewares/owner-or-client-person-guard')
 const OwnershipGuard = require('../middlewares/ownership-guard')
 const { uuidv7 } = require('uuidv7')
-const LoggedInUser = require('../middlewares/logged-in-user')
-const { Complaint } = require('../models')
-const User = require('../models/User')
+const { Complaint, Order } = require('../models')
 const MongoComplaint = require('../mongo-models/Complaint')
 
 function ComplaintRouter() {
@@ -28,10 +24,37 @@ function ComplaintRouter() {
         CRUDRouter({
             model: Complaint,
             mongoModel: MongoComplaint,
-            collectionMiddlewares: [AuthGuard, RolesGuard([ROLE.admin, ROLE.support])],
+            collectionMiddlewares: [
+                AuthGuard,
+                RolesGuard([ROLE.admin, ROLE.support]),
+            ],
             itemCreateMiddlewares: [
+                AuthGuard,
                 Validator(validators.createComplaint),
-                LoggedInUser,
+                async (req, res, next) => {
+                    const order = await Order.findByPk(req.body['orderId'], {
+                        include: ['complaint'],
+                    })
+
+                    if (!order) {
+                        return res.sendStatus(400)
+                    }
+
+                    if (
+                        ![
+                            ORDER_STATUS.delivered,
+                            ORDER_STATUS.cancelled,
+                        ].includes(order.status)
+                    ) {
+                        return res.sendStatus(400)
+                    }
+
+                    if (order.complaint) {
+                        return res.sendStatus(400)
+                    }
+
+                    next()
+                },
                 async (req, res, next) => {
                     req.body = {
                         id: uuidv7(),

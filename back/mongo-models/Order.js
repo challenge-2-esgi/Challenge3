@@ -38,6 +38,10 @@ const schema = new mongoose.Schema(
         user: userSchemaDef,
         deliverer: userSchemaDef,
         createdAt: Date,
+        complaintId: {
+            type: String,
+            default: null,
+        },
     },
     { collection: 'orders' }
 )
