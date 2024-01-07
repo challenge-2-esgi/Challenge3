@@ -183,10 +183,10 @@ function StatisticsRouter() {
                 })
 
                 // Calculate the average delivery time for all time
-                const averageDeliveryTimeAllTime =
+                const averageDeliveryTime =
                     ordersCount > 0 ? totalDeliveryTime / ordersCount : 0
 
-                res.json({ averageDeliveryTimeAllTime })
+                res.json({ averageDeliveryTime })
             } catch (error) {
                 console.error(error)
                 res.status(500).send('Internal Server Error')

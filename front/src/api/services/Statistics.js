@@ -18,6 +18,20 @@ export default {
             },
             retry: false,
         }),
+    useAverageDeliveryTile: () =>
+        useQuery({
+            queryKey: ['averageDeliveryTime'],
+            queryFn: async () => {
+                const res = await client.get(
+                    prefix + '/average-delivery-time',
+                    {
+                        authorization: true,
+                    }
+                )
+                return res.data
+            },
+            retry: false,
+        }),
     useDeliveriesPerDay: () =>
         useQuery({
             queryKey: ['deliveriesPerDay'],

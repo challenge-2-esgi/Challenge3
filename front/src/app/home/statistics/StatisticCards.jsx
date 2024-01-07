@@ -11,6 +11,8 @@ const StatisticCards = () => {
         Statistics.useActiveDeliverers('')
     const { data: averageDelivererRating, isLoading: fetchingAverageRating } =
         Statistics.useAverageDelivererRating('')
+        const { data: averageDeliveryTime, isLoading: fetchingAverageDeliveryTime } =
+        Statistics.useAverageDeliveryTile('')
     const { data: deliveriesPerDay, isLoading: fetchingDeliveriesPerDay } =
         Statistics.useDeliveriesPerDay('')
 
@@ -36,10 +38,10 @@ const StatisticCards = () => {
                 )}
             </div>
             <div>
-                {deliveriesPerDay && (
+                {averageDeliveryTime && (
                     <StatisticCard
                         title={t(`page.statistics.averageDeliveryTime`)}
-                        value={deliveriesPerDay?.deliveriesCount?.toFixed(1)}
+                        value={averageDeliveryTime?.averageDeliveryTime}
                     />
                 )}
             </div>
