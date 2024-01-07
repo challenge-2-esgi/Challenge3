@@ -25,8 +25,6 @@ const Statistics = ({ params }) => {
                     <DeliveriesPerDay />
                     <NewClientsPerDay />
                 </div>
-                <Separator />
-                <TopClients />
             </div>
         </>
     )
