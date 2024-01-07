@@ -1,0 +1,23 @@
+name: back
+
+type: nodejs:18
+
+relationships:
+  mongodb: 'mongodb:mongodb'
+  postgresql: 'postgresql:postgresql'
+
+disk: 1024
+
+dependencies:
+  nodejs:
+    sharp: "*"
+
+web:
+  commands:
+    start: "node server.js"
+
+hooks:
+  build: |
+    set -x -e
+    npm ci
+    npx sequelize-cli db:migrate
