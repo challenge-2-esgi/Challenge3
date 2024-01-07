@@ -3,18 +3,14 @@ name: CI/CD back
 on:
   push:
     branches:
-      - "main"
-      - "feat/ci-cd"
-    paths:
-      - "back/**"
-      - ".github/workflows/back.yml"
+      - "back"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        run: echo "deploy"
+      - name: Deploy Back
+        run: echo "deploy back"
         # uses: izemaghilas/platformsh-nodejs-deploy-action@v1.1
         # with:
         #   project-id: ${{ secrets.PLATFORM_PROJECT_ID }}
