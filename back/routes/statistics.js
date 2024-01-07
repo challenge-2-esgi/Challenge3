@@ -16,21 +16,37 @@ function StatisticsRouter() {
         AuthGuard,
         RolesGuard([ROLE.admin]),
         async (req, res) => {
-            try {
-                // Calculate the start of the current day
-                const currentDate = moment().startOf('day')
-
-                // Query MongoDB for the count of delivered orders on the current day
-                const deliveriesCount = await MongoOrder.countDocuments({
-                    isDelivered: true,
-                    deliverTime: { $gte: currentDate.toDate() },
-                })
-
-                res.json({ deliveriesCount })
-            } catch (error) {
-                console.error(error)
-                res.status(500).send('Internal Server Error')
-            }
+                try {
+                    // Calculate the start of the last 7 days
+                    const startOfLast7Days = moment().subtract(7, 'days').startOf('day');
+            
+                    // Response array to store counts for each day
+                    const response = [];
+            
+                    // Loop through each day within the last 7 days
+                    let currentDate = moment(startOfLast7Days);
+                    while (currentDate.isSameOrBefore(moment())) {
+            
+                        // Query MongoDB for the count of delivered orders on the current day
+                        const deliveriesCount = await MongoOrder.countDocuments({
+                            isDelivered: true,
+                            deliverTime: { $gte: currentDate.toDate(), $lt: currentDate.clone().endOf('day').toDate() },
+                        });
+            
+                        // Add counts to the response array for the current day
+                        response.push({
+                            date: currentDate.toDate().toLocaleDateString(),
+                            nbOfDeliveries: deliveriesCount,
+                        });
+            
+                        currentDate.add(1, 'day');
+                    }
+            
+                    res.json(response);
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).send('Internal Server Error');
+                }
         }
     )
 
@@ -73,8 +89,8 @@ function StatisticsRouter() {
                     .subtract(7, 'days')
                     .startOf('day')
 
-                // Response object to store counts for each day
-                const response = {}
+                // Response array to store counts for each day
+                const response = []
 
                 // Loop through each day within the last 7 days
                 let currentDate = moment(startOfLast7Days)
@@ -98,12 +114,12 @@ function StatisticsRouter() {
                         role: 'DELIVERER', // 'DELIVERER' is the role for deliverers
                     })
 
-                    // Add counts to the response object for the current day
-                    response[currentDay] = {
+                    // Add counts to the response array for the current day
+                    response.push({
                         date: currentDay,
                         nbNewUsers: newUsers,
                         nbNewDeliverers: newDeliverers,
-                    }
+                    })
 
                     currentDate.add(1, 'day')
                 }
