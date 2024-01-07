@@ -8,32 +8,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const DeliveriesPerDay = ({ params }) => {
     const { t } = useTranslation()
-    const { data, isLoading } = Statistics.useNewUsersCount()
-
-    const statistics = {
-        nbOfDeliveriesPerDay: [
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 100,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 80,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 30,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 190,
-            },
-            {
-                date: new Date().toLocaleDateString(),
-                nbOfDeliveries: 1,
-            },
-        ],
-    }
+    const { data: nbOfDeliveriesPerDay, isLoading } = Statistics.useDeliveriesPerDay()
 
     return (
         <div className="flex flex-col items-center justify-center">
@@ -46,7 +21,7 @@ const DeliveriesPerDay = ({ params }) => {
                 <LineChart
                     width={500}
                     height={300}
-                    data={statistics.nbOfDeliveriesPerDay}
+                    data={nbOfDeliveriesPerDay}
                     margin={{
                         top: 5,
                         right: 30,

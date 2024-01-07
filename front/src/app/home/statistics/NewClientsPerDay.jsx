@@ -21,7 +21,7 @@ const NewClientsPerDay = ({ params }) => {
                 <LineChart
                     width={500}
                     height={300}
-                    data={[newUsers]}
+                    data={newUsers}
                     margin={{
                         top: 5,
                         right: 30,
