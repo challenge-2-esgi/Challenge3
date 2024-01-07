@@ -1,5 +1,5 @@
 mongodb:
-  type: mongodb:5.0
+  type: mongodb
   disk: 1024
 
 postgresql:
