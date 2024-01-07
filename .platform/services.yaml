@@ -1,6 +1,6 @@
-influxdb:
-  type: influxdb:2.7
-  disk: 256
+mongodb:
+  type: mongodb:5.0
+  disk: 1024
 
 postgresql:
   type: postgresql:14

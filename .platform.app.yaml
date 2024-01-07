@@ -3,8 +3,8 @@ name: app
 type: nodejs:18
 
 relationships:
-  influxdb: 'influxdb:influxdb'
-  postgresql: 'postgresql:postgresql'
+  influxdb: "mongodb:mongodb"
+  postgresql: "postgresql:postgresql"
 
 disk: 1024
 
