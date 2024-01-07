@@ -3,8 +3,8 @@ name: app
 type: nodejs:18
 
 relationships:
-  # mongodb: 'mongodb:mongodb'
-  postgresql: 'postgresql:postgresql'
+  mongodb:
+  postgresql:
 
 disk: 1024
 
