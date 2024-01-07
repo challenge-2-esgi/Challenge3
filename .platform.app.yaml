@@ -1,4 +1,4 @@
-name: back
+name: app
 
 type: nodejs:18
 
