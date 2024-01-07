@@ -1,0 +1,119 @@
+{
+    "yes": "Oui",
+    "no": "Non",
+    "login_form": {
+        "title": "Se connecter",
+        "label": {
+            "email": "Addresse mail",
+            "password": "Mot de passe"
+        },
+        "input": {
+            "email": "Saisir votre adresse mail",
+            "password": "Saisir votre mot de passe"
+        },
+        "button": {
+            "login_in": "Se connecter"
+        }
+    },
+    "sidebar": {
+        "item": {
+            "dashboard": "Dashboard",
+            "users": "Utilisateurs",
+            "orders": "Commandes",
+            "ratings": "Ratings",
+            "fleet": "Flotte",
+            "deliverers": "Livreurs",
+            "complaints": "Réclamations"
+        }
+    },
+    "header": {
+        "menu": {
+            "account": "Paramètres du compte",
+            "logout": "Se déconnecter"
+        }
+    },
+    "page": {
+        "dashboard": {
+            "main_title": "TABLEAU DE BORD"
+        },
+        "statistics": {
+            "averageRatingsDeliverers": "Note moyenne des livreurs",
+            "averageDeliveryTime": "Temps moyen de livraison",
+            "titleNewClientsPerDay": "Nouveaux clients par jour",
+            "nbOfNewClients": "Nombre de nouveaux clients",
+            "titleDeliveriesPerDay": "Nombre livraisons par jour",
+            "nbOfDeliveries": "Nombre de livraisons",
+            "date": "Date",
+            "titleTopClients": "Meilleurs clients",
+            "rank": "Rang",
+            "firstname": "Prénom",
+            "lastname": "Nom",
+            "nbOfOrders": "Nombre de commandes"
+        },
+        "fleet": {
+            "filters": {
+                "all": "Tous",
+                "delivering": "En cours de livraison",
+                "waiting": "En attente"
+            }
+        },
+        "orders": {
+            "title": "Commandes",
+            "button": {
+                "add": "Ajouter"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer cette commande ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!",
+            "delete_success_message": "Commande supprimée avec succès"
+        },
+        "users": {
+            "title": "Utilisateurs",
+            "button": {
+                "add": "Ajouter un Support"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!"
+        },
+        "ratings": {
+            "title": "Notes",
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer ce rating ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!",
+            "delete_success_message": "Rating supprimé avec succès"
+        },
+        "deliverers": {
+            "title": "Livreurs",
+            "button": {
+                "add": "Ajouter"
+            },
+            "confirm_dialog": {
+                "message": "Êtes-vous sûr de vouloir supprimer ce livreur ?",
+                "cancel": "Annuler",
+                "confirm": "Supprimer"
+            },
+            "delete_error_message": "quelque chose s'est mal passé Désolé!",
+            "delete_success_message": "Livreur supprimé avec succès"
+        },
+        "not_found": {
+            "title": "Désolé, la page est introuvable",
+            "description": "La page que vous recherchez semble avoir été déplacée, supprimée ou n'existe pas.",
+            "button_label": "Retour à l'accueil",
+            "no_data": "Pas de données disponible"
+        }
+    },
+    "error": {
+        "title": "Uh oh, quelque chose s'est mal passé",
+        "description": "Désolé ! Il y a eu un problème avec votre demande"
+    }
+}
