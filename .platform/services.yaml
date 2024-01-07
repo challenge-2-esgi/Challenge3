@@ -1,4 +1,4 @@
-mongodb:
+dbmongo:
   type: mongodb:6
   disk: 1024
 
