@@ -58,9 +58,11 @@ function StatisticsRouter() {
                         },
                     })
 
+                    const currentDay = currentDate.format('DD-MM-YYYY')
+
                     // Add counts to the response array for the current day
                     response.push({
-                        date: currentDate.toDate().toLocaleDateString(),
+                        date: currentDay,
                         nbOfDeliveries: deliveriesCount,
                     })
 
@@ -120,7 +122,7 @@ function StatisticsRouter() {
                 // Loop through each day within the last 7 days
                 let currentDate = moment(startOfLast7Days)
                 while (currentDate.isSameOrBefore(moment())) {
-                    const currentDay = currentDate.format('YYYY-MM-DD')
+                    const currentDay = currentDate.format('DD-MM-YYYY')
 
                     // Query MongoDB for the counts of new users and new deliverers created on the current day
                     const newUsers = await MongoUser.countDocuments({
