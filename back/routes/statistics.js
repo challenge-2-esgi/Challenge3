@@ -10,6 +10,22 @@ const MongoUser = require('../mongo-models/User')
 function StatisticsRouter() {
     const router = new Router()
 
+    // Endpoint to get the number of active deliverers
+    router.get('/active-deliverers-count', AuthGuard, RolesGuard([ROLE.admin]), async (req, res) => {
+        try {
+            // Query MongoDB for the count of active deliverers
+            const activeDeliverersCount = await MongoUser.countDocuments({
+                role: ROLE.deliverer,
+                isActive: true,
+            });
+
+            res.json({ activeDeliverersCount });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
+    });
+    
     // Endpoint to get the number of deliveries made per day
     router.get(
         '/deliveries-per-day',

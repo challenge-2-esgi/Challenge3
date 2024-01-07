@@ -7,12 +7,14 @@ import Statistics from '@/api/services/Statistics'
 
 const StatisticCards = () => {
     const { t } = useTranslation()
+    const { data: activeDeliverers, isLoading: fetchingActiveDeliverers } =
+        Statistics.useActiveDeliverers('')
     const { data: averageDelivererRating, isLoading: fetchingAverageRating } =
         Statistics.useAverageDelivererRating('')
     const { data: deliveriesPerDay, isLoading: fetchingDeliveriesPerDay } =
         Statistics.useDeliveriesPerDay('')
 
-        console.log(deliveriesPerDay)
+    console.log(deliveriesPerDay)
     return (
         <div className="mb-5 flex flex-row items-center justify-center gap-3">
             <div>
@@ -26,28 +28,18 @@ const StatisticCards = () => {
                 )}
             </div>
             <div>
+                {activeDeliverers && (
+                    <StatisticCard
+                        title={t(`page.statistics.totalDeliverers`)}
+                        value={activeDeliverers?.activeDeliverersCount}
+                    />
+                )}
+            </div>
+            <div>
                 {deliveriesPerDay && (
                     <StatisticCard
                         title={t(`page.statistics.averageDeliveryTime`)}
-                        value={deliveriesPerDay?.deliveriesCount?.toFixed(
-                            1
-                        )}
-                    />
-                )}
-            </div>
-            <div>
-                {deliveriesPerDay && (
-                    <StatisticCard
-                        title={t(`page.statistics.totalDeliverers`)}
-                        value={deliveriesPerDay?.deliveriesCount}
-                    />
-                )}
-            </div>
-            <div>
-                {deliveriesPerDay && (
-                    <StatisticCard
-                        title={t(`page.statistics.totalClients`)}
-                        value={deliveriesPerDay?.deliveriesCount}
+                        value={deliveriesPerDay?.deliveriesCount?.toFixed(1)}
                     />
                 )}
             </div>
