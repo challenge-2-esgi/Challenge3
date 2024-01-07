@@ -30,7 +30,7 @@ const StatisticCards = () => {
             <div>
                 {activeDeliverers && (
                     <StatisticCard
-                        title={t(`page.statistics.totalDeliverers`)}
+                        title={t(`page.statistics.activeDeliverers`)}
                         value={activeDeliverers?.activeDeliverersCount}
                     />
                 )}

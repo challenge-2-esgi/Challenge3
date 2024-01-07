@@ -50,6 +50,7 @@
             "lastname": "Nom",
             "nbOfOrders": "Nombre de commandes",
             "totalDeliverers": "Nombre de livreurs total",
+            "activeDeliverers": "Nombre de livreurs actifs",
             "totalClients": "Nombre de clients total"
         },
         "fleet": {
