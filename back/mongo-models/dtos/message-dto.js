@@ -7,7 +7,6 @@ module.exports = async (messageId, Message, operation = operations.create) => {
             include: [
                 { association: 'sender' },
                 { association: 'receiver' },
-                { association: 'order' },
             ],
         })
         await MongoMessage.deleteOne({ _id: messageId })
@@ -17,7 +16,6 @@ module.exports = async (messageId, Message, operation = operations.create) => {
             ...message.dataValues,
             sender: message.sender.dataValues,
             receiver: message.receiver.dataValues,
-            order: message.order.dataValues,
         })
 
         await mongoMessage.save()

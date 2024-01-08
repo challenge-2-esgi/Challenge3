@@ -14,13 +14,6 @@ const receiverSchemaDef = {
     email: String,
 }
 
-const orderSchemaDef = {
-    id: String,
-    sku: String,
-    isDelivered: Boolean,
-    status: String,
-}
-
 const schema = new mongoose.Schema(
     {
         _id: {
@@ -31,7 +24,6 @@ const schema = new mongoose.Schema(
         createdAt: Date,
         sender: senderSchemaDef,
         receiver: receiverSchemaDef,
-        order: orderSchemaDef,
     },
     { collection: 'messages' }
 );

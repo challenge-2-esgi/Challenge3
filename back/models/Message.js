@@ -20,14 +20,6 @@ module.exports = function (connection) {
                     allowNull: true,
                 },
             })
-    
-            Message.belongsTo(db.Order, {
-                as: 'order',
-                foreignKey: {
-                    name: 'orderId',
-                    allowNull: false,
-                },
-            })    
         }
 
         static addHooks(db) {

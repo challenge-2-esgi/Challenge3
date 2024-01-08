@@ -32,15 +32,7 @@ module.exports = {
           model: 'user',
           key: 'id',
         },
-      },
-      orderId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-        references: {
-          model: 'order',
-          key: 'id',
-        },
-      },
+      }
     });
   },
 
