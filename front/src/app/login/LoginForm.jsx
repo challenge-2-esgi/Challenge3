@@ -6,8 +6,10 @@ import route from '@/constants/route'
 import { t_NAMESPACES } from '@/i18n'
 import useStore from '@/store'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 import { useTranslation } from 'react-i18next'
 import { z } from 'zod'
 
@@ -52,9 +54,24 @@ const LoginForm = () => {
             loginAction(token)
             router.replace(route.HOME)
         },
+        onError: (error) => {
+            if (error.response?.status === 422) {
+                toast.error(
+                    t(
+                        'login_form.submit.error_message.incorrect_email_password',
+                        { ns: t_NAMESPACES.FORM }
+                    )
+                )
+            } else {
+                toast.error(
+                    t('login_form.submit.error_message.unknown', {
+                        ns: t_NAMESPACES.FORM,
+                    })
+                )
+            }
+        },
     })
 
-    // TODO: handle api errors
     const onsubmit = (data) => {
         login(data)
     }
