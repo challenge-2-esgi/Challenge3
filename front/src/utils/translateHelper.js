@@ -2,6 +2,8 @@ const { orderStatus } = require('../constants')
 
 export const mapStatusToLabel = (status, t, nameSpace) => {
     switch (status) {
+        case orderStatus.waitingForDeliverer:
+            return t('order.statusTypes.waiting_for_deliverer', { ns: nameSpace })
         case orderStatus.waitingForPickup:
             return t('order.statusTypes.waiting_for_pick_up', { ns: nameSpace })
         case orderStatus.delivering:
