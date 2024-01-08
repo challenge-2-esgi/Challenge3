@@ -1,0 +1,27 @@
+name: CI/CD push back folder to back branch
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/push-back-folder.yml"
+      - ".github/workflows/back.yml"
+      - "back/**"
+
+jobs:
+  push-back:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copy back deploy action
+        run: |
+          mkdir ./back/.github && mkdir ./back/.github/workflows
+          cp ./.github/workflows/back.yml ./back/.github/workflows/back.yml
+      - name: Push to back branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: back
+          FOLDER: back
+          MESSAGE: "deploy back"
+          GITHUB_TOKEN: ${{ secrets.PAT }}

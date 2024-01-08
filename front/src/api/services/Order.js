@@ -3,12 +3,13 @@ import client from '../client'
 
 const prefix = 'orders'
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    useOrders: () =>
+    useOrders: (query) =>
         useQuery({
             queryKey: ['orders'],
             queryFn: async () => {
-                const res = await client.get('orders', { authorization: true })
+                const res = await client.get('orders?'+query, { authorization: true })
                 return res.data
             },
         }),

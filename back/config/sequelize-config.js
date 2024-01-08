@@ -10,7 +10,7 @@ module.exports = {
         dialect: 'postgres',
     },
     [appConfig.supportedEnvs.prod]: {
-        url: '',
+        url: appConfig.postgresUrl,
         dialect: 'postgres',
     },
 }

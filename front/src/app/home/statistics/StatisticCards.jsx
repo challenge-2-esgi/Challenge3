@@ -3,36 +3,48 @@
 import { Order } from '@/api'
 import { useTranslation } from 'react-i18next'
 import StatisticCard from './StatisticCard'
+import Statistics from '@/api/services/Statistics'
 
 const StatisticCards = () => {
     const { t } = useTranslation()
-    const { data, isLoading: fetchingOrder } = Order.useOrder('')
+    const { data: activeDeliverers, isLoading: fetchingActiveDeliverers } =
+        Statistics.useActiveDeliverers('')
+    const { data: averageDelivererRating, isLoading: fetchingAverageRating } =
+        Statistics.useAverageDelivererRating('')
+        const { data: averageDeliveryTime, isLoading: fetchingAverageDeliveryTime } =
+        Statistics.useAverageDeliveryTile('')
+    const { data: deliveriesPerDay, isLoading: fetchingDeliveriesPerDay } =
+        Statistics.useDeliveriesPerDay('')
 
-    const statistics = [
-        {
-            title: 'averageRatingsDeliverers',
-            value: 10,
-        },
-        {
-            title: 'averageDeliveryTime',
-            value: 70,
-        },
-    ]
-
+    console.log(deliveriesPerDay)
     return (
         <div className="mb-5 flex flex-row items-center justify-center gap-3">
-            {statistics.map((statistic, index) => {
-                console.log(statistic[0])
-                return (
-                    <div className="">
-                        <StatisticCard
-                            key={index}
-                            title={t(`page.statistics.${statistic.title}`)}
-                            value={statistic.value}
-                        />
-                    </div>
-                )
-            })}
+            <div>
+                {averageDelivererRating && (
+                    <StatisticCard
+                        title={t(`page.statistics.averageRatingsDeliverers`)}
+                        value={averageDelivererRating?.averageRating?.toFixed(
+                            1
+                        )}
+                    />
+                )}
+            </div>
+            <div>
+                {activeDeliverers && (
+                    <StatisticCard
+                        title={t(`page.statistics.activeDeliverers`)}
+                        value={activeDeliverers?.activeDeliverersCount}
+                    />
+                )}
+            </div>
+            <div>
+                {averageDeliveryTime && (
+                    <StatisticCard
+                        title={t(`page.statistics.averageDeliveryTime`)}
+                        value={averageDeliveryTime?.averageDeliveryTime}
+                    />
+                )}
+            </div>
         </div>
     )
 }

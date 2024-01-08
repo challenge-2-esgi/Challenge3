@@ -6,13 +6,19 @@ class Storage {
     }
 
     storeToken(token) {
-        localStorage.setItem(this.keys.token, token)
+        if (typeof window !== 'undefined') {
+            localStorage.setItem(this.keys.token, token)
+        }
     }
     getToken() {
-        return localStorage.getItem(this.keys.token) ?? null
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem(this.keys.token) ?? null
+        }
     }
     removeToken() {
-        localStorage.removeItem(this.keys.token)
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem(this.keys.token)
+        }
     }
 }
 

@@ -1,0 +1,23 @@
+name: app
+
+type: nodejs:18
+
+relationships:
+  postgresql: "postgresql:postgresql"
+
+disk: 1024
+
+dependencies:
+  nodejs:
+    sharp: "*"
+
+web:
+  commands:
+    start: |
+      npx sequelize-cli db:migrate
+      node server.js
+
+hooks:
+  build: |
+    set -x -e
+    npm ci --omit=dev

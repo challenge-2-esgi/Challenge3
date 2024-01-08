@@ -19,18 +19,12 @@ const Statistics = ({ params }) => {
     return (
         <>
             <div className="flex w-full flex-col">
-                <p className="text-center text-xl font-bold">
-                    {t('page.dashboard.main_title')}
-                </p>
-                <Separator />
                 <StatisticCards />
                 <Spacer />
-                <div className="flex">
+                <div className="flex justify-center">
                     <DeliveriesPerDay />
                     <NewClientsPerDay />
                 </div>
-                <Separator />
-                <TopClients />
             </div>
         </>
     )
