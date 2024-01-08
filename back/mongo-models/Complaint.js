@@ -21,6 +21,7 @@ const schema = new mongoose.Schema(
         subject: String,
         content: String,
         status: String,
+        createdAt: Date,
         user: userSchemaDef,
         order: orderSchemaDef,
     },
