@@ -20,4 +20,4 @@ web:
 hooks:
   build: |
     set -x -e
-    npm ci --production
+    npm ci --omit=dev
