@@ -35,8 +35,6 @@ class MyCustomFormState extends State<ValidationForm> {
               fillColor: Colors.black,
             ),
             validator: (value) {
-              print("BLABLA");
-              print(widget.validationCode);
               if (value == null || value.isEmpty) {
                 return 'Veuillez entrer le code de validation';
               }
@@ -46,6 +44,7 @@ class MyCustomFormState extends State<ValidationForm> {
               return null;
             },
           ),
+          const SizedBox(height: 5),
           ElevatedButton(
             onPressed: () {
               // Validate returns true if the form is valid, or false otherwise.
