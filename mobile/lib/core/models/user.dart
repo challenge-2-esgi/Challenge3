@@ -6,6 +6,7 @@ class User {
   final String firstname;
   final String email;
   final String role;
+  final String? validationCode;
 
   // deliverer
   final String? delivererId;
@@ -18,6 +19,7 @@ class User {
     required this.firstname,
     required this.email,
     required this.role,
+    required this.validationCode,
     this.delivererId,
     this.phone,
     this.isActive,
@@ -35,6 +37,7 @@ class User {
       firstname: json['firstname'],
       email: json['email'],
       role: json['role'],
+      validationCode: json['validationCode'],
       delivererId: json['delivererId'],
       phone: json['phone'],
       isActive: json['isActive'],
@@ -47,6 +50,7 @@ class User {
     String? firstname,
     String? email,
     String? role,
+    String? validationCode,
     String? delivererId,
     String? phone,
     bool? isActive,
@@ -57,6 +61,7 @@ class User {
       firstname: firstname ?? this.firstname,
       email: email ?? this.email,
       role: role ?? this.role,
+      validationCode: validationCode,
       delivererId: delivererId ?? this.delivererId,
       phone: phone ?? this.phone,
       isActive: isActive ?? this.isActive,
