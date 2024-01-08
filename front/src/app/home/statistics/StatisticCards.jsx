@@ -16,7 +16,6 @@ const StatisticCards = () => {
     const { data: deliveriesPerDay, isLoading: fetchingDeliveriesPerDay } =
         Statistics.useDeliveriesPerDay('')
 
-    console.log(deliveriesPerDay)
     return (
         <div className="mb-5 flex flex-row items-center justify-center gap-3">
             <div>

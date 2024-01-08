@@ -61,5 +61,13 @@
             "adding_success_message": "Complaint successfuly added",
             "editing_success_message": "Complaint successfuly updated"
         }
+    },
+    "login_form": {
+        "submit": {
+            "error_message": {
+                "incorrect_email_password": "Incorrect email address or password!",
+                "unknown": "something went wrong Sorry!"
+            }
+        }
     }
 }
