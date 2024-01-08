@@ -19,4 +19,6 @@ hooks:
   build: |
     set -x -e
     npm ci
+
+  deploy: |
     npx sequelize-cli db:migrate
