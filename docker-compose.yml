@@ -30,6 +30,7 @@ services:
     stdin_open: true
     ports:
       - $BACK_PORT:$BACK_PORT
+      - 9000:9000
     volumes:
       - ./back:/home/node/app
 
