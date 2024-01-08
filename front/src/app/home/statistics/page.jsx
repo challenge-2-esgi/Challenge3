@@ -21,7 +21,7 @@ const Statistics = ({ params }) => {
             <div className="flex w-full flex-col">
                 <StatisticCards />
                 <Spacer />
-                <div className="flex">
+                <div className="flex justify-center">
                     <DeliveriesPerDay />
                     <NewClientsPerDay />
                 </div>
