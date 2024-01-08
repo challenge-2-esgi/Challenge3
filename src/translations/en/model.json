@@ -2,6 +2,7 @@
     "order": {
         "status": "Status",
         "statusTypes": {
+            "waiting_for_deliverer": "Waiting for deliverer",
             "waiting_for_pick_up": "Waiting for pick up",
             "delivering": "Delivering",
             "delivered": "Delivered",

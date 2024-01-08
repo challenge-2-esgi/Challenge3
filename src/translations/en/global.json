@@ -38,7 +38,6 @@
         },
         "statistics": {
             "averageRatingsDeliverers": "Average ratings of deliverers",
-            "averageDeliveryTime": "Average delivery time",
             "titleNewClientsPerDay": "Number of new clients per day",
             "nbOfNewClients": "Number of new clients",
             "titleDeliveriesPerDay": "Number of deliveries per day",
@@ -48,7 +47,11 @@
             "rank": "Rank",
             "firstname": "Firstname",
             "lastname": "Lastname",
-            "nbOfOrders": "Number of orders"
+            "nbOfOrders": "Number of orders",
+            "totalDeliverers": "Total deliverers",
+            "activeDeliverers": "Active deliverers",
+            "averageDeliveryTime": "Average delivery time (in mins)",
+            "totalClients": "Total orders"
         },
         "fleet": {
             "filters": {
