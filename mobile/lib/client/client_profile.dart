@@ -28,6 +28,9 @@ class ClientProfile extends StatelessWidget {
           _buildDetail('Nom', user.lastname),
           _buildDetail('Prénom', user.firstname),
           _buildDetail('Email', user.email),
+          (user.validationCode != null && user.validationCode!.isNotEmpty)
+              ? _buildDetail('Code de validation', user.validationCode ?? '')
+              : const SizedBox(),
         ],
       ),
     );

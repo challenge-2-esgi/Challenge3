@@ -5,6 +5,7 @@ import 'package:mobile/core/models/order.dart';
 import 'package:mobile/deliverer/blocs/order_bloc.dart';
 import 'package:mobile/deliverer/delivering/delivering_steps.dart';
 import 'package:mobile/deliverer/delivering/order_details.dart';
+import 'package:mobile/deliverer/delivering/validation_form.dart';
 import 'package:mobile/shared/custom_error_widget.dart';
 
 class DeliveringView extends StatelessWidget {
@@ -33,6 +34,22 @@ class DeliveringView extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  _showForm(BuildContext context, String? message, Function() onValidated) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: Container(
+          padding: const EdgeInsets.all(8.0),
+          height: 200,
+          child: ValidationForm(
+            validationCode: message,
+            onValidated: onValidated,
+          ),
+        ),
       ),
     );
   }
@@ -85,8 +102,16 @@ class DeliveringView extends StatelessWidget {
                             : () => order.status == Status.delivered ||
                                     order.status == Status.canceled
                                 ? orderBloc.add(OrderDelivered())
-                                : orderBloc
-                                    .add(OrderStepValidated(order: order)),
+                                : order.status == Status.delivering
+                                    ? _showForm(
+                                        context, order.clientValidationCode,
+                                        () {
+                                        orderBloc.add(
+                                            OrderStepValidated(order: order));
+                                        Navigator.pop(context);
+                                      })
+                                    : orderBloc
+                                        .add(OrderStepValidated(order: order)),
                         child: updatingStep
                             ? const SizedBox(
                                 width: 20,

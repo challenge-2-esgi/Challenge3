@@ -53,6 +53,10 @@ module.exports = function (connection) {
                 type: DataTypes.ENUM(Object.values(ROLE)),
                 allowNull: false,
             },
+            validationCode: {
+                type: DataTypes.STRING(25),
+                allowNull: true,
+            },
         },
         {
             sequelize: connection,
