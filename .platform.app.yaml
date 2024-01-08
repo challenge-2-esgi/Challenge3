@@ -11,9 +11,9 @@ dependencies:
   nodejs:
     sharp: "*"
 
-web:
-  commands:
-    start: "node server.js"
+# web:
+#   commands:
+#     start: "node server.js"
 
 hooks:
   build: |
