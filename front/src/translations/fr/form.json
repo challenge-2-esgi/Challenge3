@@ -17,7 +17,7 @@
     },
     "order_form": {
         "input": {
-            "sku" : "Saisir le SKU"
+            "sku": "Saisir le SKU"
         },
         "button": {
             "add": "Ajouter",
@@ -66,6 +66,14 @@
             "error_message": "something went wrong Sorry!",
             "adding_success_message": "La réclamation a été ajouté avec succès",
             "editing_success_message": "La réclamation a été mis à jour avec succès"
+        }
+    },
+    "login_form": {
+        "submit": {
+            "error_message": {
+                "incorrect_email_password": "Addresse mail ou mot de passe incorrect !",
+                "unknown": "Il y a eu un problème. Désolé !"
+            }
         }
     }
 }

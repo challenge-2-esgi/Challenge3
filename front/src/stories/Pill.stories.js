@@ -12,7 +12,7 @@ export default {
 export const Default = {
     args: {
         title: 'Info',
-        color: 'info',
+        color: 'primary',
     },
 }
 
