@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "main"
+      - "fix/front-prod"
     paths:
       - ".github/workflows/push-front-folder.yml"
       - ".github/workflows/front.yml"
