@@ -1,0 +1,32 @@
+name: app
+type: "nodejs:18"
+
+disk: 2048
+
+dependencies:
+  nodejs:
+    sharp: "*"
+
+web:
+  # doc: https://docs.platform.sh/create-apps/web/static.html
+  locations:
+    "/":
+      root: "dist"
+      index:
+        - "index.html"
+      scripts: false
+      allow: true
+      expires: 300s
+      rules:
+        \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|html|ico|svg?)$:
+          allow: true
+        \/(.+/?)+$:
+          passthru: "/index.html"
+  commands:
+    start: sleep infinity
+
+hooks:
+  build: |
+    set -x -e
+    npm ci
+    npm run build
