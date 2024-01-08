@@ -1,7 +1,9 @@
-import Map from '@/components/Map'
 import { sseEvent } from '@/constants'
 import useSSE from '@/hooks/useSSE'
+import dynamic from 'next/dynamic'
 import { useMemo } from 'react'
+
+const Map = dynamic(() => import('@/components/Map'), { ssr: false })
 
 const TrackingView = ({ deliverers }) => {
     const { data: location } = useSSE(sseEvent.delivererLocation)
