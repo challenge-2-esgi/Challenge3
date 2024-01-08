@@ -7,26 +7,24 @@ dependencies:
   nodejs:
     sharp: "*"
 
+mounts:
+  # Next.js will try to cache files, so it must be writeable.
+  "/.next":
+    source: local
+    source_path: "next"
+
 web:
-  # doc: https://docs.platform.sh/create-apps/web/static.html
-  locations:
-    "/":
-      root: "dist"
-      index:
-        - "index.html"
-      scripts: false
-      allow: true
-      expires: 300s
-      rules:
-        \.(css|js|gif|jpe?g|png|ttf|eot|woff2?|otf|html|ico|svg?)$:
-          allow: true
-        \/(.+/?)+$:
-          passthru: "/index.html"
-  commands:
-    start: sleep infinity
+  # doc: https://docs.platform.sh/create-apps/web/static.html  commands:
+  start: npx next start -p $PORT
 
 hooks:
   build: |
     set -x -e
     npm ci
     npm run build
+    chmod +x handle_mounts.sh
+    ./handle_mounts.sh
+  
+  # Move committed files from temp directory back into mounts.
+  deploy: |
+    ./handle_mounts.sh
