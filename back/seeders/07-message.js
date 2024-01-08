@@ -9,41 +9,31 @@ const { ORDER_STATUS, ROLE } = require('../constants')
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        const orders = await queryInterface.select(Order, 'order', {
-            where: Sequelize.or(
-                { status: ORDER_STATUS.delivered },
-                { status: ORDER_STATUS.cancelled }
-            ),
-        })
+        
+        const userClients = await queryInterface.select(
+            User, 'user', { where: { role: ROLE.client} }
+        )
+
+        const userDeliverers = await queryInterface.select(
+            User, 'user', { where: { role: ROLE.deliverer } }
+        )
 
         const userSupports = await queryInterface.select(
             User, 'user', { where: { role: ROLE.support } }
         )
 
-        if (orders.length < 3) {
-            throw new Error(
-                '[Message seeder]: need at least 3 orders, given: ' +
-                    orders.length
-            )
-        }
-
         const messages = [];
 
-        [orders[0], orders[1]].map((order) => {
-
-            for (let i = 0; i < 3; i++) {
-                messages.push({
-                    id: uuidv7(),
-                    content: faker.lorem.paragraph(2),
-                    createdAt: new Date(),
-                    senderId: order.clientId,
-                    receiverId: userSupports[0].id,
-                    orderId: order.id,
-                })
-            }
-
-            return messages;
-        })
+        for (let i = 0; i < 3; i++) {
+            messages.push({
+                id: uuidv7(),
+                content: faker.lorem.paragraph(2),
+                createdAt: new Date(),
+                senderId: [...userClients, ...userDeliverers][0].id,
+                receiverId: userSupports[0].id,
+            })
+        }
+        
 
         await queryInterface.bulkInsert(
             'message',
