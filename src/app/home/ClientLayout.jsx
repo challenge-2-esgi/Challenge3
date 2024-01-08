@@ -9,15 +9,18 @@ import { redirect } from 'next/navigation'
 import { useTranslation } from 'react-i18next'
 import SidebarItems from './SidebarItems'
 import UserLoader from './UserLoader'
+import { useEffect } from 'react'
 
 const ClientLayout = ({ children }) => {
     const { i18n } = useTranslation()
 
     const isAuthenticated = useStore((state) => state.isAuthenticated)
 
-    if (!isAuthenticated) {
-        redirect(route.LOGIN, 'replace')
-    }
+    useEffect(() => {
+        if (!isAuthenticated) {
+            redirect(route.LOGIN, 'replace')
+        }
+    }, [isAuthenticated])
 
     return (
         <UserLoader>

@@ -22,7 +22,6 @@ const fields = {
 
 const ComplaintForm = ({ operation, values, onSubmit, loading = true }) => {
     const { t } = useTranslation()
-    console.log(fields)
 
     const validationSchema = z.object({
         [fields.subject]: z
