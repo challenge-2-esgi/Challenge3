@@ -13,12 +13,11 @@ dependencies:
 
 web:
   commands:
-    start: "node server.js"
+    start: |
+      npx sequelize-cli db:migrate
+      node server.js
 
 hooks:
   build: |
     set -x -e
-    npm ci
-
-  deploy: |
-    npx sequelize-cli db:migrate
+    npm ci --production
