@@ -18,8 +18,8 @@ class Deliverer {
       id: json['id'],
       isActive: json['isActive'] ?? false,
       phone: json['phone'] ?? "",
-      latitude: json['latitude'] ?? 0.0,
-      longitude: json['longitude'] ?? 0.0,
+      latitude: json['latitude'],
+      longitude: json['longitude'],
     );
   }
 }
