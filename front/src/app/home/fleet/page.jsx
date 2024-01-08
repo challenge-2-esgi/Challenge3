@@ -1,14 +1,15 @@
 'use client'
 
 import withRoleGuard from '@/HOC/withRoleGuard'
-import Deliverer from '@/api/services/Deliverer'
 import Button from '@/components/Button'
 import Container from '@/components/Container'
 import Loader from '@/components/Loader'
 import { role } from '@/constants'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TrackingView from './TrackingView'
+import { Deliverer, Order } from '@/api'
+import { set } from 'react-hook-form'
 
 const filters = {
     all: 'ALL',
@@ -19,7 +20,30 @@ const filters = {
 const FleetPage = () => {
     const { t } = useTranslation()
     const [filter, setFilter] = useState(filters.all)
-    const { isLoading, data } = Deliverer.useDeliverers()
+    const { isLoading, data } = Order.useOrders("status=DELIVERING&status=WAITING_FOR_PICK_UP")
+    const {isLoading: isLoadingDeliverers, data: dataDeliverers} = Deliverer.useDeliverers()
+    const [deliverers, setDeliverers] = useState([])
+
+    useEffect(() => {
+
+        if (!isLoading && !isLoadingDeliverers) {
+            setDeliverers([])
+            data.forEach((order) => {
+                if (order.deliverer) {
+                    const deliverer = dataDeliverers.find((d) => d.delivererId === order.deliverer.id)
+                    
+                    if (filter == filters.all) {
+                        setDeliverers(deliverers => [...deliverers, deliverer])
+                    } else if (filter == filters.delivering && order.status == "DELIVERING") {
+                        setDeliverers(deliverers => [...deliverers, deliverer])
+                    } else if (filter == filters.waiting && order.status == "WAITING_FOR_PICK_UP") {
+                        setDeliverers(deliverers => [...deliverers, deliverer])
+                    }
+                }
+            })
+        }
+
+    }, [data, isLoading, filter, isLoadingDeliverers, dataDeliverers])
 
     return (
         <Container className="h-full">
@@ -53,7 +77,7 @@ const FleetPage = () => {
                 {isLoading ? (
                     <Loader className="h-full" size="large" />
                 ) : (
-                    <TrackingView deliverers={data} />
+                <TrackingView deliverers={deliverers} />
                 )}
             </div>
         </Container>
