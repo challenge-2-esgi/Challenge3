@@ -1,0 +1,27 @@
+name: CI/CD push front folder to front branch
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - ".github/workflows/push-front-folder.yml"
+      - ".github/workflows/front.yml"
+      - "front/**"
+
+jobs:
+  push-front:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Copy front deploy action
+        run: |
+          mkdir ./front/.github && mkdir ./front/.github/workflows
+          cp ./.github/workflows/front.yml ./front/.github/workflows/front.yml
+      - name: Push to back branch
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: front
+          FOLDER: front
+          MESSAGE: "deploy front"
+          GITHUB_TOKEN: ${{ secrets.PAT }}

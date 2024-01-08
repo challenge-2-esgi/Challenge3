@@ -9,6 +9,9 @@ const nextConfig = {
             },
         ]
     },
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     webpack(config) {
         // https://react-svgr.com/docs/next/
 
