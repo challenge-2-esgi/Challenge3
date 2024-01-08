@@ -12,6 +12,7 @@ const itemOperation = {
 }
 
 const orderStatus = {
+    waitingForDeliverer: 'WAITING_FOR_DELIVERER',
     waitingForPickup: 'WAITING_FOR_PICK_UP',
     delivering: 'DELIVERING',
     delivered: 'DELIVERED',
