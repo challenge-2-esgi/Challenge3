@@ -15,6 +15,14 @@ const userSchemaDef = {
     lastname: String,
     email: String,
 }
+const delivererSchema = {
+    id: String,
+    firstname: String,
+    lastname: String,
+    email: String,
+    latitude: Number,
+    longitude: Number,
+}
 
 const schema = new mongoose.Schema(
     {
@@ -36,7 +44,7 @@ const schema = new mongoose.Schema(
         pickupAddress: addressSchemaDef,
         deliveryAddress: addressSchemaDef,
         user: userSchemaDef,
-        deliverer: userSchemaDef,
+        deliverer: delivererSchema,
         createdAt: Date,
         complaintId: {
             type: String,
