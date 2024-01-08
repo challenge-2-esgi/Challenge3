@@ -9,9 +9,9 @@ const users = [
     { email: 'admin@dev.fr', role: ROLE.admin },
     { email: 'support1@dev.fr', role: ROLE.support },
     { email: 'support2@dev.fr', role: ROLE.support },
-    { email: 'client1@dev.fr', role: ROLE.client },
-    { email: 'client2@dev.fr', role: ROLE.client },
-    { email: 'client3@dev.fr', role: ROLE.client },
+    { email: 'client1@dev.fr', role: ROLE.client, validationCode: '1234' },
+    { email: 'client2@dev.fr', role: ROLE.client, validationCode: '2345' },
+    { email: 'client3@dev.fr', role: ROLE.client, validationCode: '3456' },
     { email: 'deliverer1@dev.fr', role: ROLE.deliverer },
     { email: 'deliverer2@dev.fr', role: ROLE.deliverer },
     { email: 'deliverer3@dev.fr', role: ROLE.deliverer },
@@ -33,6 +33,7 @@ module.exports = {
                 password: hashedPassword,
                 createdAt: new Date(),
                 updatedAt: new Date(),
+                validationCode: u.validationCode
             })),
             {}
         )
