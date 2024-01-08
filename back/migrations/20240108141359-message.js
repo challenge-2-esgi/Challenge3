@@ -27,7 +27,7 @@ module.exports = {
       },
       receiverId: {
         type: Sequelize.UUID,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: 'user',
           key: 'id',

@@ -17,7 +17,7 @@ module.exports = function (connection) {
                 as: 'receiver',
                 foreignKey: {
                     name: 'receiverId',
-                    allowNull: false,
+                    allowNull: true,
                 },
             })
     
