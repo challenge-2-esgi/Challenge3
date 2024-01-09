@@ -95,6 +95,7 @@ const DeliverersPage = () => {
                                     buildEditDelivererRoute(row.getValue('id'))
                                 )
                             }}
+                            canDelete={false}
                             onDelete={() => {
                                 setShowModal(true)
                             }}

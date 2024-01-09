@@ -92,6 +92,7 @@ const UsersPage = () => {
                                     buildEditUserRoute(row.getValue('id'))
                                 )
                             }}
+                            canDelete={false}
                             onDelete={() => {
                                 setShowModal(true)
                             }}

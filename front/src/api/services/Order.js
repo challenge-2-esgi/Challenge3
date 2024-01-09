@@ -9,7 +9,10 @@ export default {
         useQuery({
             queryKey: ['orders'],
             queryFn: async () => {
-                const res = await client.get('orders?'+query, { authorization: true })
+                const res = await client.get(
+                    query == null ? 'orders' : 'orders?' + query,
+                    { authorization: true }
+                )
                 return res.data
             },
         }),

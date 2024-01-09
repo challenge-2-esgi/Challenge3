@@ -25,14 +25,14 @@ const UserDropdown = () => {
     const user = useStore((state) => state.loggedinUser)
 
     const menu = [
-        {
-            icon: <SettingsIcon />,
-            label: t('header.menu.account'),
-            action: () => {
-                router.push(route.DASHBOARD)
-            },
-            type: MENU_ITEM_TYPE.link,
-        },
+        // {
+        //     icon: <SettingsIcon />,
+        //     label: t('header.menu.account'),
+        //     action: () => {
+        //         router.push(route.DASHBOARD)
+        //     },
+        //     type: MENU_ITEM_TYPE.link,
+        // },
         {
             icon: <LogoutIcon />,
             label: t('header.menu.logout'),

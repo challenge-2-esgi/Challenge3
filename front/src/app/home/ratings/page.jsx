@@ -81,7 +81,7 @@ const RatingsPage = () => {
                         <TableCrudActions
                             canView={false}
                             canEdit={true}
-                            canDelete={true}
+                            canDelete={false}
                             onEdit={() => {
                                 router.push(
                                     buildEditRatingRoute(row.getValue('id'))
