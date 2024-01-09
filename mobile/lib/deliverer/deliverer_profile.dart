@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/blocs/auth/auth_bloc.dart';
 import 'package:mobile/core/models/user.dart';
 import 'package:mobile/home/blocs/user_bloc.dart';
+import 'package:mobile/deliverer/blocs/order_bloc.dart';
 
 class DelivererProfile extends StatelessWidget {
-  const DelivererProfile({super.key});
+  const DelivererProfile({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +30,15 @@ class DelivererProfile extends StatelessWidget {
                   icon: const Icon(Icons.exit_to_app, color: Colors.white),
                   label: const Text('Déconnexion', style: TextStyle(color: Colors.white)),
                 ),
+                const SizedBox(height: 8),
+                const SizedBox(height: 8),
+                _buildBadgeAndProgressBar(context),
                 const SizedBox(height: 40),
                 if (userState.status == UserStatus.loading)
-                // Loading state
                   const CircularProgressIndicator(),
                 if (userState.status == UserStatus.success)
-                // Success state
                   _buildUserInfo(userState.user!),
                 if (userState.status == UserStatus.error)
-                // Error state
                   const Text(
                     'Erreur lors du chargement du profil.',
                   ),
@@ -94,6 +95,61 @@ class DelivererProfile extends StatelessWidget {
           style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const Divider(height: 20, thickness: 1, color: Colors.deepPurpleAccent),
+      ],
+    );
+  }
+
+  Widget _buildBadgeAndProgressBar(BuildContext context) {
+    final blocOrder = context.watch<OrderBloc>();
+
+    final deliveredOrders = blocOrder.state.orders.where((order) => order.status == 'DELIVERED').toList();
+    final totalOrdersDelivered = deliveredOrders.length;
+
+    String badgeText;
+    Color badgeColor;
+    int nextBadgeThreshold;
+    
+    if (totalOrdersDelivered < 10) {
+      badgeText = 'Bronze';
+      badgeColor = Colors.brown;
+      nextBadgeThreshold = 10;
+    } else if (totalOrdersDelivered < 20) {
+      badgeText = 'Silver';
+      badgeColor = Colors.grey;
+      nextBadgeThreshold = 20;
+    } else {
+      badgeText = 'Diamond';
+      badgeColor = Colors.blue;
+      nextBadgeThreshold = totalOrdersDelivered;
+    }
+
+    double progress = (totalOrdersDelivered / nextBadgeThreshold).clamp(0.0, 1.0);
+
+    int deliveriesLeft = nextBadgeThreshold - totalOrdersDelivered;
+
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: badgeColor,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            badgeText,
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        const SizedBox(height: 8),
+        LinearProgressIndicator(
+          value: progress,
+          backgroundColor: Colors.grey.withOpacity(0.3),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          'Il reste $deliveriesLeft livraisons pour le prochain badge',
+          style: const TextStyle(fontSize: 16),
+        ),
       ],
     );
   }
