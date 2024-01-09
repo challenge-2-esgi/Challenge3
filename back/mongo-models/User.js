@@ -33,6 +33,10 @@ const schema = new mongoose.Schema(
             type: Number,
             default: null,
         },
+        validationCode: {
+            type: String,
+            default: null,
+        },
     },
     { collection: 'users' }
 )

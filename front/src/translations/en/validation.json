@@ -21,6 +21,9 @@
             "email": {
                 "required": "email is required",
                 "not_valid": "must be a valid email"
+            },
+            "password": {
+                "required": "Password should be at least 8 characters"
             }
         }
     },

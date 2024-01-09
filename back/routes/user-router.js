@@ -81,6 +81,12 @@ function UserRouter() {
                         return res.sendStatus(403)
                     }
 
+                    if (req.body['role'] === ROLE.client) {
+                        req.body['validationCode'] = Math.floor(
+                            Math.random() * 9000 + 1000
+                        ).toString()
+                    }
+
                     next()
                 },
             ],

@@ -22,7 +22,8 @@
         "role": "Role",
         "role_title": {
             "deliverer": "Deliverer"
-        }
+        },
+        "password": "Password"
     },
     "rating": {
         "rating": "Rating",

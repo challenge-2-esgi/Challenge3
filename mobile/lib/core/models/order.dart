@@ -18,6 +18,7 @@ class Order {
   final Status status;
   final String clientFirstName;
   final String clientLastName;
+  final String? clientValidationCode;
   final String receiverFirstname;
   final String receiverLastname;
   final Deliverer? deliverer;
@@ -33,6 +34,7 @@ class Order {
     required this.deliveryAddress,
     required this.clientFirstName,
     required this.clientLastName,
+    required this.clientValidationCode,
     required this.receiverFirstname,
     required this.receiverLastname,
     required this.deliverer,
@@ -112,6 +114,7 @@ class Order {
     Address? deliveryAddress,
     String? clientFirstName,
     String? clientLastName,
+    String? clientValidationCode,
     String? receiverFirstname,
     String? receiverLastname,
     Deliverer? deliverer,
@@ -127,6 +130,7 @@ class Order {
       deliveryAddress: deliveryAddress ?? this.deliveryAddress,
       clientFirstName: clientFirstName ?? this.clientFirstName,
       clientLastName: clientLastName ?? this.clientLastName,
+      clientValidationCode: clientValidationCode ?? this.clientValidationCode,
       deliverer: deliverer ?? this.deliverer,
       createdAt: createdAt ?? this.createdAt,
       pickupTime: pickupTime ?? this.pickupTime,
@@ -145,6 +149,7 @@ class Order {
       deliveryAddress: Address.fromJson(json['deliveryAddress']),
       clientFirstName: json['user']['firstname'],
       clientLastName: json['user']['lastname'],
+      clientValidationCode: json['user']['validationCode'],
       receiverFirstname: json['receiverFirstname'],
       receiverLastname: json['receiverLastname'],
       deliverer: json['deliverer'] == null

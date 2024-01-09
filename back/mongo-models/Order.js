@@ -14,6 +14,7 @@ const userSchemaDef = {
     firstname: String,
     lastname: String,
     email: String,
+    validationCode: String,
 }
 const delivererSchema = {
     id: String,
