@@ -83,10 +83,7 @@ const UsersPage = () => {
                     <Fragment>
                         <TableCrudActions
                             canView={false}
-                            canEdit={
-                                row.getValue('role') === role.admin ||
-                                row.getValue('role') === role.support
-                            }
+                            canEdit={false}
                             onEdit={() => {
                                 router.push(
                                     buildEditUserRoute(row.getValue('id'))
