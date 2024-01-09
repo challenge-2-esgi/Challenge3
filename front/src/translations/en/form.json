@@ -3,7 +3,8 @@
         "input": {
             "firstname": "Enter first name",
             "lastname": "Enter last name",
-            "email": "Enter email"
+            "email": "Enter email",
+            "password": "Enter password"
         },
         "button": {
             "add": "Add",

@@ -3,7 +3,8 @@
         "input": {
             "firstname": "Saisir le prénom",
             "lastname": "Saisir le nom",
-            "email": "Saisir l'addresse mail"
+            "email": "Saisir l'addresse mail",
+            "password": "Saisir le mon de passe"
         },
         "button": {
             "add": "Ajouter",

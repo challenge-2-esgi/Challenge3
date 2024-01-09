@@ -2,7 +2,7 @@
     "order": {
         "status": "Status",
         "statusTypes": {
-            "waiting_for_deliverer" : "En attente de livreur",
+            "waiting_for_deliverer": "En attente de livreur",
             "waiting_for_pick_up": "En attente de récupération",
             "delivering": "En cours de livraison",
             "delivered": "Livré",
@@ -22,7 +22,8 @@
         "role": "Rôle",
         "role_title": {
             "deliverer": "Livreur"
-        }
+        },
+        "password": "Mot de passe"
     },
     "rating": {
         "rating": "Note",
